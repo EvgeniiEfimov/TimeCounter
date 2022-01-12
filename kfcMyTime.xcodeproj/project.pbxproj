@@ -1,0 +1,470 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6BDAA430F48F4E849236683E /* Pods_kfcMyTime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45F28FDEB540BDD13213FA5D /* Pods_kfcMyTime.framework */; };
+		CE482CB4272992490034798E /* ModelJobDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE482CB3272992490034798E /* ModelJobDate.swift */; };
+		CE482CBF272AC44C0034798E /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE482CBE272AC44C0034798E /* DataManager.swift */; };
+		CE482CC2272AD9C90034798E /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE482CC1272AD9C90034798E /* StorageManager.swift */; };
+		CECA89E427280CEC00B2A03B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA89E327280CEC00B2A03B /* AppDelegate.swift */; };
+		CECA89E627280CEC00B2A03B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA89E527280CEC00B2A03B /* SceneDelegate.swift */; };
+		CECA89E827280CEC00B2A03B /* DetailedInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA89E727280CEC00B2A03B /* DetailedInformationViewController.swift */; };
+		CECA89EB27280CEC00B2A03B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CECA89E927280CEC00B2A03B /* Main.storyboard */; };
+		CECA89ED27280CF900B2A03B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CECA89EC27280CF900B2A03B /* Assets.xcassets */; };
+		CECA89F027280CF900B2A03B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CECA89EE27280CF900B2A03B /* LaunchScreen.storyboard */; };
+		CECA89FB272812EE00B2A03B /* TableDateCellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA89FA272812ED00B2A03B /* TableDateCellViewController.swift */; };
+		CECA8A0227283C6B00B2A03B /* AddJobDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA8A0127283C6B00B2A03B /* AddJobDateViewController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		45F28FDEB540BDD13213FA5D /* Pods_kfcMyTime.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_kfcMyTime.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		73A72700679B2D3F9988BB17 /* Pods-kfcMyTime.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kfcMyTime.release.xcconfig"; path = "Target Support Files/Pods-kfcMyTime/Pods-kfcMyTime.release.xcconfig"; sourceTree = "<group>"; };
+		CE482CB3272992490034798E /* ModelJobDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelJobDate.swift; sourceTree = "<group>"; };
+		CE482CBE272AC44C0034798E /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		CE482CC1272AD9C90034798E /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		CECA89E027280CEC00B2A03B /* kfcMyTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kfcMyTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CECA89E327280CEC00B2A03B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		CECA89E527280CEC00B2A03B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		CECA89E727280CEC00B2A03B /* DetailedInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedInformationViewController.swift; sourceTree = "<group>"; };
+		CECA89EA27280CEC00B2A03B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		CECA89EC27280CF900B2A03B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CECA89EF27280CF900B2A03B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		CECA89F127280CF900B2A03B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CECA89FA272812ED00B2A03B /* TableDateCellViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableDateCellViewController.swift; sourceTree = "<group>"; };
+		CECA8A0127283C6B00B2A03B /* AddJobDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddJobDateViewController.swift; sourceTree = "<group>"; };
+		E27667F708EF91AB32750857 /* Pods-kfcMyTime.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kfcMyTime.debug.xcconfig"; path = "Target Support Files/Pods-kfcMyTime/Pods-kfcMyTime.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CECA89DD27280CEC00B2A03B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6BDAA430F48F4E849236683E /* Pods_kfcMyTime.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3B916CA765F8D2E8EF90BD1F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E27667F708EF91AB32750857 /* Pods-kfcMyTime.debug.xcconfig */,
+				73A72700679B2D3F9988BB17 /* Pods-kfcMyTime.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		CE482CB927299C510034798E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CE482CB3272992490034798E /* ModelJobDate.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		CECA89D727280CEC00B2A03B = {
+			isa = PBXGroup;
+			children = (
+				CECA89E227280CEC00B2A03B /* kfcMyTime */,
+				CECA89E127280CEC00B2A03B /* Products */,
+				3B916CA765F8D2E8EF90BD1F /* Pods */,
+				D5A85664C5489E8D9B612828 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		CECA89E127280CEC00B2A03B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CECA89E027280CEC00B2A03B /* kfcMyTime.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CECA89E227280CEC00B2A03B /* kfcMyTime */ = {
+			isa = PBXGroup;
+			children = (
+				CECA89E327280CEC00B2A03B /* AppDelegate.swift */,
+				CECA89E527280CEC00B2A03B /* SceneDelegate.swift */,
+				CE482CBE272AC44C0034798E /* DataManager.swift */,
+				CE482CC1272AD9C90034798E /* StorageManager.swift */,
+				CE482CB927299C510034798E /* Models */,
+				CECA89FF2728134700B2A03B /* Controllers */,
+				CECA89F92728127700B2A03B /* Storyboards */,
+				CECA89EC27280CF900B2A03B /* Assets.xcassets */,
+				CECA89F127280CF900B2A03B /* Info.plist */,
+			);
+			path = kfcMyTime;
+			sourceTree = "<group>";
+		};
+		CECA89F92728127700B2A03B /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				CECA89E927280CEC00B2A03B /* Main.storyboard */,
+				CECA89EE27280CF900B2A03B /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		CECA89FF2728134700B2A03B /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				CECA89FA272812ED00B2A03B /* TableDateCellViewController.swift */,
+				CECA89E727280CEC00B2A03B /* DetailedInformationViewController.swift */,
+				CECA8A0127283C6B00B2A03B /* AddJobDateViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		D5A85664C5489E8D9B612828 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				45F28FDEB540BDD13213FA5D /* Pods_kfcMyTime.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CECA89DF27280CEC00B2A03B /* kfcMyTime */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CECA89F427280CF900B2A03B /* Build configuration list for PBXNativeTarget "kfcMyTime" */;
+			buildPhases = (
+				80B93CEC5057A6149AB22E0E /* [CP] Check Pods Manifest.lock */,
+				CECA89DC27280CEC00B2A03B /* Sources */,
+				CECA89DD27280CEC00B2A03B /* Frameworks */,
+				CECA89DE27280CEC00B2A03B /* Resources */,
+				1B06CFBFE26670479EEA7D38 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = kfcMyTime;
+			productName = kfcMyTime;
+			productReference = CECA89E027280CEC00B2A03B /* kfcMyTime.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CECA89D827280CEC00B2A03B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1240;
+				LastUpgradeCheck = 1240;
+				TargetAttributes = {
+					CECA89DF27280CEC00B2A03B = {
+						CreatedOnToolsVersion = 12.4;
+					};
+				};
+			};
+			buildConfigurationList = CECA89DB27280CEC00B2A03B /* Build configuration list for PBXProject "kfcMyTime" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CECA89D727280CEC00B2A03B;
+			productRefGroup = CECA89E127280CEC00B2A03B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CECA89DF27280CEC00B2A03B /* kfcMyTime */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CECA89DE27280CEC00B2A03B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CECA89F027280CF900B2A03B /* LaunchScreen.storyboard in Resources */,
+				CECA89ED27280CF900B2A03B /* Assets.xcassets in Resources */,
+				CECA89EB27280CEC00B2A03B /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1B06CFBFE26670479EEA7D38 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-kfcMyTime/Pods-kfcMyTime-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-kfcMyTime/Pods-kfcMyTime-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-kfcMyTime/Pods-kfcMyTime-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		80B93CEC5057A6149AB22E0E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-kfcMyTime-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CECA89DC27280CEC00B2A03B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CECA89E827280CEC00B2A03B /* DetailedInformationViewController.swift in Sources */,
+				CE482CB4272992490034798E /* ModelJobDate.swift in Sources */,
+				CECA89E427280CEC00B2A03B /* AppDelegate.swift in Sources */,
+				CE482CBF272AC44C0034798E /* DataManager.swift in Sources */,
+				CECA8A0227283C6B00B2A03B /* AddJobDateViewController.swift in Sources */,
+				CECA89E627280CEC00B2A03B /* SceneDelegate.swift in Sources */,
+				CECA89FB272812EE00B2A03B /* TableDateCellViewController.swift in Sources */,
+				CE482CC2272AD9C90034798E /* StorageManager.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		CECA89E927280CEC00B2A03B /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CECA89EA27280CEC00B2A03B /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		CECA89EE27280CF900B2A03B /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CECA89EF27280CF900B2A03B /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		CECA89F227280CF900B2A03B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CODE_SIGN_FLAGS = "--generate-entitlement-der";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		CECA89F327280CF900B2A03B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				OTHER_CODE_SIGN_FLAGS = "--generate-entitlement-der";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CECA89F527280CF900B2A03B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E27667F708EF91AB32750857 /* Pods-kfcMyTime.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3HP969HW97;
+				INFOPLIST_FILE = kfcMyTime/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				OTHER_CODE_SIGN_FLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = EvgeniiEfimov.kfcMyTime;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		CECA89F627280CF900B2A03B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 73A72700679B2D3F9988BB17 /* Pods-kfcMyTime.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3HP969HW97;
+				INFOPLIST_FILE = kfcMyTime/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				OTHER_CODE_SIGN_FLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = EvgeniiEfimov.kfcMyTime;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CECA89DB27280CEC00B2A03B /* Build configuration list for PBXProject "kfcMyTime" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CECA89F227280CF900B2A03B /* Debug */,
+				CECA89F327280CF900B2A03B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CECA89F427280CF900B2A03B /* Build configuration list for PBXNativeTarget "kfcMyTime" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CECA89F527280CF900B2A03B /* Debug */,
+				CECA89F627280CF900B2A03B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CECA89D827280CEC00B2A03B /* Project object */;
+}
