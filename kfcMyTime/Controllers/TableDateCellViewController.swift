@@ -15,7 +15,7 @@ class TableDateCellViewController: UITableViewController {
     var sortDate: Results<ListInfoDate>!
     
     private var jobDataList: Results<ListInfoDate>!
-    private var monthName = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"]
+    private var monthName = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь","Июль",  "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"]
     private let calendar = Calendar.current
     
 //    private func monthValue (_ monthArray: [String]) -> String {
@@ -36,14 +36,22 @@ class TableDateCellViewController: UITableViewController {
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        monthName.count
+//        monthName.count
+        var count = 0
+        for month in 0...monthName.count {
+           countRows = sortDataToMonth(month)
+            if countRows.count != 0 {
+                count += 1
+            }
+        }
+        return count - 1
     }
 
 //    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 //         2
 //    }
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        monthName[section]
+        monthName[section] + "   " + allTimeMonth(section)
     }
     
     
@@ -56,6 +64,7 @@ class TableDateCellViewController: UITableViewController {
 
     private func sortDataToMonth(_ section: Int) -> Results<ListInfoDate>! {
         var filtrDate: Results<ListInfoDate>!
+//        var timeMoncth: Double
         switch section {
         case 0:
             filtrDate = jobDataList.filter("month = 1")
@@ -98,6 +107,19 @@ class TableDateCellViewController: UITableViewController {
         }
     }
     
+    private func allTimeMonth(_ section: Int) -> String {
+        let dayInSection = sortDataToMonth(section)
+        var allTime: Double = 0.0
+        for timeDay in dayInSection! {
+            allTime = allTime + timeDay.timeWork
+        }
+        if allTime == 0.0 {
+            return ""
+        } else {
+        return String(allTime)
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellDate", for: indexPath)
         cell.backgroundColor = UIColor.clear
@@ -123,45 +145,90 @@ class TableDateCellViewController: UITableViewController {
 //        jobDataLists = sortDate[indexPath.row]
 //    }
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        view.tintColor = UIColor.init(red: 0.3, green: 0.5, blue: 0.5, alpha: 0.3)
-        view.backgroundColor = .brown
+        view.tintColor = .init(red: 0.134, green: 0.128, blue: 0.128, alpha: 0.2)
+//        view.backgroundColor = .brown
         
         let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.textColor = .red
-        header.textLabel?.font = UIFont.boldSystemFont(ofSize: 24)
+//        header.textLabel?.textColor = .white
+//        header.textLabel?.font = UIFont.init(name: "Courier", size: 22.0)
+//        header.textLabel?.textAlignment = .right
+//        header.automaticallyUpdatesContentConfiguration = true
+        var content = header.defaultContentConfiguration()
+        
+//        content.textToSecondaryTextHorizontalPadding = 0.0
+//        content.textToSecondaryTextVerticalPadding = 0.0
+//        content.secondaryTextProperties.font = UIFont.init(name: "Courier", size: 22.0)!
+//        content.secondaryTextProperties.alignment = .center
+//        content.textProperties.alignment = .justified
+//        content.secondaryText = allTimeMonth(section)
+//        print(content.secondaryText)
+        content.prefersSideBySideTextAndSecondaryText = true
+        content.text = monthName[section]
+        content.secondaryText = allTimeMonth(section)
+        content.secondaryTextProperties.font = UIFont.init(name: "Zapf DingBats", size: 20.0)!
+        content.secondaryTextProperties.color = .white
+        content.textProperties.color = .white
+        content.textProperties.font = UIFont.init(name: "Courier", size: 22.0)!
+        header.contentConfiguration = content
         
     }
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let currentList = jobDataList[indexPath.row]
+        
+        sortDate = sortDataToMonth(indexPath.section)
+        jobDataLists = sortDate[indexPath.row]
+
+        
+        let currentList = jobDataLists ?? jobDataList[indexPath.row] // нвыести порядок!!!
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { _, _, _ in
             StorageManager.shared.delete(infoList: currentList)
             tableView.deleteRows(at: [indexPath], with: .automatic)
+            tableView.reloadSections(IndexSet(integer: indexPath.section), with: .automatic)
         }
+//        tableView.endUpdates()
+//        tableView.reloadSections(IndexSet(integer: indexPath.section), with: .automatic)
+
         return UISwipeActionsConfiguration(actions: [deleteAction])
+
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let addJobDateVC = segue.destination as? AddJobDateViewController {
-            addJobDateVC.saveCompletion = {
-                self.tableView.reloadData()
-            }} else if let detailedVC = segue.destination as? DetailedInformationViewController {
-                guard let indexPath = tableView.indexPathForSelectedRow else {
-                    return
-                }
-//                let info = countRows[indexPath.row]
-//                let info = sortDate[indexPath.row]
-                sortDate = sortDataToMonth(indexPath.section)
-                jobDataLists = sortDate[indexPath.row]
-                let info = jobDataLists
+        if segue.identifier == "addVC" {
+            if let addJobDateVC = segue.destination as? AddJobDateViewController {
+                addJobDateVC.saveCompletion = {
+                    self.tableView.reloadData()
+        }
+            }} else if segue.identifier == "detailVC" {
+               if let detailedVC = segue.destination as? DetailedInformationViewController {
+                    guard let indexPath = tableView.indexPathForSelectedRow else {
+                        return
+                    }
+                    sortDate = sortDataToMonth(indexPath.section)
+                    jobDataLists = sortDate[indexPath.row]
+                    let info = jobDataLists
 
 
-                detailedVC.info = info
-            } else {
-                return
+                    detailedVC.info = info
             }
- 
+                
+            } else { return }
         
+//        if let addJobDateVC = segue.destination as? AddJobDateViewController {
+//            addJobDateVC.saveCompletion = {
+//                self.tableView.reloadData()
+//            }} else if let detailedVC = segue.destination as? DetailedInformationViewController {
+//                guard let indexPath = tableView.indexPathForSelectedRow else {
+//                    return
+//                }
+//                sortDate = sortDataToMonth(indexPath.section)
+//                jobDataLists = sortDate[indexPath.row]
+//                let info = jobDataLists
+//
+//
+//                detailedVC.info = info
+//            } else {
+//                return
+//            }
     }
  
     override func viewWillAppear(_ animated: Bool) {
@@ -172,6 +239,7 @@ class TableDateCellViewController: UITableViewController {
         tableView.reloadData()
     }
 
+    
     private func readDataAndUpdateUI() {
         jobDataList = StorageManager.shared.realm.objects(ListInfoDate.self).sorted(byKeyPath: "dateWorkShift")
 

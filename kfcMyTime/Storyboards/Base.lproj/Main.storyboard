@@ -81,7 +81,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="eBg-um-hZX" kind="show" id="JIW-ob-JbW"/>
+                                    <segue destination="eBg-um-hZX" kind="show" identifier="detailVC" id="JIW-ob-JbW"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -97,7 +97,7 @@
                                 <imageReference key="image" image="plus" catalog="system" symbolScale="large"/>
                                 <color key="tintColor" systemColor="systemPinkColor"/>
                                 <connections>
-                                    <segue destination="U2n-7v-o0l" kind="presentation" id="UQ7-Gm-B53"/>
+                                    <segue destination="U2n-7v-o0l" kind="presentation" identifier="addVC" id="UQ7-Gm-B53"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem systemItem="trash" id="LXO-jb-gxA">
@@ -125,63 +125,63 @@
                                 <rect key="frame" x="0.0" y="-27" width="320" height="573"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="oWs-uA-JUA">
-                                <rect key="frame" x="53.5" y="63" width="213.5" height="393.5"/>
+                                <rect key="frame" x="58.5" y="69" width="203.5" height="381"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Дата: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gFD-Bx-c3L">
-                                        <rect key="frame" x="64.5" y="0.0" width="84" height="28.5"/>
-                                        <fontDescription key="fontDescription" name="Copperplate-Light" family="Copperplate" pointSize="28"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Дата: " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gFD-Bx-c3L">
+                                        <rect key="frame" x="54.5" y="0.0" width="94" height="26"/>
+                                        <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="26"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="04.01.2022" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KDj-r7-Cmu">
-                                        <rect key="frame" x="44" y="42.5" width="125.5" height="25"/>
+                                        <rect key="frame" x="39" y="40" width="125.5" height="25"/>
                                         <fontDescription key="fontDescription" name="ZapfDingbatsITC" family="Zapf Dingbats" pointSize="25"/>
                                         <color key="textColor" systemColor="systemRedColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Начало смены:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="vBW-wT-Xzb">
-                                        <rect key="frame" x="0.0" y="81.5" width="213.5" height="28.5"/>
-                                        <fontDescription key="fontDescription" name="Copperplate-Light" family="Copperplate" pointSize="28"/>
+                                        <rect key="frame" x="0.0" y="79" width="203.5" height="26"/>
+                                        <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="26"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="16:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="reV-Yj-gby">
-                                        <rect key="frame" x="75" y="124" width="63" height="25"/>
+                                        <rect key="frame" x="70" y="119" width="63" height="25"/>
                                         <fontDescription key="fontDescription" name="ZapfDingbatsITC" family="Zapf Dingbats" pointSize="25"/>
                                         <color key="textColor" systemColor="systemRedColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Конец смены:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="HK0-HL-fkR">
-                                        <rect key="frame" x="6" y="163" width="201.5" height="28.5"/>
-                                        <fontDescription key="fontDescription" name="Copperplate-Light" family="Copperplate" pointSize="28"/>
+                                        <rect key="frame" x="7.5" y="158" width="188" height="26"/>
+                                        <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="26"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pUK-Ir-OHC">
-                                        <rect key="frame" x="75" y="205.5" width="63" height="25"/>
+                                        <rect key="frame" x="70" y="198" width="63" height="25"/>
                                         <fontDescription key="fontDescription" name="ZapfDingbatsITC" family="Zapf Dingbats" pointSize="25"/>
                                         <color key="textColor" systemColor="systemRedColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Обед:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="svK-Kx-RBW">
-                                        <rect key="frame" x="66.5" y="244.5" width="80" height="28.5"/>
-                                        <fontDescription key="fontDescription" name="Copperplate-Light" family="Copperplate" pointSize="28"/>
+                                        <rect key="frame" x="62.5" y="237" width="78.5" height="26"/>
+                                        <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="26"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30'" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aDy-xj-JD7">
-                                        <rect key="frame" x="90" y="287" width="33" height="25"/>
+                                        <rect key="frame" x="85" y="277" width="33" height="25"/>
                                         <fontDescription key="fontDescription" name="ZapfDingbatsITC" family="Zapf Dingbats" pointSize="25"/>
                                         <color key="textColor" systemColor="systemRedColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Часы:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="WyM-IN-5Zc">
-                                        <rect key="frame" x="65.5" y="326" width="82" height="28.5"/>
-                                        <fontDescription key="fontDescription" name="Copperplate-Light" family="Copperplate" pointSize="28"/>
+                                        <rect key="frame" x="62.5" y="316" width="78.5" height="26"/>
+                                        <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="26"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7,5" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MgP-S5-S2g">
-                                        <rect key="frame" x="89" y="368.5" width="35" height="25"/>
+                                        <rect key="frame" x="84" y="356" width="35" height="25"/>
                                         <fontDescription key="fontDescription" name="ZapfDingbatsITC" family="Zapf Dingbats" pointSize="25"/>
                                         <color key="textColor" systemColor="systemRedColor"/>
                                         <nil key="highlightedColor"/>
@@ -221,7 +221,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.14999999999999999" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backAddImage" translatesAutoresizingMaskIntoConstraints="NO" id="GkR-Z1-2rP">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.10000000000000001" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backAddImage" translatesAutoresizingMaskIntoConstraints="NO" id="GkR-Z1-2rP">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pH8-W0-kaJ">
@@ -243,13 +243,13 @@
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="175"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Начало смены:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Bed-Uo-hvN">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="20"/>
-                                                <fontDescription key="fontDescription" name="Copperplate-Light" family="Copperplate" pointSize="28"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="19"/>
+                                                <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="27"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="10" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="Nvq-Bk-JRs">
-                                                <rect key="frame" x="0.0" y="25" width="320" height="150"/>
+                                                <rect key="frame" x="0.0" y="24" width="320" height="151"/>
                                                 <locale key="locale" localeIdentifier="ru_RU"/>
                                             </datePicker>
                                         </subviews>
@@ -258,13 +258,13 @@
                                         <rect key="frame" x="0.0" y="175" width="320" height="175"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Конец смены:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="cMb-G0-0a7">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="20"/>
-                                                <fontDescription key="fontDescription" name="Copperplate-Light" family="Copperplate" pointSize="28"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="19"/>
+                                                <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="27"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="10" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="TVa-O8-75x">
-                                                <rect key="frame" x="0.0" y="25" width="320" height="150"/>
+                                                <rect key="frame" x="0.0" y="24" width="320" height="151"/>
                                                 <locale key="locale" localeIdentifier="ru"/>
                                             </datePicker>
                                         </subviews>
@@ -272,16 +272,16 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7GD-hD-7f6">
-                                <rect key="frame" x="103" y="400" width="114" height="119"/>
+                                <rect key="frame" x="119.5" y="400" width="81" height="83"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="7GD-hD-7f6" secondAttribute="height" multiplier="114:119" id="dAL-VP-Xuq"/>
+                                    <constraint firstAttribute="width" secondItem="7GD-hD-7f6" secondAttribute="height" multiplier="81:83" id="Xwj-Jy-6cY"/>
                                 </constraints>
                                 <state key="normal" backgroundImage="buttonAdd">
                                     <attributedString key="attributedTitle">
                                         <fragment content="Добавить">
                                             <attributes>
                                                 <color key="NSColor" systemColor="systemYellowColor"/>
-                                                <font key="NSFont" size="18" name="Noteworthy-Bold"/>
+                                                <font key="NSFont" size="14" name="Noteworthy-Bold"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.5" tighteningFactorForTruncation="0.0"/>
                                             </attributes>
                                         </fragment>
@@ -296,7 +296,6 @@
                         <viewLayoutGuide key="safeArea" id="ucZ-aU-w26"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="7GD-hD-7f6" firstAttribute="width" secondItem="GkR-Z1-2rP" secondAttribute="width" multiplier="0.35625" id="9zd-Fm-Ww5"/>
                             <constraint firstItem="7GD-hD-7f6" firstAttribute="centerX" secondItem="v4Y-K4-OBa" secondAttribute="centerX" id="CRP-va-81J"/>
                             <constraint firstItem="wD7-Yy-H6x" firstAttribute="height" secondItem="GkR-Z1-2rP" secondAttribute="height" multiplier="0.638686" id="Egd-PA-qFU"/>
                             <constraint firstItem="wD7-Yy-H6x" firstAttribute="leading" secondItem="ucZ-aU-w26" secondAttribute="leading" constant="5" id="JIQ-We-Jb5"/>
@@ -307,6 +306,7 @@
                             <constraint firstItem="wD7-Yy-H6x" firstAttribute="trailing" secondItem="ucZ-aU-w26" secondAttribute="trailing" constant="5" id="ggY-a0-fN4"/>
                             <constraint firstItem="GkR-Z1-2rP" firstAttribute="centerX" secondItem="v4Y-K4-OBa" secondAttribute="centerX" id="jCx-Ss-iSs"/>
                             <constraint firstItem="GkR-Z1-2rP" firstAttribute="centerY" secondItem="v4Y-K4-OBa" secondAttribute="centerY" id="jP3-AQ-IkR"/>
+                            <constraint firstItem="7GD-hD-7f6" firstAttribute="width" secondItem="GkR-Z1-2rP" secondAttribute="width" multiplier="0.253125" id="oIk-FA-iha"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
@@ -325,7 +325,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Yn-gz-Ihp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="653" y="-1586"/>
+            <point key="canvasLocation" x="652.5" y="-1586.6197183098591"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="8vN-U0-ocj">
@@ -338,7 +338,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="91"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="titleTextAttributes">
-                            <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="17"/>
+                            <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="17"/>
                         </textAttributes>
                     </navigationBar>
                     <connections>
