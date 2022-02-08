@@ -40,10 +40,8 @@ class AddJobDateViewController: UIViewController {
             newListInfo.timeStart = startTimeJobOutlet.date
             newListInfo.timeStop = stopTimeJobOutlet.date
             newListInfo.lunch = calculationLunchTime(timeWorkCalculation)
+            newListInfo.dayOfDateWorkShift = components.day ?? 0
             newListInfo.month = components.month ?? 0
-
-           
-            
             
             DispatchQueue.main.async {
                 StorageManager.shared.save(infoList: newListInfo)

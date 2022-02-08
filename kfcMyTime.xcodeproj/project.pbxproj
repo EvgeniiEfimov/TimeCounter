@@ -19,6 +19,7 @@
 		CECA89F027280CF900B2A03B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CECA89EE27280CF900B2A03B /* LaunchScreen.storyboard */; };
 		CECA89FB272812EE00B2A03B /* TableDateCellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA89FA272812ED00B2A03B /* TableDateCellViewController.swift */; };
 		CECA8A0227283C6B00B2A03B /* AddJobDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA8A0127283C6B00B2A03B /* AddJobDateViewController.swift */; };
+		CEFB466727A5A39D00327CAA /* СalculatedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFB466627A5A39D00327CAA /* СalculatedViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		CECA89F127280CF900B2A03B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CECA89FA272812ED00B2A03B /* TableDateCellViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableDateCellViewController.swift; sourceTree = "<group>"; };
 		CECA8A0127283C6B00B2A03B /* AddJobDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddJobDateViewController.swift; sourceTree = "<group>"; };
+		CEFB466627A5A39D00327CAA /* СalculatedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "СalculatedViewController.swift"; sourceTree = "<group>"; };
 		E27667F708EF91AB32750857 /* Pods-kfcMyTime.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kfcMyTime.debug.xcconfig"; path = "Target Support Files/Pods-kfcMyTime/Pods-kfcMyTime.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -118,6 +120,7 @@
 				CECA89FA272812ED00B2A03B /* TableDateCellViewController.swift */,
 				CECA89E727280CEC00B2A03B /* DetailedInformationViewController.swift */,
 				CECA8A0127283C6B00B2A03B /* AddJobDateViewController.swift */,
+				CEFB466627A5A39D00327CAA /* СalculatedViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -247,6 +250,7 @@
 				CECA89E827280CEC00B2A03B /* DetailedInformationViewController.swift in Sources */,
 				CE482CB4272992490034798E /* ModelJobDate.swift in Sources */,
 				CECA89E427280CEC00B2A03B /* AppDelegate.swift in Sources */,
+				CEFB466727A5A39D00327CAA /* СalculatedViewController.swift in Sources */,
 				CE482CBF272AC44C0034798E /* DataManager.swift in Sources */,
 				CECA8A0227283C6B00B2A03B /* AddJobDateViewController.swift in Sources */,
 				CECA89E627280CEC00B2A03B /* SceneDelegate.swift in Sources */,
@@ -310,6 +314,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -372,6 +377,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -405,7 +411,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3HP969HW97;
 				INFOPLIST_FILE = kfcMyTime/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -429,7 +435,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3HP969HW97;
 				INFOPLIST_FILE = kfcMyTime/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

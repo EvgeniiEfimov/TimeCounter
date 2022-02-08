@@ -12,105 +12,188 @@ class TableDateCellViewController: UITableViewController {
     
     var jobDataLists: ListInfoDate!
     var countRows: Results<ListInfoDate>!
-    var sortDate: Results<ListInfoDate>!
+    var sortDate2: Results<ListInfoDate>!
+//        Results<ListInfoDate>!
+    
+    
+    lazy var arrayMonchFiltr = [Results<ListInfoDate>]()
+    var arrayMonthFiltr2 = [Int : [ListInfoDate]]()
     
     private var jobDataList: Results<ListInfoDate>!
-    private var monthName = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь","Июль",  "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"]
+    
+    private var arrayJobDataList = [Results<ListInfoDate>]()
+    
+    private let monthName = DataManager.shared.monthArray
+//        ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь","Июль",  "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"]
     private let calendar = Calendar.current
     
-//    private func monthValue (_ monthArray: [String]) -> String {
-//        for month in monthArray {
-//            return month
-//        }
-//    }
-
-        
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         tableView.backgroundView = UIImageView(image: UIImage(named: "backTableImage1"))
         tableView.backgroundView?.contentMode = .scaleAspectFill
         tableView.backgroundView?.alpha = 0.1
-    }
+        
+        }
 
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-//        monthName.count
-        var count = 0
-        for month in 0...monthName.count {
-           countRows = sortDataToMonth(month)
-            if countRows.count != 0 {
-                count += 1
-            }
-        }
-        return count - 1
+        sortDataToMonth2()
+        print(arrayJobDataList)
+        return arrayJobDataList.count
+        
+    }
+    
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "Swift"
     }
 
-//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//         2
-//    }
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        monthName[section] + "   " + allTimeMonth(section)
-    }
-    
-    
-    
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        countRows = sortDataToMonth(section)
-        return countRows?.count ?? 0
+        let dayOfMonth = arrayJobDataList[section]
+        return dayOfMonth.count
     }
 
-    private func sortDataToMonth(_ section: Int) -> Results<ListInfoDate>! {
+    
+    
+    private func sortDataToMonth2() {
         var filtrDate: Results<ListInfoDate>!
-//        var timeMoncth: Double
-        switch section {
+        arrayJobDataList.removeAll()
+        for value in 1...12 {
+            filtrDate = jobDataList.filter("month = \(value)")
+            if filtrDate.count != 0 {
+                if !arrayJobDataList.contains(filtrDate) {
+                    print(!arrayJobDataList.contains(filtrDate))
+            arrayJobDataList.append(filtrDate)
+                }
+            }
+        }
+    }
+//    
+    
+//    override func numberOfSections(in tableView: UITableView) -> Int {
+//        var count = 0
+//        for month in 0...monthName.count {
+//           countRows = sortDataToMonth(month)
+//            if countRows.count != 0 {
+//                count += 1
+//            }
+//        }
+//        return count - 1
+//    }
+    
+    
+    private func sortDataToMonth(_ monthDay: Int) -> Results<ListInfoDate>! {
+        var filtrDate: Results<ListInfoDate>!
+        switch monthDay {
         case 0:
             filtrDate = jobDataList.filter("month = 1")
+//            arrayJobDataList.append(filtrDate)
             return filtrDate
         case 1:
             filtrDate = jobDataList.filter("month = 2")
+//            arrayJobDataList.append(filtrDate)
             return filtrDate
         case 2:
             filtrDate = jobDataList.filter("month = 3")
+//            arrayJobDataList.append(filtrDate)
             return filtrDate
         case 3:
             filtrDate = jobDataList.filter("month = 4")
+//            arrayJobDataList.append(filtrDate)
             return filtrDate
         case 4:
             filtrDate = jobDataList.filter("month = 5")
+//            arrayJobDataList.append(filtrDate)
             return filtrDate
         case 5:
             filtrDate = jobDataList.filter("month = 6")
+//            arrayJobDataList.append(filtrDate)
             return filtrDate
         case 6:
             filtrDate = jobDataList.filter("month = 7")
+//            arrayJobDataList.append(filtrDate)
             return filtrDate
         case 7:
             filtrDate = jobDataList.filter("month = 8")
+//            arrayJobDataList.append(filtrDate)
             return filtrDate
         case 8:
             filtrDate = jobDataList.filter("month = 9")
+//            arrayJobDataList.append(filtrDate)
             return filtrDate
         case 9:
             filtrDate = jobDataList.filter("month = 10")
+//            arrayJobDataList.append(filtrDate)
             return filtrDate
         case 10:
             filtrDate = jobDataList.filter("month = 11")
+//            arrayJobDataList.append(filtrDate)
             return filtrDate
         case 11:
             filtrDate = jobDataList.filter("month = 12")
+//            arrayJobDataList.append(filtrDate)
             return filtrDate
         default:
             return jobDataList
         }
     }
+   
     
-    private func allTimeMonth(_ section: Int) -> String {
-        let dayInSection = sortDataToMonth(section)
+    
+//    private func sortDataToMonth(_ data: Results<ListInfoDate>) -> [Results<ListInfoDate>] {
+//        var filtrDate: Results<ListInfoDate>
+//        var arrayFiltrDate = [Results<ListInfoDate>]()
+//        for month in data {
+//            switch month.month {
+//        case 0:
+//            filtrDate = jobDataList.filter("month = 1")
+//            arrayFiltrDate.append(filtrDate)
+//        case 1:
+//            filtrDate = jobDataList.filter("month = 2")
+//            arrayFiltrDate.append(filtrDate)
+//        case 2:
+//            filtrDate = jobDataList.filter("month = 3")
+//            arrayFiltrDate.append(filtrDate)
+//        case 3:
+//            filtrDate = jobDataList.filter("month = 4")
+//            arrayFiltrDate.append(filtrDate)
+//        case 4:
+//            filtrDate = jobDataList.filter("month = 5")
+//            arrayFiltrDate.append(filtrDate)
+//        case 5:
+//            filtrDate = jobDataList.filter("month = 6")
+//            arrayFiltrDate.append(filtrDate)
+//        case 6:
+//            filtrDate = jobDataList.filter("month = 7")
+//            arrayFiltrDate.append(filtrDate)
+//        case 7:
+//            filtrDate = jobDataList.filter("month = 8")
+//            arrayFiltrDate.append(filtrDate)
+//        case 8:
+//            filtrDate = jobDataList.filter("month = 9")
+//            arrayFiltrDate.append(filtrDate)
+//        case 9:
+//            filtrDate = jobDataList.filter("month = 10")
+//            arrayFiltrDate.append(filtrDate)
+//        case 10:
+//            filtrDate = jobDataList.filter("month = 11")
+//            arrayFiltrDate.append(filtrDate)
+//        case 11:
+//            filtrDate = jobDataList.filter("month = 12")
+//            arrayFiltrDate.append(filtrDate)
+//        default:
+//            return []
+//        }
+//    }
+//    }
+    private func allTimeMonth(_ section: Results<ListInfoDate> ) -> String {
+//        let dayInSection = sortDataToMonth(section)
         var allTime: Double = 0.0
-        for timeDay in dayInSection! {
+        for timeDay in section {
             allTime = allTime + timeDay.timeWork
         }
         if allTime == 0.0 {
@@ -131,10 +214,12 @@ class TableDateCellViewController: UITableViewController {
     
 //        jobDataLists = jobDataList[indexPath.row]
         
-        sortDate = sortDataToMonth(indexPath.section)
-        jobDataLists = sortDate![indexPath.row]
+        let sortDate2 = arrayJobDataList[indexPath.section]
+        let jobDataLists = sortDate2[indexPath.row]
         var content = cell.defaultContentConfiguration()
-        content.text = dateFormatterDay.string(from: jobDataLists.dateWorkShift)
+        content.text = dateFormatterDay.string(from: jobDataLists.dateWorkShift )
+        content.textProperties.font = UIFont.init(name: "Zapf Dingbats", size: 18.0) ??
+            .preferredFont(forTextStyle: .body)
         content.secondaryText = "Часы: \(jobDataLists.timeWork)"
         cell.contentConfiguration = content
         return cell
@@ -144,6 +229,9 @@ class TableDateCellViewController: UITableViewController {
 //        sortDate = sortDataToMonth(indexPath.section)
 //        jobDataLists = sortDate[indexPath.row]
 //    }
+   
+    
+
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         view.tintColor = .init(red: 0.134, green: 0.128, blue: 0.128, alpha: 0.2)
 //        view.backgroundColor = .brown
@@ -163,35 +251,48 @@ class TableDateCellViewController: UITableViewController {
 //        content.secondaryText = allTimeMonth(section)
 //        print(content.secondaryText)
         content.prefersSideBySideTextAndSecondaryText = true
-        content.text = monthName[section]
-        content.secondaryText = allTimeMonth(section)
+
+        
+        let monthNameFals = arrayJobDataList[section]
+        let monthNameTrue = monthNameFals.first?.month
+        content.text = monthName[monthNameTrue ?? 5]
+            //            monthName[section]
+        content.secondaryText = allTimeMonth(monthNameFals)
         content.secondaryTextProperties.font = UIFont.init(name: "Zapf DingBats", size: 20.0)!
         content.secondaryTextProperties.color = .white
         content.textProperties.color = .white
-        content.textProperties.font = UIFont.init(name: "Courier", size: 22.0)!
+        content.textProperties.font = UIFont.init(name: "Courier", size: 22.0) ?? .preferredFont(forTextStyle: .body)
         header.contentConfiguration = content
         
     }
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        
-        sortDate = sortDataToMonth(indexPath.section)
-        jobDataLists = sortDate[indexPath.row]
 
-        
+
+         sortDate2 = arrayJobDataList[indexPath.section]
+         jobDataLists = sortDate2[indexPath.row]
+
+
+
         let currentList = jobDataLists ?? jobDataList[indexPath.row] // нвыести порядок!!!
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { _, _, _ in
             StorageManager.shared.delete(infoList: currentList)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
-            tableView.reloadSections(IndexSet(integer: indexPath.section), with: .automatic)
+
+            let value = self.sortDate2.count
+            if value == 0 {
+                tableView.deleteSections(IndexSet(integer: indexPath.section), with: .automatic)
+            } else {
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+                tableView.reloadSections(IndexSet(integer: indexPath.section), with: .automatic)
+
+            }
+
         }
-//        tableView.endUpdates()
-//        tableView.reloadSections(IndexSet(integer: indexPath.section), with: .automatic)
 
         return UISwipeActionsConfiguration(actions: [deleteAction])
 
     }
-    
+//
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "addVC" {
             if let addJobDateVC = segue.destination as? AddJobDateViewController {
@@ -203,32 +304,21 @@ class TableDateCellViewController: UITableViewController {
                     guard let indexPath = tableView.indexPathForSelectedRow else {
                         return
                     }
-                    sortDate = sortDataToMonth(indexPath.section)
-                    jobDataLists = sortDate[indexPath.row]
+
+                 sortDate2 = arrayJobDataList[indexPath.section]
+                 jobDataLists = sortDate2[indexPath.row]
+
                     let info = jobDataLists
 
 
                     detailedVC.info = info
             }
-                
-            } else { return }
-        
-//        if let addJobDateVC = segue.destination as? AddJobDateViewController {
-//            addJobDateVC.saveCompletion = {
-//                self.tableView.reloadData()
-//            }} else if let detailedVC = segue.destination as? DetailedInformationViewController {
-//                guard let indexPath = tableView.indexPathForSelectedRow else {
-//                    return
-//                }
-//                sortDate = sortDataToMonth(indexPath.section)
-//                jobDataLists = sortDate[indexPath.row]
-//                let info = jobDataLists
-//
-//
-//                detailedVC.info = info
-//            } else {
-//                return
-//            }
+
+            } else {
+                return
+
+            }
+
     }
  
     override func viewWillAppear(_ animated: Bool) {
@@ -246,6 +336,7 @@ class TableDateCellViewController: UITableViewController {
         self.setEditing(false, animated: true)
         self.tableView.reloadData()
     }
+    
     @IBAction func deleteAllAction(_ sender: UIBarButtonItem) {
         alertDeleteAll()
     }
@@ -259,6 +350,7 @@ class TableDateCellViewController: UITableViewController {
                                     style: .destructive,
                                     handler: { (UIAlertAction) in
                                         StorageManager.shared.deleteAll()
+                                        self.arrayJobDataList.removeAll()
                                         self.readDataAndUpdateUI()
                                     }))
         alertDelete.addAction(.init(title: "Нет",
