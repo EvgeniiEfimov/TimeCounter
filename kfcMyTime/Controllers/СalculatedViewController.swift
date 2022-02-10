@@ -146,8 +146,8 @@ extension СalculatedViewController: UIPickerViewDelegate {
                                    handler:{ action in
                                     self.allCalculate(self.rateTFOutlet)
                                     self.allTimeRangeDay.isHidden = false
-                                    self.amountLabelOutlet.isHidden = false
-
+//                                    self.amountLabelOutlet.isHidden = false
+////sdadadasdasdasdas
                                    }
                              ))
 
