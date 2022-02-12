@@ -44,7 +44,7 @@ class AddJobDateViewController: UIViewController {
             newListInfo.month = components.month ?? 0
             
             DispatchQueue.main.async {
-                StorageManager.shared.save(infoList: newListInfo)
+                StorageManager.shared.saveListInfo(infoList: newListInfo)
             }
             return true
         } else {

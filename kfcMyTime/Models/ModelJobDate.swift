@@ -28,3 +28,8 @@ class ListInfoDate: Object {
 //    @objc dynamic var doublePayment = false
 //    var info: InfoJobDate?
 }
+
+class SettingsUser: Object {
+    @objc dynamic var automaticLunch = Bool()
+    @objc dynamic var rateTFOutlet = String()
+}

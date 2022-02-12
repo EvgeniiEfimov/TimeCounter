@@ -11,6 +11,7 @@
 		CE482CB4272992490034798E /* ModelJobDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE482CB3272992490034798E /* ModelJobDate.swift */; };
 		CE482CBF272AC44C0034798E /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE482CBE272AC44C0034798E /* DataManager.swift */; };
 		CE482CC2272AD9C90034798E /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE482CC1272AD9C90034798E /* StorageManager.swift */; };
+		CEC2525227B6DB6500B9F2DE /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2525127B6DB6500B9F2DE /* SettingsViewController.swift */; };
 		CECA89E427280CEC00B2A03B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA89E327280CEC00B2A03B /* AppDelegate.swift */; };
 		CECA89E627280CEC00B2A03B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA89E527280CEC00B2A03B /* SceneDelegate.swift */; };
 		CECA89E827280CEC00B2A03B /* DetailedInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA89E727280CEC00B2A03B /* DetailedInformationViewController.swift */; };
@@ -28,6 +29,7 @@
 		CE482CB3272992490034798E /* ModelJobDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelJobDate.swift; sourceTree = "<group>"; };
 		CE482CBE272AC44C0034798E /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		CE482CC1272AD9C90034798E /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		CEC2525127B6DB6500B9F2DE /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		CECA89E027280CEC00B2A03B /* kfcMyTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kfcMyTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CECA89E327280CEC00B2A03B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CECA89E527280CEC00B2A03B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 				CECA89E727280CEC00B2A03B /* DetailedInformationViewController.swift */,
 				CECA8A0127283C6B00B2A03B /* AddJobDateViewController.swift */,
 				CEFB466627A5A39D00327CAA /* СalculatedViewController.swift */,
+				CEC2525127B6DB6500B9F2DE /* SettingsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -247,6 +250,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEC2525227B6DB6500B9F2DE /* SettingsViewController.swift in Sources */,
 				CECA89E827280CEC00B2A03B /* DetailedInformationViewController.swift in Sources */,
 				CE482CB4272992490034798E /* ModelJobDate.swift in Sources */,
 				CECA89E427280CEC00B2A03B /* AppDelegate.swift in Sources */,

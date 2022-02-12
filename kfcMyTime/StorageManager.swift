@@ -14,22 +14,35 @@ class StorageManager {
     
     private init() {}
     
-    func save(infoList: ListInfoDate) {
+    func saveListInfo(infoList: ListInfoDate) {
         write {
             realm.add(infoList)
         }
     }
     
-    func delete(infoList: ListInfoDate) {
+    func deleteListInfo(infoList: ListInfoDate) {
         write {
             realm.delete(infoList)
 //            realm.delete(infoList.info)
         }
     }
     
-    func deleteAll() {
+    func deleteAllListInfo() {
         write {
             realm.deleteAll()
+        }
+    }
+    
+    
+    func saveSettings(settings: SettingsUser) {
+        write {
+            realm.add(settings)
+        }
+    }
+    
+    func deleteSettings(settings: SettingsUser) {
+        write {
+            realm.delete(settings)
         }
     }
     

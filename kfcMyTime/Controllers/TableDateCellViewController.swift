@@ -41,7 +41,7 @@ class TableDateCellViewController: UITableViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         sortDataToMonth2()
-        print(arrayJobDataList)
+//        print(arrayJobDataList)
         return arrayJobDataList.count
         
     }
@@ -276,7 +276,7 @@ class TableDateCellViewController: UITableViewController {
 
         let currentList = jobDataLists ?? jobDataList[indexPath.row] // нвыести порядок!!!
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { _, _, _ in
-            StorageManager.shared.delete(infoList: currentList)
+            StorageManager.shared.deleteListInfo(infoList: currentList)
 
             let value = self.sortDate2.count
             if value == 0 {
@@ -309,17 +309,21 @@ class TableDateCellViewController: UITableViewController {
                  jobDataLists = sortDate2[indexPath.row]
 
                     let info = jobDataLists
-
-
                     detailedVC.info = info
             }
 
-            } else {
-                return
+            } else if segue.identifier == "settingsVC" {
+                if let settingsVC = segue.destination as? SettingsViewController {
+                    settingsVC.saveCompletionSettings = {
+                        self.tableView.reloadData()
 
             }
-
+                }
+            else { return }
+                
+            }
     }
+            
  
     override func viewWillAppear(_ animated: Bool) {
         readDataAndUpdateUI()
@@ -349,7 +353,7 @@ class TableDateCellViewController: UITableViewController {
         alertDelete.addAction(.init(title: "Да",
                                     style: .destructive,
                                     handler: { (UIAlertAction) in
-                                        StorageManager.shared.deleteAll()
+                                        StorageManager.shared.deleteAllListInfo()
                                         self.arrayJobDataList.removeAll()
                                         self.readDataAndUpdateUI()
                                     }))
