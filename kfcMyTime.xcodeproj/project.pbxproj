@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6BDAA430F48F4E849236683E /* Pods_kfcMyTime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45F28FDEB540BDD13213FA5D /* Pods_kfcMyTime.framework */; };
+		CE1ACB6727BCE62A002D9105 /* ProtocolsFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1ACB6627BCE62A002D9105 /* ProtocolsFile.swift */; };
 		CE482CB4272992490034798E /* ModelJobDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE482CB3272992490034798E /* ModelJobDate.swift */; };
 		CE482CBF272AC44C0034798E /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE482CBE272AC44C0034798E /* DataManager.swift */; };
 		CE482CC2272AD9C90034798E /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE482CC1272AD9C90034798E /* StorageManager.swift */; };
@@ -26,6 +27,7 @@
 /* Begin PBXFileReference section */
 		45F28FDEB540BDD13213FA5D /* Pods_kfcMyTime.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_kfcMyTime.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		73A72700679B2D3F9988BB17 /* Pods-kfcMyTime.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kfcMyTime.release.xcconfig"; path = "Target Support Files/Pods-kfcMyTime/Pods-kfcMyTime.release.xcconfig"; sourceTree = "<group>"; };
+		CE1ACB6627BCE62A002D9105 /* ProtocolsFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolsFile.swift; sourceTree = "<group>"; };
 		CE482CB3272992490034798E /* ModelJobDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelJobDate.swift; sourceTree = "<group>"; };
 		CE482CBE272AC44C0034798E /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		CE482CC1272AD9C90034798E /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 				CECA89E527280CEC00B2A03B /* SceneDelegate.swift */,
 				CE482CBE272AC44C0034798E /* DataManager.swift */,
 				CE482CC1272AD9C90034798E /* StorageManager.swift */,
+				CE1ACB6627BCE62A002D9105 /* ProtocolsFile.swift */,
 				CE482CB927299C510034798E /* Models */,
 				CECA89FF2728134700B2A03B /* Controllers */,
 				CECA89F92728127700B2A03B /* Storyboards */,
@@ -260,6 +263,7 @@
 				CECA89E627280CEC00B2A03B /* SceneDelegate.swift in Sources */,
 				CECA89FB272812EE00B2A03B /* TableDateCellViewController.swift in Sources */,
 				CE482CC2272AD9C90034798E /* StorageManager.swift in Sources */,
+				CE1ACB6727BCE62A002D9105 /* ProtocolsFile.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

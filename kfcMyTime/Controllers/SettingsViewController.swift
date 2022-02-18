@@ -10,8 +10,7 @@ import RealmSwift
 
 class SettingsViewController: UIViewController {
 
-    var settingsUser: SettingsUser!
-    var settingsUserArray: Results<SettingsUser>!
+//    var settingsUser: SettingsUser!
     var saveCompletionSettings: (() -> Void)?
 
     
@@ -21,7 +20,7 @@ class SettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        readDataAndUpdateUI()
+        readDataSettings()
     }
     
     private func isEmptyValueTF () -> Bool {
@@ -31,44 +30,76 @@ class SettingsViewController: UIViewController {
         } else { return true }
     }
     
-    private func readDataAndUpdateUI() {
-        settingsUserArray = StorageManager.shared.realm.objects(SettingsUser.self).sorted(byKeyPath: "automaticLunch")
-//        print(settingsUserArray)
-        settingsUser = StorageManager.shared.realm.objects(SettingsUser.self).first
-        guard settingsUser != nil else { return }
-        if !settingsUser.rateTFOutlet.isEmpty {
-            rateTFOutlet.text = settingsUser.rateTFOutlet
-        }
-    }
-    
-    private func saveSettings() {
-        
-        let valueSaveSattingUser = SettingsUser()
-        valueSaveSattingUser.automaticLunch = switchAutoLunchOutlet.isOn
-        valueSaveSattingUser.rateTFOutlet = rateTFOutlet.text ?? "Error 504"
-        
+//    private func readDataAndUpdateUI() {
+//        settingsUser = StorageManager.shared.realm.objects(SettingsUser.self).first
 //        guard settingsUser != nil else { return }
-//        if settingsUser.rateTFOutlet != rateTFOutlet.text {
-//            valueSaveSattingUser.rateTFOutlet = rateTFOutlet.text ?? ""
+//        if !settingsUser.rateTFOutlet.isEmpty {
+//            rateTFOutlet.text = settingsUser.rateTFOutlet
+//            switchAutoLunchOutlet.isOn = settingsUser.automaticLunch
+//
 //        }
-        
-        DispatchQueue.main.async {
-            StorageManager.shared.saveSettings(settings: valueSaveSattingUser)
-        }
-        print(valueSaveSattingUser)
-        
-        
-    }
+//    }
+    
+//    private func saveSettings() {
+//
+//        let valueSaveSattingUser = SettingsUser()
+//        valueSaveSattingUser.automaticLunch = switchAutoLunchOutlet.isOn
+//        valueSaveSattingUser.rateTFOutlet = rateTFOutlet.text ?? "Error 504"
+//
+////        guard settingsUser != nil else { return }
+////        if settingsUser.rateTFOutlet != rateTFOutlet.text {
+////            valueSaveSattingUser.rateTFOutlet = rateTFOutlet.text ?? ""
+////        }
+//
+//        DispatchQueue.main.async {
+//            StorageManager.shared.saveSettings(settings: valueSaveSattingUser)
+//        }
+//        print(valueSaveSattingUser)
+//
+//
+//    }
     
     
     @IBAction func saveButtonAction(_ sender: UIButton) {
-//        if settingsUser != nil {
-//        StorageManager.shared.deleteSettings(settings: settingsUser)
-//        }
+
+        deleteSettings()
         saveSettings()
         
         dismiss(animated: true, completion: saveCompletionSettings)
     }
     
     
+}
+
+extension SettingsViewController: SaveSettings {
+    var settingsUser: SettingsUser! {
+        get {
+            StorageManager.shared.realm.objects(SettingsUser.self).first
+        }
+    }
+    
+    func readDataSettings() {
+//        settingsUser = StorageManager.shared.realm.objects(SettingsUser.self).first
+        guard settingsUser != nil else { return }
+        if !settingsUser.rateTFOutlet.isEmpty {
+            rateTFOutlet.text = settingsUser.rateTFOutlet
+            switchAutoLunchOutlet.isOn = settingsUser.automaticLunch
+        }
+    }
+    
+    func deleteSettings() {
+        if settingsUser != nil {
+        StorageManager.shared.deleteSettings(settings: settingsUser)
+        }
+    }
+    
+    func saveSettings() {
+        let valueSaveSattingUser = SettingsUser()
+        valueSaveSattingUser.automaticLunch = switchAutoLunchOutlet.isOn
+        valueSaveSattingUser.rateTFOutlet = rateTFOutlet.text ?? "Error 504"
+        
+        DispatchQueue.main.async {
+            StorageManager.shared.saveSettings(settings: valueSaveSattingUser)
+        }
+    }
 }

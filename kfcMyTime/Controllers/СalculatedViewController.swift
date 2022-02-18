@@ -53,7 +53,6 @@ class СalculatedViewController: UIViewController {
     
     private func allCalculate( _ textField: String) {
         let intValue = monthPickerView.selectedRow(inComponent: 0)
-        print(intValue)
        value = sortDataToMonth(intValue)
         let newValue = filtrDay(value)
         let allTime = calculatedTime(newValue)
@@ -69,7 +68,9 @@ class СalculatedViewController: UIViewController {
 //        }
 //    }
     @IBAction func calculateButton(_ sender: UIButton) {
-        showAlert()
+//        showAlert()
+        readDataSettings()
+        
     }
     
     private func filtrDay(_ sortDataDayOfMonth: Results<ListInfoDate>) -> [ListInfoDate] {
@@ -145,8 +146,10 @@ extension СalculatedViewController: UIPickerViewDelegate {
                                    style: .default,
                                    handler:{ action in
                                     self.allCalculate(self.rateTFOutlet)
+                                    self.deleteSettings()
+                                    self.saveSettings()
                                     self.allTimeRangeDay.isHidden = false
-//                                    self.amountLabelOutlet.isHidden = false
+                                    self.amountLabelOutlet.isHidden = false
 ////sdadadasdasdasdas
                                    }
                              ))
@@ -170,4 +173,42 @@ extension СalculatedViewController: UITextFieldDelegate {
         return true
     }
     
+}
+
+extension СalculatedViewController: SaveSettings {
+    var settingsUser: SettingsUser! {
+        get {
+            StorageManager.shared.realm.objects(SettingsUser.self).first
+        }
+    }
+    
+    func readDataSettings() {
+        guard settingsUser != nil else { return
+            showAlert()
+        }
+        if settingsUser.rateTFOutlet.isEmpty {
+            showAlert()
+        }
+        allCalculate(settingsUser.rateTFOutlet)
+        allTimeRangeDay.isHidden = false
+        amountLabelOutlet.isHidden = false
+    }
+    
+    func deleteSettings() {
+        if settingsUser != nil {
+        StorageManager.shared.deleteSettings(settings: settingsUser)
+        }
+    }
+    
+    func saveSettings() {
+        let valueSaveSattingUser = SettingsUser()
+        valueSaveSattingUser.rateTFOutlet = rateTFOutlet
+        
+        DispatchQueue.main.async {
+            StorageManager.shared.saveSettings(settings: valueSaveSattingUser)
+
+    }
+    
+    
+}
 }
