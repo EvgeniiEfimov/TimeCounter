@@ -43,6 +43,7 @@ class AddJobDateViewController: UIViewController {
             newListInfo.dayOfDateWorkShift = components.day ?? 0
             newListInfo.month = components.month ?? 0
             
+            
             DispatchQueue.main.async {
                 StorageManager.shared.saveListInfo(infoList: newListInfo)
             }
@@ -64,12 +65,6 @@ class AddJobDateViewController: UIViewController {
                 animated: true,
                 completion: nil)
     }
-//    @IBAction func actionMarkButton(_ sender: UIButton) {
-//        flagDoublePay ?
-//                markButtonBool(markFalse, sender) :
-//                markButtonBool(markTrue, sender)
-//            flagDoublePay.toggle()
-//    }
     
     private func calculationOfWorkingHours(_ timeWork: TimeInterval,_ lunchTime: Double) -> Double {
         return Double(String(format: "%.1f", (timeWork / 3600.0 - lunchTime))) ?? 0.2
@@ -77,8 +72,6 @@ class AddJobDateViewController: UIViewController {
     
     private func calculationLunchTime(_ timeWork: TimeInterval) -> Double {
         switch timeWork {
-        case (0...14400):
-            return 0.0
         case (14401...32399):
             return 0.5
         case (32400...):

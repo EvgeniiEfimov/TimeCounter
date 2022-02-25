@@ -10,9 +10,7 @@ import RealmSwift
 
 class СalculatedViewController: UIViewController {
     
-//    var jobDataLists: ListInfoDate!
     private var jobDataList: Results<ListInfoDate>!
-//    private var period: ClosedRange<Int>!
     
     var value: Results<ListInfoDate>! // проба
     let monthName = DataManager.shared.monthArray
@@ -47,6 +45,7 @@ class СalculatedViewController: UIViewController {
             filtrDate = jobDataList.filter("month = \(monthDay)")
             return filtrDate
         }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
@@ -60,15 +59,8 @@ class СalculatedViewController: UIViewController {
         amountLabelOutlet.text = calculatedMoney(allTime, textField)
         
     }
-//    @IBAction func periodSC(_ sender: UISegmentedControl) {
-//        if sender.numberOfSegments == 0 {
-//            period = 1...15
-//        } else {
-//            period = 15...31
-//        }
-//    }
+
     @IBAction func calculateButton(_ sender: UIButton) {
-//        showAlert()
         readDataSettings()
         
     }
@@ -76,7 +68,6 @@ class СalculatedViewController: UIViewController {
     private func filtrDay(_ sortDataDayOfMonth: Results<ListInfoDate>) -> [ListInfoDate] {
        
         let rangeDay = (periodSCOutlet.selectedSegmentIndex == 0) ? oneRangeDay : twoRangeDay
-//        let newList = sortDataDayOfMonth.filter("rangeDay.contains(month)")
         var newList = [ListInfoDate]()
         for day in sortDataDayOfMonth {
             if rangeDay.contains(day.dayOfDateWorkShift) {
@@ -105,12 +96,6 @@ class СalculatedViewController: UIViewController {
     private func readDataAndUpdateUI() {
         jobDataList = StorageManager.shared.realm.objects(ListInfoDate.self).sorted(byKeyPath: "dateWorkShift")
             }
-
-//    override func viewWillAppear(_ animated: Bool) {
-//        readDataAndUpdateUI()
-//    }
-    
- 
 }
 
 extension СalculatedViewController: UIPickerViewDataSource {
@@ -121,8 +106,6 @@ extension СalculatedViewController: UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return monthName.count
     }
-    
-    
 }
 
 extension СalculatedViewController: UIPickerViewDelegate {
@@ -150,7 +133,6 @@ extension СalculatedViewController: UIPickerViewDelegate {
                                     self.saveSettings()
                                     self.allTimeRangeDay.isHidden = false
                                     self.amountLabelOutlet.isHidden = false
-////sdadadasdasdasdas
                                    }
                              ))
 
@@ -158,11 +140,8 @@ extension СalculatedViewController: UIPickerViewDelegate {
                 animated: true,
                 completion: nil)
     }
-//    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-//        value = monthName[row]
-//        print(value)
-//    }
 }
+
 extension СalculatedViewController: UITextFieldDelegate {
      func textFieldDidEndEditing(_ textField: UITextField) {
         rateTFOutlet = textField.text ?? ""
@@ -172,7 +151,6 @@ extension СalculatedViewController: UITextFieldDelegate {
         allCalculate(rateTFOutlet)
         return true
     }
-    
 }
 
 extension СalculatedViewController: SaveSettings {
@@ -208,7 +186,6 @@ extension СalculatedViewController: SaveSettings {
             StorageManager.shared.saveSettings(settings: valueSaveSattingUser)
 
     }
-    
     
 }
 }

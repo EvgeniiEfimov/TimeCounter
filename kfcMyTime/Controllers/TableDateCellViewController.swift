@@ -13,7 +13,8 @@ class TableDateCellViewController: UITableViewController {
     var jobDataLists: ListInfoDate!
     var countRows: Results<ListInfoDate>!
     var sortDate2: Results<ListInfoDate>!
-//        Results<ListInfoDate>!
+    
+    var valueSettingsOfLunchtime = StorageManager.shared.realm.objects(SettingsUser.self)
     
     
     lazy var arrayMonchFiltr = [Results<ListInfoDate>]()
@@ -24,7 +25,6 @@ class TableDateCellViewController: UITableViewController {
     private var arrayJobDataList = [Results<ListInfoDate>]()
     
     private let monthName = DataManager.shared.monthArray
-//        ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь","Июль",  "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"]
     private let calendar = Calendar.current
     
     override func viewDidLoad() {
@@ -41,7 +41,6 @@ class TableDateCellViewController: UITableViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         sortDataToMonth2()
-//        print(arrayJobDataList)
         return arrayJobDataList.count
         
     }
@@ -66,135 +65,22 @@ class TableDateCellViewController: UITableViewController {
             filtrDate = jobDataList.filter("month = \(value)")
             if filtrDate.count != 0 {
                 if !arrayJobDataList.contains(filtrDate) {
-                    print(!arrayJobDataList.contains(filtrDate))
             arrayJobDataList.append(filtrDate)
                 }
             }
         }
     }
-//    
     
-//    override func numberOfSections(in tableView: UITableView) -> Int {
-//        var count = 0
-//        for month in 0...monthName.count {
-//           countRows = sortDataToMonth(month)
-//            if countRows.count != 0 {
-//                count += 1
-//            }
-//        }
-//        return count - 1
-//    }
-    
-    
-    private func sortDataToMonth(_ monthDay: Int) -> Results<ListInfoDate>! {
-        var filtrDate: Results<ListInfoDate>!
-        switch monthDay {
-        case 0:
-            filtrDate = jobDataList.filter("month = 1")
-//            arrayJobDataList.append(filtrDate)
-            return filtrDate
-        case 1:
-            filtrDate = jobDataList.filter("month = 2")
-//            arrayJobDataList.append(filtrDate)
-            return filtrDate
-        case 2:
-            filtrDate = jobDataList.filter("month = 3")
-//            arrayJobDataList.append(filtrDate)
-            return filtrDate
-        case 3:
-            filtrDate = jobDataList.filter("month = 4")
-//            arrayJobDataList.append(filtrDate)
-            return filtrDate
-        case 4:
-            filtrDate = jobDataList.filter("month = 5")
-//            arrayJobDataList.append(filtrDate)
-            return filtrDate
-        case 5:
-            filtrDate = jobDataList.filter("month = 6")
-//            arrayJobDataList.append(filtrDate)
-            return filtrDate
-        case 6:
-            filtrDate = jobDataList.filter("month = 7")
-//            arrayJobDataList.append(filtrDate)
-            return filtrDate
-        case 7:
-            filtrDate = jobDataList.filter("month = 8")
-//            arrayJobDataList.append(filtrDate)
-            return filtrDate
-        case 8:
-            filtrDate = jobDataList.filter("month = 9")
-//            arrayJobDataList.append(filtrDate)
-            return filtrDate
-        case 9:
-            filtrDate = jobDataList.filter("month = 10")
-//            arrayJobDataList.append(filtrDate)
-            return filtrDate
-        case 10:
-            filtrDate = jobDataList.filter("month = 11")
-//            arrayJobDataList.append(filtrDate)
-            return filtrDate
-        case 11:
-            filtrDate = jobDataList.filter("month = 12")
-//            arrayJobDataList.append(filtrDate)
-            return filtrDate
-        default:
-            return jobDataList
-        }
+        private func sortDataToMonth(_ monthDay: Int) -> Results<ListInfoDate>! {
+    var filtrDate: Results<ListInfoDate>!
+        filtrDate = jobDataList.filter("month = \(monthDay + 1)")
+        return filtrDate
     }
-   
-    
-    
-//    private func sortDataToMonth(_ data: Results<ListInfoDate>) -> [Results<ListInfoDate>] {
-//        var filtrDate: Results<ListInfoDate>
-//        var arrayFiltrDate = [Results<ListInfoDate>]()
-//        for month in data {
-//            switch month.month {
-//        case 0:
-//            filtrDate = jobDataList.filter("month = 1")
-//            arrayFiltrDate.append(filtrDate)
-//        case 1:
-//            filtrDate = jobDataList.filter("month = 2")
-//            arrayFiltrDate.append(filtrDate)
-//        case 2:
-//            filtrDate = jobDataList.filter("month = 3")
-//            arrayFiltrDate.append(filtrDate)
-//        case 3:
-//            filtrDate = jobDataList.filter("month = 4")
-//            arrayFiltrDate.append(filtrDate)
-//        case 4:
-//            filtrDate = jobDataList.filter("month = 5")
-//            arrayFiltrDate.append(filtrDate)
-//        case 5:
-//            filtrDate = jobDataList.filter("month = 6")
-//            arrayFiltrDate.append(filtrDate)
-//        case 6:
-//            filtrDate = jobDataList.filter("month = 7")
-//            arrayFiltrDate.append(filtrDate)
-//        case 7:
-//            filtrDate = jobDataList.filter("month = 8")
-//            arrayFiltrDate.append(filtrDate)
-//        case 8:
-//            filtrDate = jobDataList.filter("month = 9")
-//            arrayFiltrDate.append(filtrDate)
-//        case 9:
-//            filtrDate = jobDataList.filter("month = 10")
-//            arrayFiltrDate.append(filtrDate)
-//        case 10:
-//            filtrDate = jobDataList.filter("month = 11")
-//            arrayFiltrDate.append(filtrDate)
-//        case 11:
-//            filtrDate = jobDataList.filter("month = 12")
-//            arrayFiltrDate.append(filtrDate)
-//        default:
-//            return []
-//        }
-//    }
-//    }
-    private func allTimeMonth(_ section: Results<ListInfoDate> ) -> String {
-//        let dayInSection = sortDataToMonth(section)
+
+    private func allTimeMonth(_ section: Results<ListInfoDate>) -> String {
         var allTime: Double = 0.0
         for timeDay in section {
-            allTime = allTime + timeDay.timeWork
+            allTime = allTime + timeDay.timeWork // <-- условия расчета
         }
         if allTime == 0.0 {
             return ""
@@ -211,9 +97,6 @@ class TableDateCellViewController: UITableViewController {
         dateFormatterDay.dateFormat = "dd / MM, EEEE"
         dateFormatterDay.locale = Locale(identifier: "RU_RU")
         
-    
-//        jobDataLists = jobDataList[indexPath.row]
-        
         let sortDate2 = arrayJobDataList[indexPath.section]
         let jobDataLists = sortDate2[indexPath.row]
         var content = cell.defaultContentConfiguration()
@@ -224,39 +107,18 @@ class TableDateCellViewController: UITableViewController {
         cell.contentConfiguration = content
         return cell
     }
-    
-//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        sortDate = sortDataToMonth(indexPath.section)
-//        jobDataLists = sortDate[indexPath.row]
-//    }
-   
-    
 
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         view.tintColor = .init(red: 0.134, green: 0.128, blue: 0.128, alpha: 0.2)
-//        view.backgroundColor = .brown
         
         let header = view as! UITableViewHeaderFooterView
-//        header.textLabel?.textColor = .white
-//        header.textLabel?.font = UIFont.init(name: "Courier", size: 22.0)
-//        header.textLabel?.textAlignment = .right
-//        header.automaticallyUpdatesContentConfiguration = true
         var content = header.defaultContentConfiguration()
-        
-//        content.textToSecondaryTextHorizontalPadding = 0.0
-//        content.textToSecondaryTextVerticalPadding = 0.0
-//        content.secondaryTextProperties.font = UIFont.init(name: "Courier", size: 22.0)!
-//        content.secondaryTextProperties.alignment = .center
-//        content.textProperties.alignment = .justified
-//        content.secondaryText = allTimeMonth(section)
-//        print(content.secondaryText)
         content.prefersSideBySideTextAndSecondaryText = true
 
         
         let monthNameFals = arrayJobDataList[section]
         let monthNameTrue = monthNameFals.first?.month
         content.text = monthName[monthNameTrue ?? 5]
-            //            monthName[section]
         content.secondaryText = allTimeMonth(monthNameFals)
         content.secondaryTextProperties.font = UIFont.init(name: "Zapf DingBats", size: 20.0)!
         content.secondaryTextProperties.color = .white

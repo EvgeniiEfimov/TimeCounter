@@ -11,6 +11,7 @@ class DetailedInformationViewController: UIViewController {
 
     var listInfo: Results<ListInfoDate>!
     var info: ListInfoDate!
+    var dateFormatter = DateFormatterClass()
     
     @IBOutlet weak var dateWorkOutlet: UILabel!
     @IBOutlet weak var startTimeWorkOutlet: UILabel!
@@ -22,21 +23,6 @@ class DetailedInformationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadingView()
-//        startTimeWorkOutlet.text = "\(String(describing: info.info?.timeStart))"
-    }
-    
-    private func timeDateFormatter(_ time: Date) -> String {
-        let dateFormatterTime = DateFormatter()
-        dateFormatterTime.dateFormat = "HH:mm"
-        dateFormatterTime.locale = Locale(identifier: "RU_RU")
-        return dateFormatterTime.string(from: time)
-    }
-    
-    private func dayDateFormatter(_ day: Date) -> String  {
-        let dateFormatterDay = DateFormatter()
-        dateFormatterDay.dateFormat = "dd.MM.yy"
-        dateFormatterDay.locale = Locale(identifier: "RU_RU")
-        return dateFormatterDay.string(from: day)
     }
     
     private func calculationLunchTimeMinute(_ lunch: Double) -> String {
@@ -50,12 +36,19 @@ class DetailedInformationViewController: UIViewController {
         }
     }
     
+    
+    
     private func loadingView() {
-        dateWorkOutlet.text = dayDateFormatter(info.dateWorkShift)
-        startTimeWorkOutlet.text = timeDateFormatter(info.timeStart)
-        finishTimeWorkOutlet.text = timeDateFormatter(info.timeStop)
+        
+        dateWorkOutlet.text = dateFormatter.dayDateFormatter(info.dateWorkShift)
+//            dayDateFormatter(info.dateWorkShift)
+        startTimeWorkOutlet.text = dateFormatter.timeDateFormatter(info.timeStart)
+//            timeDateFormatter(info.timeStart)
+        finishTimeWorkOutlet.text = dateFormatter.timeDateFormatter(info.timeStop)
+//            timeDateFormatter(info.timeStop)
         lanchTimeOutlet.text = calculationLunchTimeMinute(info.lunch)
         workTimeOutlet.text = String(info.timeWork)
     }
 }
+
 

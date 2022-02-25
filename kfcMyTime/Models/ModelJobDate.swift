@@ -7,16 +7,6 @@
 import UIKit
 import RealmSwift
 
-
-//class InfoJobDate: Object {
-//    @objc dynamic var dateWorkShift = Date()
-//    @objc dynamic var timeStart = Date()
-//    @objc dynamic var timeStop =  Date()
-//    @objc dynamic var timeWork =  TimeInterval()
-//    @objc dynamic var lunch = false
-//    @objc dynamic var doublePayment = false
-//}
-
 class ListInfoDate: Object {
     @objc dynamic var dateWorkShift = Date()
     @objc dynamic var dayOfDateWorkShift = Int()
@@ -25,8 +15,7 @@ class ListInfoDate: Object {
     @objc dynamic var timeStart = Date()
     @objc dynamic var timeStop =  Date()
     @objc dynamic var lunch = Double()
-//    @objc dynamic var doublePayment = false
-//    var info: InfoJobDate?
+    
 }
 
 class SettingsUser: Object {

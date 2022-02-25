@@ -10,7 +10,6 @@ import RealmSwift
 
 class SettingsViewController: UIViewController {
 
-//    var settingsUser: SettingsUser!
     var saveCompletionSettings: (() -> Void)?
 
     
@@ -29,37 +28,7 @@ class SettingsViewController: UIViewController {
             return false
         } else { return true }
     }
-    
-//    private func readDataAndUpdateUI() {
-//        settingsUser = StorageManager.shared.realm.objects(SettingsUser.self).first
-//        guard settingsUser != nil else { return }
-//        if !settingsUser.rateTFOutlet.isEmpty {
-//            rateTFOutlet.text = settingsUser.rateTFOutlet
-//            switchAutoLunchOutlet.isOn = settingsUser.automaticLunch
-//
-//        }
-//    }
-    
-//    private func saveSettings() {
-//
-//        let valueSaveSattingUser = SettingsUser()
-//        valueSaveSattingUser.automaticLunch = switchAutoLunchOutlet.isOn
-//        valueSaveSattingUser.rateTFOutlet = rateTFOutlet.text ?? "Error 504"
-//
-////        guard settingsUser != nil else { return }
-////        if settingsUser.rateTFOutlet != rateTFOutlet.text {
-////            valueSaveSattingUser.rateTFOutlet = rateTFOutlet.text ?? ""
-////        }
-//
-//        DispatchQueue.main.async {
-//            StorageManager.shared.saveSettings(settings: valueSaveSattingUser)
-//        }
-//        print(valueSaveSattingUser)
-//
-//
-//    }
-    
-    
+ 
     @IBAction func saveButtonAction(_ sender: UIButton) {
 
         deleteSettings()
@@ -79,7 +48,6 @@ extension SettingsViewController: SaveSettings {
     }
     
     func readDataSettings() {
-//        settingsUser = StorageManager.shared.realm.objects(SettingsUser.self).first
         guard settingsUser != nil else { return }
         if !settingsUser.rateTFOutlet.isEmpty {
             rateTFOutlet.text = settingsUser.rateTFOutlet
