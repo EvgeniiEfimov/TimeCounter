@@ -11,6 +11,5 @@ import RealmSwift
 protocol SaveSettings {
     var settingsUser: SettingsUser! {get}
     func readDataSettings()
-    func deleteSettings()
     func saveSettings()
 }

@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Расчёт-->
         <scene sceneID="ooC-HD-d74">
             <objects>
                 <viewController id="C3D-nT-u1h" customClass="СalculatedViewController" customModule="kfcMyTime" customModuleProvider="target" sceneMemberID="viewController">
@@ -98,8 +98,8 @@
                             <constraint firstItem="AhF-4f-ee2" firstAttribute="width" secondItem="QJD-rF-Ips" secondAttribute="width" multiplier="0.90625" id="hPK-qC-NzR"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" id="kwB-d7-5Ll">
-                        <imageReference key="image" image="dollarsign.circle" catalog="system" symbolScale="large"/>
+                    <tabBarItem key="tabBarItem" title="Расчёт" id="kwB-d7-5Ll">
+                        <imageReference key="image" image="rublesign.circle" catalog="system" symbolScale="default"/>
                     </tabBarItem>
                     <connections>
                         <outlet property="allTimeRangeDay" destination="aiI-zi-hpX" id="J98-RH-TMy"/>
@@ -215,9 +215,10 @@
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.14999999999999999" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backDetailedInfo" translatesAutoresizingMaskIntoConstraints="NO" id="zuy-TZ-nRT">
                                 <rect key="frame" x="0.0" y="-27" width="320" height="573"/>
+                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
                             </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="oWs-uA-JUA">
-                                <rect key="frame" x="58.5" y="69" width="203.5" height="381"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="oWs-uA-JUA">
+                                <rect key="frame" x="58.5" y="89" width="203.5" height="341"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Дата: " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gFD-Bx-c3L">
                                         <rect key="frame" x="54.5" y="0.0" width="94" height="26"/>
@@ -225,55 +226,55 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="04.01.2022" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KDj-r7-Cmu">
-                                        <rect key="frame" x="39" y="40" width="125.5" height="25"/>
+                                        <rect key="frame" x="39" y="36" width="125.5" height="25"/>
                                         <fontDescription key="fontDescription" name="ZapfDingbatsITC" family="Zapf Dingbats" pointSize="25"/>
                                         <color key="textColor" systemColor="systemRedColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Начало смены:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="vBW-wT-Xzb">
-                                        <rect key="frame" x="0.0" y="79" width="203.5" height="26"/>
+                                        <rect key="frame" x="0.0" y="71" width="203.5" height="26"/>
                                         <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="26"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="16:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="reV-Yj-gby">
-                                        <rect key="frame" x="70" y="119" width="63" height="25"/>
+                                        <rect key="frame" x="70" y="107" width="63" height="25"/>
                                         <fontDescription key="fontDescription" name="ZapfDingbatsITC" family="Zapf Dingbats" pointSize="25"/>
                                         <color key="textColor" systemColor="systemRedColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Конец смены:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="HK0-HL-fkR">
-                                        <rect key="frame" x="7.5" y="158" width="188" height="26"/>
+                                        <rect key="frame" x="7.5" y="142" width="188" height="26"/>
                                         <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="26"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pUK-Ir-OHC">
-                                        <rect key="frame" x="70" y="198" width="63" height="25"/>
+                                        <rect key="frame" x="70" y="178" width="63" height="25"/>
                                         <fontDescription key="fontDescription" name="ZapfDingbatsITC" family="Zapf Dingbats" pointSize="25"/>
                                         <color key="textColor" systemColor="systemRedColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Обед:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="svK-Kx-RBW">
-                                        <rect key="frame" x="62.5" y="237" width="78.5" height="26"/>
+                                        <rect key="frame" x="62.5" y="213" width="78.5" height="26"/>
                                         <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="26"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30'" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aDy-xj-JD7">
-                                        <rect key="frame" x="85" y="277" width="33" height="25"/>
+                                        <rect key="frame" x="85" y="249" width="33" height="25"/>
                                         <fontDescription key="fontDescription" name="ZapfDingbatsITC" family="Zapf Dingbats" pointSize="25"/>
                                         <color key="textColor" systemColor="systemRedColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Часы:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="WyM-IN-5Zc">
-                                        <rect key="frame" x="62.5" y="316" width="78.5" height="26"/>
-                                        <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="26"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Часы: " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="WyM-IN-5Zc">
+                                        <rect key="frame" x="62" y="284" width="79.5" height="22"/>
+                                        <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="22"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7,5" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MgP-S5-S2g">
-                                        <rect key="frame" x="84" y="356" width="35" height="25"/>
+                                        <rect key="frame" x="84" y="316" width="35" height="25"/>
                                         <fontDescription key="fontDescription" name="ZapfDingbatsITC" family="Zapf Dingbats" pointSize="25"/>
                                         <color key="textColor" systemColor="systemRedColor"/>
                                         <nil key="highlightedColor"/>
@@ -292,7 +293,7 @@
                             <constraint firstItem="zuy-TZ-nRT" firstAttribute="centerX" secondItem="L1l-rD-4gV" secondAttribute="centerX" id="oUy-T2-cfI"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="9kr-ff-ERR"/>
+                    <navigationItem key="navigationItem" leftItemsSupplementBackButton="YES" largeTitleDisplayMode="never" id="9kr-ff-ERR"/>
                     <connections>
                         <outlet property="dateWorkOutlet" destination="KDj-r7-Cmu" id="XAe-Wf-ipl"/>
                         <outlet property="finishTimeWorkOutlet" destination="pUK-Ir-OHC" id="kb6-VB-fQb"/>
@@ -548,12 +549,12 @@
             </objects>
             <point key="canvasLocation" x="653" y="-1294"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Часы-->
         <scene sceneID="8vN-U0-ocj">
             <objects>
                 <navigationController id="8Md-s0-vWw" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" id="fzY-0E-dos">
-                        <imageReference key="image" image="stopwatch" catalog="system" symbolScale="large"/>
+                    <tabBarItem key="tabBarItem" title="Часы" id="fzY-0E-dos">
+                        <imageReference key="image" image="stopwatch" catalog="system" symbolScale="default"/>
                     </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="ehA-DV-r0Y">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="91"/>
@@ -575,9 +576,9 @@
         <image name="backAddImage" width="1920" height="1080"/>
         <image name="backDetailedInfo" width="600" height="800"/>
         <image name="buttonAdd" width="431" height="600"/>
-        <image name="dollarsign.circle" catalog="system" width="128" height="121"/>
         <image name="gearshape" catalog="system" width="128" height="121"/>
         <image name="plus" catalog="system" width="128" height="113"/>
+        <image name="rublesign.circle" catalog="system" width="128" height="121"/>
         <image name="square.dashed" catalog="system" width="128" height="114"/>
         <image name="stopwatch" catalog="system" width="121" height="128"/>
         <systemColor name="systemBackgroundColor">

@@ -11,6 +11,7 @@ import RealmSwift
 class SettingsViewController: UIViewController {
 
     var saveCompletionSettings: (() -> Void)?
+    var realm = try! Realm()
 
     
     @IBOutlet weak var switchAutoLunchOutlet: UISwitch!
@@ -31,7 +32,7 @@ class SettingsViewController: UIViewController {
  
     @IBAction func saveButtonAction(_ sender: UIButton) {
 
-        deleteSettings()
+//        deleteSettings()
         saveSettings()
         
         dismiss(animated: true, completion: saveCompletionSettings)
@@ -41,6 +42,9 @@ class SettingsViewController: UIViewController {
 }
 
 extension SettingsViewController: SaveSettings {
+    func deleteSettings() {
+    }
+    
     var settingsUser: SettingsUser! {
         get {
             StorageManager.shared.realm.objects(SettingsUser.self).first
@@ -49,25 +53,25 @@ extension SettingsViewController: SaveSettings {
     
     func readDataSettings() {
         guard settingsUser != nil else { return }
+      
         if !settingsUser.rateTFOutlet.isEmpty {
             rateTFOutlet.text = settingsUser.rateTFOutlet
-            switchAutoLunchOutlet.isOn = settingsUser.automaticLunch
         }
-    }
-    
-    func deleteSettings() {
-        if settingsUser != nil {
-        StorageManager.shared.deleteSettings(settings: settingsUser)
-        }
+        switchAutoLunchOutlet.isOn = settingsUser.automaticLunch
     }
     
     func saveSettings() {
-        let valueSaveSattingUser = SettingsUser()
-        valueSaveSattingUser.automaticLunch = switchAutoLunchOutlet.isOn
-        valueSaveSattingUser.rateTFOutlet = rateTFOutlet.text ?? "Error 504"
-        
-        DispatchQueue.main.async {
-            StorageManager.shared.saveSettings(settings: valueSaveSattingUser)
+        if settingsUser != nil {
+            StorageManager.shared.write {
+                settingsUser.automaticLunch = switchAutoLunchOutlet.isOn
+                settingsUser.rateTFOutlet = rateTFOutlet.text ?? "Error"
+            }
+        }
+        else {
+            let newValueSettingsUser = SettingsUser()
+            newValueSettingsUser.automaticLunch = switchAutoLunchOutlet.isOn
+            newValueSettingsUser.rateTFOutlet = rateTFOutlet.text ?? "Error"
+            StorageManager.shared.saveSettings(settings: newValueSettingsUser)
         }
     }
 }

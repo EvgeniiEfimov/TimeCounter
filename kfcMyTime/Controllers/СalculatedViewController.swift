@@ -13,6 +13,8 @@ class СalculatedViewController: UIViewController {
     private var jobDataList: Results<ListInfoDate>!
     
     var value: Results<ListInfoDate>! // проба
+    var valueSettingsOfLunchtime = StorageManager.shared.realm.objects(SettingsUser.self)
+
     let monthName = DataManager.shared.monthArray
     let oneRangeDay = 1...15
     let twoRangeDay = 15...31
@@ -80,7 +82,7 @@ class СalculatedViewController: UIViewController {
     private func calculatedTime(_ arrayOfDay: [ListInfoDate]) -> Double{
         var allTime = 0.0
         for day in arrayOfDay {
-            allTime = allTime + day.timeWork
+            allTime = allTime + (valueSettingsOfLunchtime.first?.automaticLunch ?? true ? day.fullTimeWork : day.timeWorkWithLunch)
         }
         return allTime
     }
@@ -129,7 +131,7 @@ extension СalculatedViewController: UIPickerViewDelegate {
                                    style: .default,
                                    handler:{ action in
                                     self.allCalculate(self.rateTFOutlet)
-                                    self.deleteSettings()
+                                   // self.deleteSettings()
                                     self.saveSettings()
                                     self.allTimeRangeDay.isHidden = false
                                     self.amountLabelOutlet.isHidden = false
@@ -179,13 +181,25 @@ extension СalculatedViewController: SaveSettings {
     }
     
     func saveSettings() {
-        let valueSaveSattingUser = SettingsUser()
-        valueSaveSattingUser.rateTFOutlet = rateTFOutlet
+//        let valueSaveSattingUser = SettingsUser()
+//        valueSaveSattingUser.rateTFOutlet = rateTFOutlet
+//
+//        DispatchQueue.main.async {
+//            StorageManager.shared.saveSettings(settings: valueSaveSattingUser)
+//
+//    }
+//
+//
+        if settingsUser != nil {
+            StorageManager.shared.write {
+                settingsUser.rateTFOutlet = rateTFOutlet
+            }
+        }
+        else {
+            let newValueSettingsUser = SettingsUser()
+            newValueSettingsUser.rateTFOutlet = rateTFOutlet
+            StorageManager.shared.saveSettings(settings: newValueSettingsUser)
+        }
         
-        DispatchQueue.main.async {
-            StorageManager.shared.saveSettings(settings: valueSaveSattingUser)
-
-    }
-    
 }
 }

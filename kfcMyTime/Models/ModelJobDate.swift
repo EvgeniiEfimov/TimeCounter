@@ -10,7 +10,8 @@ import RealmSwift
 class ListInfoDate: Object {
     @objc dynamic var dateWorkShift = Date()
     @objc dynamic var dayOfDateWorkShift = Int()
-    @objc dynamic var timeWork =  TimeInterval()
+    @objc dynamic var fullTimeWork =  TimeInterval()
+    @objc dynamic var timeWorkWithLunch =  TimeInterval()
     @objc dynamic var month = Int()
     @objc dynamic var timeStart = Date()
     @objc dynamic var timeStop =  Date()

@@ -30,11 +30,13 @@ class TableDateCellViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         tableView.backgroundView = UIImageView(image: UIImage(named: "backTableImage1"))
         tableView.backgroundView?.contentMode = .scaleAspectFill
         tableView.backgroundView?.alpha = 0.1
-        
+        readDataAndUpdateUI()
+        if jobDataList.isEmpty {
+            alertFirstStart()
+        }
         }
 
     // MARK: - Table view data source
@@ -80,7 +82,7 @@ class TableDateCellViewController: UITableViewController {
     private func allTimeMonth(_ section: Results<ListInfoDate>) -> String {
         var allTime: Double = 0.0
         for timeDay in section {
-            allTime = allTime + timeDay.timeWork // <-- условия расчета
+            allTime = allTime + (valueSettingsOfLunchtime.first?.automaticLunch ?? true ? timeDay.fullTimeWork : timeDay.timeWorkWithLunch)
         }
         if allTime == 0.0 {
             return ""
@@ -103,7 +105,7 @@ class TableDateCellViewController: UITableViewController {
         content.text = dateFormatterDay.string(from: jobDataLists.dateWorkShift )
         content.textProperties.font = UIFont.init(name: "Zapf Dingbats", size: 18.0) ??
             .preferredFont(forTextStyle: .body)
-        content.secondaryText = "Часы: \(jobDataLists.timeWork)"
+        content.secondaryText = "Часы: \(valueSettingsOfLunchtime.first?.automaticLunch ?? true ? jobDataLists.fullTimeWork : jobDataLists.timeWorkWithLunch)"
         cell.contentConfiguration = content
         return cell
     }
@@ -172,6 +174,7 @@ class TableDateCellViewController: UITableViewController {
 
                     let info = jobDataLists
                     detailedVC.info = info
+                   detailedVC.boolValueOfLunch = valueSettingsOfLunchtime.first?.automaticLunch
             }
 
             } else if segue.identifier == "settingsVC" {
@@ -198,7 +201,7 @@ class TableDateCellViewController: UITableViewController {
     
     private func readDataAndUpdateUI() {
         jobDataList = StorageManager.shared.realm.objects(ListInfoDate.self).sorted(byKeyPath: "dateWorkShift")
-
+        
         self.setEditing(false, animated: true)
         self.tableView.reloadData()
     }
@@ -226,5 +229,24 @@ class TableDateCellViewController: UITableViewController {
         present(alertDelete,
                 animated: true,
                 completion: nil)
+    }
+    
+    func alertFirstStart() {
+        let alertStart = UIAlertController(title: "Привет!",
+                                           message: """
+Краткая инструкция:
+* Для добавления смены воспользуйтесь иконкой ➕ в правом верхнем углу
+* Для удаления конкретной смены воспользуйтесь свайпом  👈🏻 влево на необходимой ячейки
+* Иконка корзины 🗑 в левом верхнем углу служит для удаления всех смен (без возможности возврата!)
+* ⚙️ позволит настроить учет обеденного перерыва и часовую ставку
+* ВНИМАНИЕ! Данное приложение носит исключительно информативный характер и предназначено для
+более удобного отслеживания рабочих часов. Все расчеты являются приблизительными и в настоящее время
+не учитывают доплату за ночные часы и премии
+""",
+                                           preferredStyle: .alert)
+        alertStart.addAction(.init(title: "Понятно!",
+                                   style: .default,
+                                   handler: nil))
+        present(alertStart, animated: true, completion: nil)
     }
 }

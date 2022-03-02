@@ -23,7 +23,6 @@ class StorageManager {
     func deleteListInfo(infoList: ListInfoDate) {
         write {
             realm.delete(infoList)
-//            realm.delete(infoList.info)
         }
     }
     
@@ -46,7 +45,7 @@ class StorageManager {
         }
     }
     
-    private func write (_ completion: () -> Void) {
+     func write (_ completion: () -> Void) {
         do {
             try realm.write {
             completion()

@@ -7,6 +7,7 @@
 
 import UIKit
 import RealmSwift
+import SPAlert
 
 class AddJobDateViewController: UIViewController {
 
@@ -36,7 +37,8 @@ class AddJobDateViewController: UIViewController {
             
             let timeWorkCalculation = stopTimeJobOutlet.date.timeIntervalSince(startTimeJobOutlet.date)
             newListInfo.dateWorkShift = dataDayOutlet.date
-            newListInfo.timeWork = calculationOfWorkingHours(timeWorkCalculation, calculationLunchTime(timeWorkCalculation))
+            newListInfo.fullTimeWork = calculationOfWorkingHours(timeWorkCalculation, calculationLunchTime(timeWorkCalculation))
+            newListInfo.timeWorkWithLunch = calculationOfWorkingHours(timeWorkCalculation, 0.0)
             newListInfo.timeStart = startTimeJobOutlet.date
             newListInfo.timeStop = stopTimeJobOutlet.date
             newListInfo.lunch = calculationLunchTime(timeWorkCalculation)
@@ -47,6 +49,7 @@ class AddJobDateViewController: UIViewController {
             DispatchQueue.main.async {
                 StorageManager.shared.saveListInfo(infoList: newListInfo)
             }
+            spAlert() 
             return true
         } else {
             showAlert()
@@ -79,6 +82,14 @@ class AddJobDateViewController: UIViewController {
         default:
             return 0.0
         }
+    }
+    
+    private func spAlert() {
+        let alertView = SPAlertView(title: "Добавлено", preset: .done)
+        alertView.duration = 1.3
+        alertView.cornerRadius = 12
+        alertView.present()
+        alertView.backgroundColor = UIColor.darkGray
     }
     
     @IBAction func addButtonAction(_ sender: UIButton) {
