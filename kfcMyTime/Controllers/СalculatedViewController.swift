@@ -181,15 +181,7 @@ extension СalculatedViewController: SaveSettings {
     }
     
     func saveSettings() {
-//        let valueSaveSattingUser = SettingsUser()
-//        valueSaveSattingUser.rateTFOutlet = rateTFOutlet
-//
-//        DispatchQueue.main.async {
-//            StorageManager.shared.saveSettings(settings: valueSaveSattingUser)
-//
-//    }
-//
-//
+
         if settingsUser != nil {
             StorageManager.shared.write {
                 settingsUser.rateTFOutlet = rateTFOutlet

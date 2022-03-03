@@ -33,9 +33,16 @@ class AddJobDateViewController: UIViewController {
             
             let newListInfo = ListInfoDate()
             
-            let components = Calendar.current.dateComponents([.day, .month], from: dataDayOutlet.date)
+            let dateFormatMonthName = DateFormatter()
+            dateFormatMonthName.dateFormat = "MMMM"
+            dateFormatMonthName.locale = Locale(identifier: "Ru-ru")
+            
+            let components = Calendar.current.dateComponents([.day, .month, .minute, .hour], from: dataDayOutlet.date)
+            let componentsTime = Calendar.current.dateComponents([.hour, .minute], from:startTimeJobOutlet.date , to:stopTimeJobOutlet.date)
+
             
             let timeWorkCalculation = stopTimeJobOutlet.date.timeIntervalSince(startTimeJobOutlet.date)
+            print(timeWorkCalculation)
             newListInfo.dateWorkShift = dataDayOutlet.date
             newListInfo.fullTimeWork = calculationOfWorkingHours(timeWorkCalculation, calculationLunchTime(timeWorkCalculation))
             newListInfo.timeWorkWithLunch = calculationOfWorkingHours(timeWorkCalculation, 0.0)
@@ -44,6 +51,10 @@ class AddJobDateViewController: UIViewController {
             newListInfo.lunch = calculationLunchTime(timeWorkCalculation)
             newListInfo.dayOfDateWorkShift = components.day ?? 0
             newListInfo.month = components.month ?? 0
+            newListInfo.monthNameString = dateFormatMonthName.string(from: dataDayOutlet.date)
+            newListInfo.timeWorkHour = componentsTime.hour ?? 0
+            newListInfo.timeWorkMinute = componentsTime.minute ?? 0
+            
             
             
             DispatchQueue.main.async {
@@ -70,6 +81,7 @@ class AddJobDateViewController: UIViewController {
     }
     
     private func calculationOfWorkingHours(_ timeWork: TimeInterval,_ lunchTime: Double) -> Double {
+        
         return Double(String(format: "%.1f", (timeWork / 3600.0 - lunchTime))) ?? 0.2
         }
     

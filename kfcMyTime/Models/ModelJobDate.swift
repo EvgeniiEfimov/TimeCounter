@@ -13,9 +13,13 @@ class ListInfoDate: Object {
     @objc dynamic var fullTimeWork =  TimeInterval()
     @objc dynamic var timeWorkWithLunch =  TimeInterval()
     @objc dynamic var month = Int()
+    @objc dynamic var monthNameString = String()
     @objc dynamic var timeStart = Date()
     @objc dynamic var timeStop =  Date()
     @objc dynamic var lunch = Double()
+    @objc dynamic var timeWorkHour = Int()
+    @objc dynamic var timeWorkMinute = Int()
+
     
 }
 

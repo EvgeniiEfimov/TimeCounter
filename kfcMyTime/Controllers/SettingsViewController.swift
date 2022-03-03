@@ -32,7 +32,6 @@ class SettingsViewController: UIViewController {
  
     @IBAction func saveButtonAction(_ sender: UIButton) {
 
-//        deleteSettings()
         saveSettings()
         
         dismiss(animated: true, completion: saveCompletionSettings)

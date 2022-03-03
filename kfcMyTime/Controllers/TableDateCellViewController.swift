@@ -13,6 +13,7 @@ class TableDateCellViewController: UITableViewController {
     var jobDataLists: ListInfoDate!
     var countRows: Results<ListInfoDate>!
     var sortDate2: Results<ListInfoDate>!
+    let minOfHour = 60
     
     var valueSettingsOfLunchtime = StorageManager.shared.realm.objects(SettingsUser.self)
     
@@ -34,6 +35,7 @@ class TableDateCellViewController: UITableViewController {
         tableView.backgroundView?.contentMode = .scaleAspectFill
         tableView.backgroundView?.alpha = 0.1
         readDataAndUpdateUI()
+//        arrayJobDataList = sortDataToMonth2(jobDataList)
         if jobDataList.isEmpty {
             alertFirstStart()
         }
@@ -42,7 +44,7 @@ class TableDateCellViewController: UITableViewController {
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        sortDataToMonth2()
+        arrayJobDataList = sortDataToMonth2(jobDataList)
         return arrayJobDataList.count
         
     }
@@ -59,35 +61,29 @@ class TableDateCellViewController: UITableViewController {
     }
 
     
-    
-    private func sortDataToMonth2() {
-        var filtrDate: Results<ListInfoDate>!
-        arrayJobDataList.removeAll()
+    private func sortDataToMonth2(_ jobData: Results<ListInfoDate>) -> [Results<ListInfoDate>]  {
+        var filtrDate: Results<ListInfoDate>
+        var arrayData = [Results<ListInfoDate>]()
         for value in 1...12 {
-            filtrDate = jobDataList.filter("month = \(value)")
+            filtrDate = jobData.filter("month = \(value)")
             if filtrDate.count != 0 {
-                if !arrayJobDataList.contains(filtrDate) {
-            arrayJobDataList.append(filtrDate)
+                if !arrayData.contains(filtrDate) {
+            arrayData.append(filtrDate)
                 }
             }
         }
-    }
-    
-        private func sortDataToMonth(_ monthDay: Int) -> Results<ListInfoDate>! {
-    var filtrDate: Results<ListInfoDate>!
-        filtrDate = jobDataList.filter("month = \(monthDay + 1)")
-        return filtrDate
+        return arrayData
     }
 
-    private func allTimeMonth(_ section: Results<ListInfoDate>) -> String {
+    private func allTimeMonth(_ section: Results<ListInfoDate>) -> Double {
         var allTime: Double = 0.0
         for timeDay in section {
             allTime = allTime + (valueSettingsOfLunchtime.first?.automaticLunch ?? true ? timeDay.fullTimeWork : timeDay.timeWorkWithLunch)
         }
         if allTime == 0.0 {
-            return ""
+            return 0
         } else {
-        return String(allTime)
+        return allTime
         }
     }
     
@@ -105,7 +101,7 @@ class TableDateCellViewController: UITableViewController {
         content.text = dateFormatterDay.string(from: jobDataLists.dateWorkShift )
         content.textProperties.font = UIFont.init(name: "Zapf Dingbats", size: 18.0) ??
             .preferredFont(forTextStyle: .body)
-        content.secondaryText = "Часы: \(valueSettingsOfLunchtime.first?.automaticLunch ?? true ? jobDataLists.fullTimeWork : jobDataLists.timeWorkWithLunch)"
+        content.secondaryText = "Часы: \(valueSettingsOfLunchtime.first?.automaticLunch ?? true ? jobDataLists.fullTimeWork : jobDataLists.timeWorkWithLunch) ()"
         cell.contentConfiguration = content
         return cell
     }
@@ -116,12 +112,10 @@ class TableDateCellViewController: UITableViewController {
         let header = view as! UITableViewHeaderFooterView
         var content = header.defaultContentConfiguration()
         content.prefersSideBySideTextAndSecondaryText = true
-
         
-        let monthNameFals = arrayJobDataList[section]
-        let monthNameTrue = monthNameFals.first?.month
-        content.text = monthName[monthNameTrue ?? 5]
-        content.secondaryText = allTimeMonth(monthNameFals)
+        let month = arrayJobDataList[section]
+        content.text = month.first?.monthNameString
+        content.secondaryText = "\(allTimeMonth(month))  \(Int(floor(allTimeMonth(month)))):\(Int((allTimeMonth(month).truncatingRemainder(dividingBy: 1)) * 60))"
         content.secondaryTextProperties.font = UIFont.init(name: "Zapf DingBats", size: 20.0)!
         content.secondaryTextProperties.color = .white
         content.textProperties.color = .white
@@ -201,7 +195,6 @@ class TableDateCellViewController: UITableViewController {
     
     private func readDataAndUpdateUI() {
         jobDataList = StorageManager.shared.realm.objects(ListInfoDate.self).sorted(byKeyPath: "dateWorkShift")
-        
         self.setEditing(false, animated: true)
         self.tableView.reloadData()
     }

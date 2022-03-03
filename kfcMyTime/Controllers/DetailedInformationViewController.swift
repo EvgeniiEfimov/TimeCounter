@@ -14,6 +14,7 @@ class DetailedInformationViewController: UIViewController {
     var boolValueOfLunch: Bool!
     var dateFormatter = DateFormatterClass()
     
+    
     @IBOutlet weak var dateWorkOutlet: UILabel!
     @IBOutlet weak var startTimeWorkOutlet: UILabel!
     @IBOutlet weak var finishTimeWorkOutlet: UILabel!
@@ -40,7 +41,6 @@ class DetailedInformationViewController: UIViewController {
     
     
     private func loadingView() {
-        
         dateWorkOutlet.text = dateFormatter.dayDateFormatter(info.dateWorkShift)
         startTimeWorkOutlet.text = dateFormatter.timeDateFormatter(info.timeStart)
         finishTimeWorkOutlet.text = dateFormatter.timeDateFormatter(info.timeStop)
