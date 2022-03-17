@@ -9,8 +9,9 @@ import RealmSwift
 
 class DetailedInformationViewController: UIViewController {
 
-    var listInfo: Results<ListInfoDate>!
-    var info: ListInfoDate!
+    var listInfo: Results<InfoOfDayWork>!
+    var info: InfoOfDayWork!
+    var lunchTime: String = ""
     var boolValueOfLunch: Bool!
     var dateFormatter = DateFormatterClass()
     
@@ -27,16 +28,16 @@ class DetailedInformationViewController: UIViewController {
         loadingView()
     }
     
-    private func calculationLunchTimeMinute(_ lunch: Double) -> String {
-        switch lunch {
-        case 0.8:
-            return "45'"
-        case 0.5:
-            return "30'"
-        default:
-            return "0"
-        }
-    }
+//    private func calculationLunchTimeMinute(_ lunch: Double) -> String {
+//        switch lunch {
+//        case 0.8:
+//            return "45'"
+//        case 0.5:
+//            return "30'"
+//        default:
+//            return "0"
+//        }
+//    }
     
     
     
@@ -44,8 +45,8 @@ class DetailedInformationViewController: UIViewController {
         dateWorkOutlet.text = dateFormatter.dayDateFormatter(info.dateWorkShift)
         startTimeWorkOutlet.text = dateFormatter.timeDateFormatter(info.timeStart)
         finishTimeWorkOutlet.text = dateFormatter.timeDateFormatter(info.timeStop)
-        lanchTimeOutlet.text = (boolValueOfLunch ?? false) ? calculationLunchTimeMinute(info.lunch) : "-"
-        workTimeOutlet.text = (boolValueOfLunch ?? false) ? String(info.fullTimeWork) : String(info.timeWorkWithLunch)
+        lanchTimeOutlet.text = info.lunchString
+        workTimeOutlet.text = info.timeWorkString
     }
 }
 

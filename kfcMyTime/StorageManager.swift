@@ -14,15 +14,17 @@ class StorageManager {
     
     private init() {}
     
-    func saveListInfo(infoList: ListInfoDate) {
+    //MARK: - work ListInfoOfMonch
+    func save(allMonch: ListInfoOfMonch) {
         write {
-            realm.add(infoList)
+            realm.add(allMonch)
         }
     }
     
-    func deleteListInfo(infoList: ListInfoDate) {
+    func deleteMonch(allMonch: ListInfoOfMonch) {
         write {
-            realm.delete(infoList)
+
+            realm.delete(allMonch)
         }
     }
     
@@ -32,19 +34,55 @@ class StorageManager {
         }
     }
     
+    //MARK: - Work DayOfMonth
     
-    func saveSettings(settings: SettingsUser) {
+    func save(monch: DayOfMonth, in listInfoOfMonch: ListInfoOfMonch) {
+        write {
+            listInfoOfMonch.monch.append(monch)
+        }
+    }
+    
+    func deleteMonch(monch: DayOfMonth) {
+        write {
+            realm.delete(monch)
+//            realm.delete(monch)
+        }
+    }
+    
+    //MARK: - InfoOfDayWork
+    
+    func save(day: InfoOfDayWork, in dayOfMonth: DayOfMonth, in listInfoOfMonch: ListInfoOfMonch) {
+        write {
+            let monch = dayOfMonth
+            listInfoOfMonch.monch.append(monch)
+            
+        }
+    }
+    
+    func deleteDayInfo(day: InfoOfDayWork) {
+        write {
+            realm.delete(day)
+        }
+    }
+    
+    
+    //MARK: - Settings
+    
+    func saveSettings (settings: SettingsUser) {
         write {
             realm.add(settings)
         }
     }
     
-    func deleteSettings(settings: SettingsUser) {
+    
+    func deleteSettings (settings: SettingsUser) {
         write {
             realm.delete(settings)
         }
     }
     
+    
+
      func write (_ completion: () -> Void) {
         do {
             try realm.write {

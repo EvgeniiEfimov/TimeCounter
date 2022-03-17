@@ -42,6 +42,7 @@
                                         <segments>
                                             <segment title="с 1 по 15"/>
                                             <segment title="с 15 по 31"/>
+                                            <segment title="Месяц"/>
                                         </segments>
                                     </segmentedControl>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="aAr-Gq-MtU">
@@ -137,16 +138,16 @@
         <scene sceneID="ARD-N9-bYG">
             <objects>
                 <tableViewController id="HfX-hm-bsm" customClass="TableDateCellViewController" customModule="kfcMyTime" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="36" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="BKA-59-WK6">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="36" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="BKA-59-WK6">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellDate" textLabel="Qy7-0D-8Ze" detailTextLabel="UFJ-eK-vHb" style="IBUITableViewCellStyleValue1" id="Xas-BC-k4O">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cellDate" textLabel="Qy7-0D-8Ze" detailTextLabel="UFJ-eK-vHb" style="IBUITableViewCellStyleValue1" id="Xas-BC-k4O">
                                 <rect key="frame" x="0.0" y="44.5" width="320" height="36"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Xas-BC-k4O" id="v7s-AE-M2Z">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="36"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="295.5" height="36"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="Qy7-0D-8Ze">
@@ -157,7 +158,7 @@
                                             <color key="highlightedColor" red="1" green="0.95090086110000005" blue="0.29467130590000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UFJ-eK-vHb">
-                                            <rect key="frame" x="260" y="11" width="44" height="20.5"/>
+                                            <rect key="frame" x="243.5" y="11" width="44" height="20.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="1" green="0.072889729099999995" blue="0.17559053459999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -165,6 +166,7 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <connections>
                                     <segue destination="eBg-um-hZX" kind="show" identifier="detailVC" id="JIW-ob-JbW"/>
                                 </connections>
@@ -428,12 +430,11 @@
                     <navigationItem key="navigationItem" id="8dQ-HN-GLM"/>
                     <connections>
                         <outlet property="rateTFOutlet" destination="Vap-BQ-0br" id="aFG-uf-KPx"/>
-                        <outlet property="switchAutoLunchOutlet" destination="Pzx-gw-rJJ" id="rhy-o7-jwI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qog-Zk-q5l" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="652.5" y="-2008.0985915492959"/>
+            <point key="canvasLocation" x="653" y="-2058"/>
         </scene>
         <!--Add Job Date View Controller-->
         <scene sceneID="bYl-NO-rtf">
@@ -446,18 +447,6 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.10000000000000001" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backAddImage" translatesAutoresizingMaskIntoConstraints="NO" id="GkR-Z1-2rP">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pH8-W0-kaJ">
-                                <rect key="frame" x="193" y="408" width="28" height="26"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" systemColor="systemGrayColor"/>
-                                <state key="normal">
-                                    <imageReference key="image" image="square.dashed" catalog="system" symbolScale="default"/>
-                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="24" scale="default"/>
-                                </state>
-                                <connections>
-                                    <action selector="actionMarkButton:" destination="U2n-7v-o0l" eventType="touchUpInside" id="Fm5-Kz-jh9"/>
-                                </connections>
-                            </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="wD7-Yy-H6x">
                                 <rect key="frame" x="5" y="20" width="320" height="350"/>
                                 <subviews>
@@ -470,7 +459,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="10" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="Nvq-Bk-JRs">
+                                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="Nvq-Bk-JRs">
                                                 <rect key="frame" x="0.0" y="24" width="320" height="151"/>
                                                 <locale key="locale" localeIdentifier="ru_RU"/>
                                             </datePicker>
@@ -485,7 +474,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="10" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="TVa-O8-75x">
+                                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="TVa-O8-75x">
                                                 <rect key="frame" x="0.0" y="24" width="320" height="151"/>
                                                 <locale key="locale" localeIdentifier="ru"/>
                                             </datePicker>
@@ -514,6 +503,10 @@
                                     <action selector="addButtonAction:" destination="U2n-7v-o0l" eventType="touchUpInside" id="qYJ-ZQ-c8w"/>
                                 </connections>
                             </button>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F7K-sG-cHU">
+                                <rect key="frame" x="233" y="413" width="49" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </switch>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ucZ-aU-w26"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -530,19 +523,14 @@
                             <constraint firstItem="GkR-Z1-2rP" firstAttribute="centerY" secondItem="v4Y-K4-OBa" secondAttribute="centerY" id="jP3-AQ-IkR"/>
                             <constraint firstItem="7GD-hD-7f6" firstAttribute="width" secondItem="GkR-Z1-2rP" secondAttribute="width" multiplier="0.253125" id="oIk-FA-iha"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="pH8-W0-kaJ"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="td6-8J-b55"/>
                     <connections>
                         <outlet property="addButtonOutlet" destination="7GD-hD-7f6" id="fy4-CZ-0Cf"/>
                         <outlet property="dataDayOutlet" destination="Nvq-Bk-JRs" id="8Sx-KS-3d3"/>
-                        <outlet property="markDoublePayOutlet" destination="pH8-W0-kaJ" id="dnM-k6-NPM"/>
                         <outlet property="startTimeJobOutlet" destination="Nvq-Bk-JRs" id="9ae-v5-Lg6"/>
                         <outlet property="stopTimeJobOutlet" destination="TVa-O8-75x" id="J4Y-0r-CPR"/>
+                        <outlet property="switchOfLunch" destination="F7K-sG-cHU" id="7rU-up-bEU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Yn-gz-Ihp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -579,13 +567,9 @@
         <image name="gearshape" catalog="system" width="128" height="121"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="rublesign.circle" catalog="system" width="128" height="121"/>
-        <image name="square.dashed" catalog="system" width="128" height="114"/>
         <image name="stopwatch" catalog="system" width="121" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGrayColor">
-            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemPinkColor">
             <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

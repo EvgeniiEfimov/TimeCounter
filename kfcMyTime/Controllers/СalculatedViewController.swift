@@ -5,19 +5,20 @@
 //  Created by User on 29.01.2022.
 //
 
-//import UIKit
+import UIKit
 import RealmSwift
 
 class СalculatedViewController: UIViewController {
     
-    private var jobDataList: Results<ListInfoDate>!
+    private var jobDataList: Results<ListInfoOfMonch>!
     
-    var value: Results<ListInfoDate>! // проба
+    var value1: ListInfoOfMonch!// проба
     var valueSettingsOfLunchtime = StorageManager.shared.realm.objects(SettingsUser.self)
 
     let monthName = DataManager.shared.monthArray
     let oneRangeDay = 1...15
     let twoRangeDay = 15...31
+    let freeRangeDay = 1...31
     var rateTFOutlet: String = ""
 
     
@@ -33,7 +34,7 @@ class СalculatedViewController: UIViewController {
         monthPickerView.delegate = self
         monthPickerView.selectRow(1, inComponent: 0, animated: true)
 
-        readDataAndUpdateUI()
+        jobDataList = StorageManager.shared.realm.objects(ListInfoOfMonch.self).sorted(byKeyPath: "numberMonth")
         
     }
     
@@ -42,62 +43,58 @@ class СalculatedViewController: UIViewController {
         amountLabelOutlet.isHidden = true
     }
     
-    private func sortDataToMonth(_ monthDay: Int) -> Results<ListInfoDate>! {
-        var filtrDate: Results<ListInfoDate>!
-            filtrDate = jobDataList.filter("month = \(monthDay)")
-            return filtrDate
+    
+    private func sortDataToMonth(_ monthDay: Int, _ arrayDayOfMonch: Results<ListInfoOfMonch> ) -> ListInfoOfMonch? {
+        
+        for monch in arrayDayOfMonch {
+            if monch.numberMonth == monthDay {
+                return monch
+            }
         }
+        return nil
+    }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
     
     private func allCalculate( _ textField: String) {
-        let intValue = monthPickerView.selectedRow(inComponent: 0)
-       value = sortDataToMonth(intValue)
-        let newValue = filtrDay(value)
-        let allTime = calculatedTime(newValue)
+        let valuePicker = monthPickerView.selectedRow(inComponent: 0)
+
+        value1 = sortDataToMonth(valuePicker, jobDataList)
+        let allTime = filtrDay(value1)
         allTimeRangeDay.text = "\(allTime)"
         amountLabelOutlet.text = calculatedMoney(allTime, textField)
-        
     }
 
     @IBAction func calculateButton(_ sender: UIButton) {
         readDataSettings()
-        
     }
     
-    private func filtrDay(_ sortDataDayOfMonth: Results<ListInfoDate>) -> [ListInfoDate] {
-       
-        let rangeDay = (periodSCOutlet.selectedSegmentIndex == 0) ? oneRangeDay : twoRangeDay
-        var newList = [ListInfoDate]()
-        for day in sortDataDayOfMonth {
-            if rangeDay.contains(day.dayOfDateWorkShift) {
-                newList.append(day)
+    private func filtrDay(_ sortDataDayOfMonth: ListInfoOfMonch?) -> Double {
+        guard let monch = sortDataDayOfMonth else { return 0.0 }
+        var rangeDay: ClosedRange<Int>
+        switch periodSCOutlet.selectedSegmentIndex {
+        case 0: rangeDay = oneRangeDay
+        case 1: rangeDay = twoRangeDay
+        default:
+            rangeDay = freeRangeDay
+        }
+        var newList = 0.0
+        for day in monch.monch {
+            let components = Calendar.current.dateComponents([.day], from: day.dateWorkShift )
+            if rangeDay.contains(components.day ?? 0) {
+               newList += day.timeWork
             }
         }
         return newList
     }
     
-    private func calculatedTime(_ arrayOfDay: [ListInfoDate]) -> Double{
-        var allTime = 0.0
-        for day in arrayOfDay {
-            allTime = allTime + (valueSettingsOfLunchtime.first?.automaticLunch ?? true ? day.fullTimeWork : day.timeWorkWithLunch)
-        }
-        return allTime
-    }
-    
     private func calculatedMoney(_ numberOfHours: Double, _ rate: String) -> String {
-        let one = rate
-        let two = Double(one) ?? 0
-        let doubleRate = two * numberOfHours
+        let doubleRate = (Double(rate) ?? 0) * numberOfHours
         return String(format: "%.2f", doubleRate)
     }
     
-    
-    private func readDataAndUpdateUI() {
-        jobDataList = StorageManager.shared.realm.objects(ListInfoDate.self).sorted(byKeyPath: "dateWorkShift")
-            }
 }
 
 extension СalculatedViewController: UIPickerViewDataSource {
@@ -195,3 +192,4 @@ extension СalculatedViewController: SaveSettings {
         
 }
 }
+

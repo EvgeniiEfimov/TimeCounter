@@ -12,15 +12,21 @@ import SPAlert
 class AddJobDateViewController: UIViewController {
 
     @IBOutlet weak var addButtonOutlet: UIButton!
-    @IBOutlet weak var markDoublePayOutlet: UIButton!
+    @IBOutlet weak var switchOfLunch: UISwitch!
     @IBOutlet weak var dataDayOutlet: UIDatePicker!
     @IBOutlet weak var startTimeJobOutlet: UIDatePicker!
     @IBOutlet weak var stopTimeJobOutlet: UIDatePicker!
+    
+    private var listInfoOfMonch: Results<ListInfoOfMonch>!
+    
+    let formatSave = FormatSave.shared
     
     var saveCompletion: (() -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        listInfoOfMonch = StorageManager.shared.realm.objects(ListInfoOfMonch.self)
     }
         
     private func markButtonBool(_ markName: String, _ markOutlet: UIButton) {
@@ -30,35 +36,49 @@ class AddJobDateViewController: UIViewController {
     private func saveData () -> Bool {
         
         if stopTimeJobOutlet.date > startTimeJobOutlet.date {
+
+            let newListInfoOfMonch = ListInfoOfMonch()
+            let newListDayOfMonth = DayOfMonth()
+            let newListInfoOfDayWork = InfoOfDayWork()
             
-            let newListInfo = ListInfoDate()
             
             let dateFormatMonthName = DateFormatter()
-            dateFormatMonthName.dateFormat = "MMMM"
+            dateFormatMonthName.dateFormat = "LLLL"
             dateFormatMonthName.locale = Locale(identifier: "Ru-ru")
             
             let components = Calendar.current.dateComponents([.day, .month, .minute, .hour], from: dataDayOutlet.date)
-            let componentsTime = Calendar.current.dateComponents([.hour, .minute], from:startTimeJobOutlet.date , to:stopTimeJobOutlet.date)
-
+           
             
-            let timeWorkCalculation = stopTimeJobOutlet.date.timeIntervalSince(startTimeJobOutlet.date)
-            print(timeWorkCalculation)
-            newListInfo.dateWorkShift = dataDayOutlet.date
-            newListInfo.fullTimeWork = calculationOfWorkingHours(timeWorkCalculation, calculationLunchTime(timeWorkCalculation))
-            newListInfo.timeWorkWithLunch = calculationOfWorkingHours(timeWorkCalculation, 0.0)
-            newListInfo.timeStart = startTimeJobOutlet.date
-            newListInfo.timeStop = stopTimeJobOutlet.date
-            newListInfo.lunch = calculationLunchTime(timeWorkCalculation)
-            newListInfo.dayOfDateWorkShift = components.day ?? 0
-            newListInfo.month = components.month ?? 0
-            newListInfo.monthNameString = dateFormatMonthName.string(from: dataDayOutlet.date)
-            newListInfo.timeWorkHour = componentsTime.hour ?? 0
-            newListInfo.timeWorkMinute = componentsTime.minute ?? 0
+            newListInfoOfMonch.nameMonth = dateFormatMonthName.string(from: dataDayOutlet.date)
+            newListInfoOfMonch.numberMonth = components.month ?? 0
             
             
+            newListDayOfMonth.dateWorkShift = dataDayOutlet.date
+            newListDayOfMonth.timeWork = formatSave.lunchTimeString(startTimeJobOutlet.date,
+                                                                   stopTimeJobOutlet.date,
+                                                                    switchOfLunch.isOn).1
+            newListDayOfMonth.timeWorkFormat = formatSave.timeWorkOfFormatString(newListDayOfMonth.timeWork)
+            newListDayOfMonth.lunchBool = switchOfLunch.isOn
             
+            
+            newListInfoOfDayWork.timeStart = startTimeJobOutlet.date
+            newListInfoOfDayWork.timeStop = stopTimeJobOutlet.date
+            newListInfoOfDayWork.dateWorkShift = dataDayOutlet.date
+            newListInfoOfDayWork.lunchString = formatSave.lunchTimeString(startTimeJobOutlet.date,
+                                                                          stopTimeJobOutlet.date,
+                                                                          switchOfLunch.isOn).0
+            newListInfoOfDayWork.timeWorkString = formatSave.timeWorkOfFormatString(newListDayOfMonth.timeWork)
+            
+           let value =  listInfoOfMonch.filter("numberMonth = \(newListInfoOfMonch.numberMonth)")
+            if value.isEmpty {
             DispatchQueue.main.async {
-                StorageManager.shared.saveListInfo(infoList: newListInfo)
+                newListDayOfMonth.day = newListInfoOfDayWork
+                newListInfoOfMonch.monch.append(newListDayOfMonth)
+                StorageManager.shared.save(allMonch: newListInfoOfMonch)
+            }
+            } else {
+                newListDayOfMonth.day = newListInfoOfDayWork
+                StorageManager.shared.save(monch: newListDayOfMonth, in: value.first!)
             }
             spAlert() 
             return true
@@ -78,22 +98,6 @@ class AddJobDateViewController: UIViewController {
         present(alertError,
                 animated: true,
                 completion: nil)
-    }
-    
-    private func calculationOfWorkingHours(_ timeWork: TimeInterval,_ lunchTime: Double) -> Double {
-        
-        return Double(String(format: "%.1f", (timeWork / 3600.0 - lunchTime))) ?? 0.2
-        }
-    
-    private func calculationLunchTime(_ timeWork: TimeInterval) -> Double {
-        switch timeWork {
-        case (14401...32399):
-            return 0.5
-        case (32400...):
-            return 0.8
-        default:
-            return 0.0
-        }
     }
     
     private func spAlert() {

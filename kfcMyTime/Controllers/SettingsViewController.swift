@@ -10,11 +10,9 @@ import RealmSwift
 
 class SettingsViewController: UIViewController {
 
-    var saveCompletionSettings: (() -> Void)?
     var realm = try! Realm()
 
     
-    @IBOutlet weak var switchAutoLunchOutlet: UISwitch!
     @IBOutlet weak var rateTFOutlet: UITextField!
     
     
@@ -22,22 +20,11 @@ class SettingsViewController: UIViewController {
         super.viewDidLoad()
         readDataSettings()
     }
-    
-    private func isEmptyValueTF () -> Bool {
-        if !settingsUser.rateTFOutlet.isEmpty {
-            rateTFOutlet.text = settingsUser.rateTFOutlet
-            return false
-        } else { return true }
-    }
  
     @IBAction func saveButtonAction(_ sender: UIButton) {
-
         saveSettings()
-        
-        dismiss(animated: true, completion: saveCompletionSettings)
+        dismiss(animated: true, completion: nil)
     }
-    
-    
 }
 
 extension SettingsViewController: SaveSettings {
@@ -52,23 +39,19 @@ extension SettingsViewController: SaveSettings {
     
     func readDataSettings() {
         guard settingsUser != nil else { return }
-      
         if !settingsUser.rateTFOutlet.isEmpty {
             rateTFOutlet.text = settingsUser.rateTFOutlet
         }
-        switchAutoLunchOutlet.isOn = settingsUser.automaticLunch
     }
     
     func saveSettings() {
         if settingsUser != nil {
             StorageManager.shared.write {
-                settingsUser.automaticLunch = switchAutoLunchOutlet.isOn
                 settingsUser.rateTFOutlet = rateTFOutlet.text ?? "Error"
             }
         }
         else {
             let newValueSettingsUser = SettingsUser()
-            newValueSettingsUser.automaticLunch = switchAutoLunchOutlet.isOn
             newValueSettingsUser.rateTFOutlet = rateTFOutlet.text ?? "Error"
             StorageManager.shared.saveSettings(settings: newValueSettingsUser)
         }

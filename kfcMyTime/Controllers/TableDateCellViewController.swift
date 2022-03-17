@@ -6,27 +6,14 @@
 //
 
 import RealmSwift
+import SPAlert
 
 class TableDateCellViewController: UITableViewController {
 
-    
-    var jobDataLists: ListInfoDate!
-    var countRows: Results<ListInfoDate>!
-    var sortDate2: Results<ListInfoDate>!
-    let minOfHour = 60
-    
-    var valueSettingsOfLunchtime = StorageManager.shared.realm.objects(SettingsUser.self)
-    
-    
-    lazy var arrayMonchFiltr = [Results<ListInfoDate>]()
-    var arrayMonthFiltr2 = [Int : [ListInfoDate]]()
-    
-    private var jobDataList: Results<ListInfoDate>!
-    
-    private var arrayJobDataList = [Results<ListInfoDate>]()
-    
-    private let monthName = DataManager.shared.monthArray
+    private var listInfoOfMonch: Results<ListInfoOfMonch>!
     private let calendar = Calendar.current
+    private let imageLunchTrue = UIImage.init(systemName: "fork.knife")
+    private let imageLunchFalse = UIImage.init(systemName: "minus")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,19 +21,23 @@ class TableDateCellViewController: UITableViewController {
         tableView.backgroundView = UIImageView(image: UIImage(named: "backTableImage1"))
         tableView.backgroundView?.contentMode = .scaleAspectFill
         tableView.backgroundView?.alpha = 0.1
-        readDataAndUpdateUI()
-//        arrayJobDataList = sortDataToMonth2(jobDataList)
-        if jobDataList.isEmpty {
+        
+        listInfoOfMonch = StorageManager.shared.realm.objects(ListInfoOfMonch.self).sorted(byKeyPath: "numberMonth")
+        
+        if listInfoOfMonch.isEmpty {
             alertFirstStart()
         }
         }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
 
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        arrayJobDataList = sortDataToMonth2(jobDataList)
-        return arrayJobDataList.count
-        
+        listInfoOfMonch.count
     }
     
     
@@ -56,35 +47,8 @@ class TableDateCellViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let dayOfMonth = arrayJobDataList[section]
-        return dayOfMonth.count
-    }
-
-    
-    private func sortDataToMonth2(_ jobData: Results<ListInfoDate>) -> [Results<ListInfoDate>]  {
-        var filtrDate: Results<ListInfoDate>
-        var arrayData = [Results<ListInfoDate>]()
-        for value in 1...12 {
-            filtrDate = jobData.filter("month = \(value)")
-            if filtrDate.count != 0 {
-                if !arrayData.contains(filtrDate) {
-            arrayData.append(filtrDate)
-                }
-            }
-        }
-        return arrayData
-    }
-
-    private func allTimeMonth(_ section: Results<ListInfoDate>) -> Double {
-        var allTime: Double = 0.0
-        for timeDay in section {
-            allTime = allTime + (valueSettingsOfLunchtime.first?.automaticLunch ?? true ? timeDay.fullTimeWork : timeDay.timeWorkWithLunch)
-        }
-        if allTime == 0.0 {
-            return 0
-        } else {
-        return allTime
-        }
+        let day = listInfoOfMonch[section]
+        return day.monch.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -95,13 +59,18 @@ class TableDateCellViewController: UITableViewController {
         dateFormatterDay.dateFormat = "dd / MM, EEEE"
         dateFormatterDay.locale = Locale(identifier: "RU_RU")
         
-        let sortDate2 = arrayJobDataList[indexPath.section]
-        let jobDataLists = sortDate2[indexPath.row]
+        
+        let monch = listInfoOfMonch[indexPath.section]
+        let daySorted = monch.monch.sorted(byKeyPath: "dateWorkShift")
+        let day = daySorted[indexPath.row]
+//        monch.monch[indexPath.row]
+        
+//        let lunch = day.lunchBool ? imageLunchTrue : imageLunchFalse // <---------------
         var content = cell.defaultContentConfiguration()
-        content.text = dateFormatterDay.string(from: jobDataLists.dateWorkShift )
+        content.text = dateFormatterDay.string(from: day.dateWorkShift)
         content.textProperties.font = UIFont.init(name: "Zapf Dingbats", size: 18.0) ??
             .preferredFont(forTextStyle: .body)
-        content.secondaryText = "Часы: \(valueSettingsOfLunchtime.first?.automaticLunch ?? true ? jobDataLists.fullTimeWork : jobDataLists.timeWorkWithLunch) ()"
+        content.secondaryText = day.timeWorkFormat + String(format: " ~ %.1f ч", day.timeWork)
         cell.contentConfiguration = content
         return cell
     }
@@ -113,12 +82,12 @@ class TableDateCellViewController: UITableViewController {
         var content = header.defaultContentConfiguration()
         content.prefersSideBySideTextAndSecondaryText = true
         
-        let month = arrayJobDataList[section]
-        content.text = month.first?.monthNameString
-        content.secondaryText = "\(allTimeMonth(month))  \(Int(floor(allTimeMonth(month)))):\(Int((allTimeMonth(month).truncatingRemainder(dividingBy: 1)) * 60))"
+        let month = listInfoOfMonch[section]
+        content.text = month.nameMonth
+        content.secondaryText = timeWorkOfFormatString(allTimeMonch(month)) + String(format: " ~ %.1f ч", allTimeMonch(month))
         content.secondaryTextProperties.font = UIFont.init(name: "Zapf DingBats", size: 20.0)!
-        content.secondaryTextProperties.color = .white
-        content.textProperties.color = .white
+        content.secondaryTextProperties.color = .red
+        content.textProperties.color = .black
         content.textProperties.font = UIFont.init(name: "Courier", size: 22.0) ?? .preferredFont(forTextStyle: .body)
         header.contentConfiguration = content
         
@@ -127,21 +96,19 @@ class TableDateCellViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
 
 
-         sortDate2 = arrayJobDataList[indexPath.section]
-         jobDataLists = sortDate2[indexPath.row]
+        let monch = listInfoOfMonch[indexPath.section]
+        let day = monch.monch[indexPath.row]
 
-
-
-        let currentList = jobDataLists ?? jobDataList[indexPath.row] // нвыести порядок!!!
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { _, _, _ in
-            StorageManager.shared.deleteListInfo(infoList: currentList)
-
-            let value = self.sortDate2.count
-            if value == 0 {
+            StorageManager.shared.deleteMonch(monch: day)
+            if monch.monch.count == 0 {
+                StorageManager.shared.deleteMonch(allMonch: monch)
                 tableView.deleteSections(IndexSet(integer: indexPath.section), with: .automatic)
+                self.spAlert()
             } else {
                 tableView.deleteRows(at: [indexPath], with: .automatic)
                 tableView.reloadSections(IndexSet(integer: indexPath.section), with: .automatic)
+                self.spAlert()
 
             }
 
@@ -163,41 +130,40 @@ class TableDateCellViewController: UITableViewController {
                         return
                     }
 
-                 sortDate2 = arrayJobDataList[indexPath.section]
-                 jobDataLists = sortDate2[indexPath.row]
-
-                    let info = jobDataLists
-                    detailedVC.info = info
-                   detailedVC.boolValueOfLunch = valueSettingsOfLunchtime.first?.automaticLunch
+                   let month = listInfoOfMonch[indexPath.section]
+                   let sortDay = month.monch.sorted(byKeyPath: "dateWorkShift")
+                   let day = sortDay[indexPath.row]
+                   let infoOfDay = day.day
+                   
+                    detailedVC.info = infoOfDay
             }
 
-            } else if segue.identifier == "settingsVC" {
-                if let settingsVC = segue.destination as? SettingsViewController {
-                    settingsVC.saveCompletionSettings = {
-                        self.tableView.reloadData()
-
             }
-                }
-            else { return }
-                
-            }
+//        else if segue.identifier == "settingsVC" {
+//                if let settingsVC = segue.destination as? SettingsViewController {
+//                    settingsVC.saveCompletionSettings = {
+//                        self.tableView.reloadData()
+//
+//            }
+//                }
+//            else { return }
+//                
+//            }
     }
             
  
-    override func viewWillAppear(_ animated: Bool) {
-        readDataAndUpdateUI()
-    }
+   
     
     override func viewDidAppear(_ animated: Bool) {
         tableView.reloadData()
     }
 
     
-    private func readDataAndUpdateUI() {
-        jobDataList = StorageManager.shared.realm.objects(ListInfoDate.self).sorted(byKeyPath: "dateWorkShift")
-        self.setEditing(false, animated: true)
-        self.tableView.reloadData()
-    }
+//    private func readDataAndUpdateUI() {
+//        jobDataList = StorageManager.shared.realm.objects(InfoOfDayWork.self).sorted(byKeyPath: "dateWorkShift")
+//        self.setEditing(false, animated: true)
+//        self.tableView.reloadData()
+//    }
     
     @IBAction func deleteAllAction(_ sender: UIBarButtonItem) {
         alertDeleteAll()
@@ -212,8 +178,7 @@ class TableDateCellViewController: UITableViewController {
                                     style: .destructive,
                                     handler: { (UIAlertAction) in
                                         StorageManager.shared.deleteAllListInfo()
-                                        self.arrayJobDataList.removeAll()
-                                        self.readDataAndUpdateUI()
+            self.tableView.reloadData()
                                     }))
         alertDelete.addAction(.init(title: "Нет",
                                     style: .default,
@@ -242,4 +207,33 @@ class TableDateCellViewController: UITableViewController {
                                    handler: nil))
         present(alertStart, animated: true, completion: nil)
     }
+    
+    private func spAlert() {
+        let alertView = SPAlertView(title: "Удалено", preset: .error)
+        alertView.duration = 1.3
+        alertView.cornerRadius = 12
+        alertView.present()
+        alertView.backgroundColor = UIColor.darkGray
+    }
+}
+
+extension TableDateCellViewController {
+    func allTimeMonch(_ monch: ListInfoOfMonch) -> Double {
+        var allTimeMonch = 0.0
+        for timeDay in monch.monch {
+            allTimeMonch += timeDay.timeWork
+        }
+        return allTimeMonch
+    }
+    
+    func timeWorkOfFormatString(_ timeInterval: Double) -> String {
+    let formatter = DateComponentsFormatter()
+        formatter.calendar?.locale = Locale(identifier: "Ru-ru")
+    formatter.allowedUnits = [.hour, .minute, .second]
+        formatter.unitsStyle = .abbreviated
+
+        let formattedString = formatter.string(from: TimeInterval(timeInterval * 3600.0))
+        return formattedString ?? "-"
+    }
+    
 }
