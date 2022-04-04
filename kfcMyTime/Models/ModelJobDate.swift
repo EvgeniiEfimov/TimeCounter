@@ -30,7 +30,11 @@ class ListInfoOfMonch: Object {
     let monch = List<DayOfMonth>()
 }
 
-class SettingsUser: Object {
+class SettingsUser: Object, UIApplicationDelegate {
     @objc dynamic var rateTFOutlet = String()
+    @objc dynamic var switchNotification = Bool()
+    @objc dynamic var switchNotificationSound = Bool()
+    @objc dynamic var datePickerNotification = Date()
+    
 }
 

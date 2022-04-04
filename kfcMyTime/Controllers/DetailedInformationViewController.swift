@@ -26,6 +26,8 @@ class DetailedInformationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadingView()
+        
+        
     }
     
 //    private func calculationLunchTimeMinute(_ lunch: Double) -> String {
@@ -46,7 +48,7 @@ class DetailedInformationViewController: UIViewController {
         startTimeWorkOutlet.text = dateFormatter.timeDateFormatter(info.timeStart)
         finishTimeWorkOutlet.text = dateFormatter.timeDateFormatter(info.timeStop)
         lanchTimeOutlet.text = info.lunchString
-        workTimeOutlet.text = info.timeWorkString
+        workTimeOutlet.text =  info.timeWorkString
     }
 }
 

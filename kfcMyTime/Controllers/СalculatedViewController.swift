@@ -33,8 +33,16 @@ class СalculatedViewController: UIViewController {
         monthPickerView.dataSource = self
         monthPickerView.delegate = self
         monthPickerView.selectRow(1, inComponent: 0, animated: true)
-
+        
+        
+        let titleTextAttributesNormal = [NSAttributedString.Key.foregroundColor: UIColor.systemYellow]
+        periodSCOutlet.setTitleTextAttributes(titleTextAttributesNormal, for: .normal)
+        let titleTextAttributesSelected = [NSAttributedString.Key.foregroundColor: UIColor.darkGray]
+        periodSCOutlet.setTitleTextAttributes(titleTextAttributesSelected, for: .selected)
+        
         jobDataList = StorageManager.shared.realm.objects(ListInfoOfMonch.self).sorted(byKeyPath: "numberMonth")
+        
+        
         
     }
     

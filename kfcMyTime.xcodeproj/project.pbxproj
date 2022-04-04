@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		6BDAA430F48F4E849236683E /* Pods_kfcMyTime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45F28FDEB540BDD13213FA5D /* Pods_kfcMyTime.framework */; };
 		7C01234227D9E32700FBD849 /* SaveDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C01234127D9E32700FBD849 /* SaveDataManager.swift */; };
+		7C01234627F1F1E000FBD849 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C01234527F1F1E000FBD849 /* Notifications.swift */; };
 		CE1ACB6727BCE62A002D9105 /* ProtocolsFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1ACB6627BCE62A002D9105 /* ProtocolsFile.swift */; };
 		CE1ACB6A27C211BC002D9105 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1ACB6927C211BC002D9105 /* DateFormatter.swift */; };
 		CE482CB4272992490034798E /* ModelJobDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE482CB3272992490034798E /* ModelJobDate.swift */; };
@@ -30,6 +31,7 @@
 		45F28FDEB540BDD13213FA5D /* Pods_kfcMyTime.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_kfcMyTime.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		73A72700679B2D3F9988BB17 /* Pods-kfcMyTime.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kfcMyTime.release.xcconfig"; path = "Target Support Files/Pods-kfcMyTime/Pods-kfcMyTime.release.xcconfig"; sourceTree = "<group>"; };
 		7C01234127D9E32700FBD849 /* SaveDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveDataManager.swift; sourceTree = "<group>"; };
+		7C01234527F1F1E000FBD849 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		CE1ACB6627BCE62A002D9105 /* ProtocolsFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolsFile.swift; sourceTree = "<group>"; };
 		CE1ACB6927C211BC002D9105 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		CE482CB3272992490034798E /* ModelJobDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelJobDate.swift; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 			children = (
 				CECA89E327280CEC00B2A03B /* AppDelegate.swift */,
 				CECA89E527280CEC00B2A03B /* SceneDelegate.swift */,
+				7C01234527F1F1E000FBD849 /* Notifications.swift */,
 				CE482CBE272AC44C0034798E /* DataManager.swift */,
 				7C01234127D9E32700FBD849 /* SaveDataManager.swift */,
 				CE482CC1272AD9C90034798E /* StorageManager.swift */,
@@ -267,6 +270,7 @@
 				CEFB466727A5A39D00327CAA /* СalculatedViewController.swift in Sources */,
 				CE482CBF272AC44C0034798E /* DataManager.swift in Sources */,
 				CECA8A0227283C6B00B2A03B /* AddJobDateViewController.swift in Sources */,
+				7C01234627F1F1E000FBD849 /* Notifications.swift in Sources */,
 				CECA89E627280CEC00B2A03B /* SceneDelegate.swift in Sources */,
 				7C01234227D9E32700FBD849 /* SaveDataManager.swift in Sources */,
 				CECA89FB272812EE00B2A03B /* TableDateCellViewController.swift in Sources */,

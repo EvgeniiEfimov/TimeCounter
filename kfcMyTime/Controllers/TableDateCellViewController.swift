@@ -10,24 +10,44 @@ import SPAlert
 
 class TableDateCellViewController: UITableViewController {
 
+    @IBOutlet weak var addButton: UIBarButtonItem!
     private var listInfoOfMonch: Results<ListInfoOfMonch>!
     private let calendar = Calendar.current
-    private let imageLunchTrue = UIImage.init(systemName: "fork.knife")
-    private let imageLunchFalse = UIImage.init(systemName: "minus")
+//    private let imageLunchTrue = UIImage.init(systemName: "fork.knife")
+//    private let imageLunchFalse = UIImage.init(systemName: "minus")
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.backgroundView = UIImageView(image: UIImage(named: "backTableImage1"))
+        
+        tableView.backgroundView = UIImageView(image: UIImage(named: "269"))
         tableView.backgroundView?.contentMode = .scaleAspectFill
-        tableView.backgroundView?.alpha = 0.1
+        tableView.backgroundView?.alpha = 0.6
+        tableView.backgroundColor = UIColor.gray
         
         listInfoOfMonch = StorageManager.shared.realm.objects(ListInfoOfMonch.self).sorted(byKeyPath: "numberMonth")
         
         if listInfoOfMonch.isEmpty {
             alertFirstStart()
         }
+//        let button = UIButton(type: .custom)
+//                //set image for button
+//        button.setImage(UIImage.init(systemName: "cross.circle"), for: .normal)
+//                //add function for button
+//                button.addTarget(self, action: #selector(fbButtonPressed), for: .touchUpInside)
+//                //set frame
+//                button.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+//        button.tintColor = .orange
+//
+//                let barButton = UIBarButtonItem(customView: button)
+//                //assign button to navigationbar
+//                self.navigationItem.rightBarButtonItem = barButton
+//
         }
+    private func notification() {
+        
+    }
+ 
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -53,11 +73,19 @@ class TableDateCellViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellDate", for: indexPath)
-        cell.backgroundColor = UIColor.clear
+        cell.backgroundColor = UIColor.darkGray.withAlphaComponent(0.8)
+        
+        let image = UIImage(systemName: "chevron.right")
+        let accessory  = UIImageView(frame:CGRect(x:0, y:0, width:(image?.size.width)!, height:(image?.size.height)!))
+        accessory.image = image
+
+        // set the color here
+        accessory.tintColor = UIColor.systemYellow
+        cell.accessoryView = accessory
                 
         let dateFormatterDay = DateFormatter()
-        dateFormatterDay.dateFormat = "dd / MM, EEEE"
-        dateFormatterDay.locale = Locale(identifier: "RU_RU")
+        dateFormatterDay.dateFormat = "dd / MM, EEE"
+        dateFormatterDay.locale = Locale(identifier: "Ru_Ru")
         
         
         let monch = listInfoOfMonch[indexPath.section]
@@ -68,15 +96,20 @@ class TableDateCellViewController: UITableViewController {
 //        let lunch = day.lunchBool ? imageLunchTrue : imageLunchFalse // <---------------
         var content = cell.defaultContentConfiguration()
         content.text = dateFormatterDay.string(from: day.dateWorkShift)
+        content.textProperties.color = .systemYellow
         content.textProperties.font = UIFont.init(name: "Zapf Dingbats", size: 18.0) ??
             .preferredFont(forTextStyle: .body)
-        content.secondaryText = day.timeWorkFormat + String(format: " ~ %.1f ч", day.timeWork)
+        content.secondaryText = day.timeWorkFormat + String(format: " → %.1f ч", day.timeWork)
+        content.secondaryTextProperties.color = .systemYellow
         cell.contentConfiguration = content
         return cell
     }
 
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        view.tintColor = .init(red: 0.134, green: 0.128, blue: 0.128, alpha: 0.2)
+        view.tintColor = .systemYellow
+        view.alpha = 0.9
+//        view.layer.cornerRadius = view.frame.height / 2
+//        view.clipsToBounds = true
         
         let header = view as! UITableViewHeaderFooterView
         var content = header.defaultContentConfiguration()
@@ -86,7 +119,7 @@ class TableDateCellViewController: UITableViewController {
         content.text = month.nameMonth
         content.secondaryText = timeWorkOfFormatString(allTimeMonch(month)) + String(format: " ~ %.1f ч", allTimeMonch(month))
         content.secondaryTextProperties.font = UIFont.init(name: "Zapf DingBats", size: 20.0)!
-        content.secondaryTextProperties.color = .red
+        content.secondaryTextProperties.color = .darkGray
         content.textProperties.color = .black
         content.textProperties.font = UIFont.init(name: "Courier", size: 22.0) ?? .preferredFont(forTextStyle: .body)
         header.contentConfiguration = content
@@ -229,7 +262,7 @@ extension TableDateCellViewController {
     func timeWorkOfFormatString(_ timeInterval: Double) -> String {
     let formatter = DateComponentsFormatter()
         formatter.calendar?.locale = Locale(identifier: "Ru-ru")
-    formatter.allowedUnits = [.hour, .minute, .second]
+    formatter.allowedUnits = [.hour, .minute]
         formatter.unitsStyle = .abbreviated
 
         let formattedString = formatter.string(from: TimeInterval(timeInterval * 3600.0))

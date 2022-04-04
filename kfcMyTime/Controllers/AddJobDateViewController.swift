@@ -89,8 +89,8 @@ class AddJobDateViewController: UIViewController {
     }
     
     private func showAlert() {
-        let alertError = UIAlertController.init(title: "Стоп-стоп-стоп!",
-                                                message: "Не корректная продолжительность смены! проверь время начала и конца смены",
+        let alertError = UIAlertController.init(title: "Внимание!",
+                                                message: "Не корректная продолжительность смены! проверь время начала и конца смены! \n00:00 является следующим днём",
                                                 preferredStyle: .alert)
         alertError.addAction(.init(title: "Ок",
                                    style: .default,
@@ -100,12 +100,38 @@ class AddJobDateViewController: UIViewController {
                 completion: nil)
     }
     
+    private func showConfigLunchTime() {
+        let alertConfigOfLunchTime = UIAlertController.init(title: "Обеденный перерыв",
+                                                            message: "Время обеденного перерыва автоматически вычитается от общего времени смены исходя из действующих стандартов: \nпри продолжительности смены 4-8 часов - 30 минут, \n9 и более часво - 45 минут",
+                                                            preferredStyle: .alert)
+        alertConfigOfLunchTime.addAction(.init(title: "Ок",
+                                               style: .cancel,
+                                               handler: nil))
+        present(alertConfigOfLunchTime, animated: true, completion: nil)
+    }
+    
     private func spAlert() {
         let alertView = SPAlertView(title: "Добавлено", preset: .done)
         alertView.duration = 1.3
         alertView.cornerRadius = 12
         alertView.present()
         alertView.backgroundColor = UIColor.darkGray
+    }
+    
+    @IBAction func switchOfLunchAction(_ sender: UISwitch) {
+            if sender.isOn == true {
+                sender.tintColor = UIColor.systemYellow
+                sender.thumbTintColor = UIColor.darkGray
+            } else {
+                sender.tintColor = UIColor.darkGray
+                sender.thumbTintColor = UIColor.systemOrange
+            }
+
+        
+    }
+    
+    @IBAction func infoOfLunchAction(_ sender: UIButton) {
+        showConfigLunchTime()
     }
     
     @IBAction func addButtonAction(_ sender: UIButton) {
