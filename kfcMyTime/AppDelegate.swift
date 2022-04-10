@@ -19,6 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         notifications.notificationCenter.delegate = notifications
         notifications.notificationRequest()
         
+//        if  #available(iOS 13.0, *) {
+//            window?.overrideUserInterfaceStyl = .light
+//        }
         // Override point for customization after application launch.
         return true
     }

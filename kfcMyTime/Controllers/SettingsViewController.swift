@@ -8,7 +8,7 @@
 import UIKit
 import RealmSwift
 
-class SettingsViewController: UIViewController {
+class SettingsViewController: UIViewController, UITextFieldDelegate {
     
     var realm = try! Realm()
     
@@ -30,8 +30,14 @@ class SettingsViewController: UIViewController {
         viewOfaction(switchNotification)
         viewOfaction(switchNotificationSound)
         
+        self.rateTFOutlet.delegate = self
+        
         
 //        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
     
     
@@ -110,3 +116,5 @@ extension SettingsViewController: SaveSettings {
         }
     }
 }
+
+

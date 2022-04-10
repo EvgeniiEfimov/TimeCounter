@@ -99,7 +99,7 @@ class СalculatedViewController: UIViewController {
     }
     
     private func calculatedMoney(_ numberOfHours: Double, _ rate: String) -> String {
-        let doubleRate = (Double(rate) ?? 0) * numberOfHours
+        let doubleRate = (rate.doubleValue) * numberOfHours
         return String(format: "%.2f", doubleRate)
     }
     
@@ -199,5 +199,21 @@ extension СalculatedViewController: SaveSettings {
         }
         
 }
+}
+
+extension String {
+    static let numberFormatter = NumberFormatter()
+    var doubleValue: Double {
+        String.numberFormatter.decimalSeparator = "."
+        if let result =  String.numberFormatter.number(from: self) {
+            return result.doubleValue
+        } else {
+            String.numberFormatter.decimalSeparator = ","
+            if let result = String.numberFormatter.number(from: self) {
+                return result.doubleValue
+            }
+        }
+        return 0
+    }
 }
 
