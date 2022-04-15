@@ -8,14 +8,14 @@
 import UIKit
 import RealmSwift
 
-class SettingsViewController: UIViewController, UITextFieldDelegate {
+class SettingsNotificationViewController: UIViewController, UITextFieldDelegate {
     
     var realm = try! Realm()
     
     let notifications = Notifications()
 
     
-    @IBOutlet weak var rateTFOutlet: UITextField!
+//    @IBOutlet weak var rateTFOutlet: UITextField!
     @IBOutlet weak var switchNotification: UISwitch!
     @IBOutlet weak var switchNotificationSound: UISwitch!
     @IBOutlet weak var datePickerNotification: UIDatePicker!
@@ -30,18 +30,15 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
         viewOfaction(switchNotification)
         viewOfaction(switchNotificationSound)
         
-        self.rateTFOutlet.delegate = self
-        
-        
-//        let appDelegate = UIApplication.shared.delegate as? AppDelegate
-    }
+//        self.rateTFOutlet.delegate = self
+        }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
     
     
-    
+    //MARK: Notification setting
     
     @IBAction func notificationAction(_ sender: UISwitch) {
         soundNotificationAction.isEnabled = sender.isOn
@@ -65,6 +62,9 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
 
     }
     
+
+    
+    //MARK:
     
     @IBAction func saveButtonAction(_ sender: UIButton) {
         saveSettings()
@@ -75,21 +75,18 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
     }
 }
 
-extension SettingsViewController: SaveSettings {
+extension SettingsNotificationViewController: SaveSettings {
     func deleteSettings() {
     }
     
-    var settingsUser: SettingsUser! {
+    var settingsUser: SettingNotification! {
         get {
-            StorageManager.shared.realm.objects(SettingsUser.self).first
+            StorageManager.shared.realm.objects(SettingNotification.self).first
         }
     }
     
     func readDataSettings() {
         guard settingsUser != nil else { return }
-        if !settingsUser.rateTFOutlet.isEmpty {
-            rateTFOutlet.text = settingsUser.rateTFOutlet
-        }
         switchNotification.isOn = settingsUser.switchNotification
         switchNotificationSound.isOn = settingsUser.switchNotificationSound
         switchNotificationSound.isEnabled = settingsUser.switchNotification
@@ -100,15 +97,15 @@ extension SettingsViewController: SaveSettings {
     func saveSettings() {
         if settingsUser != nil {
             StorageManager.shared.write {
-                settingsUser.rateTFOutlet = rateTFOutlet.text ?? "Error"
+//                settingsUser.rateTFOutlet = rateTFOutlet.text ?? "Error"
                 settingsUser.switchNotification = switchNotification.isOn
                 settingsUser.switchNotificationSound = switchNotificationSound.isOn
                 settingsUser.datePickerNotification = datePickerNotification.date
             }
         }
         else {
-            let newValueSettingsUser = SettingsUser()
-            newValueSettingsUser.rateTFOutlet = rateTFOutlet.text ?? "Error"
+            let newValueSettingsUser = SettingNotification()
+//            newValueSettingsUser.rateTFOutlet = rateTFOutlet.text ?? "Error"
             newValueSettingsUser.switchNotification = switchNotification.isOn
             newValueSettingsUser.switchNotificationSound = switchNotificationSound.isOn
             newValueSettingsUser.datePickerNotification = datePickerNotification.date

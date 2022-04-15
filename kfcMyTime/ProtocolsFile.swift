@@ -9,9 +9,12 @@ import Foundation
 import RealmSwift
 
 protocol SaveSettings {
-    var settingsUser: SettingsUser! {get}
+    var settingsUser: SettingNotification! {get}
     func readDataSettings()
     func saveSettings()
 }
 
+protocol SettingName {
+    var settingName: String! {get set}
+}
 

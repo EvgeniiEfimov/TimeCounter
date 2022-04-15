@@ -13,7 +13,7 @@ class СalculatedViewController: UIViewController {
     private var jobDataList: Results<ListInfoOfMonch>!
     
     var value1: ListInfoOfMonch!// проба
-    var valueSettingsOfLunchtime = StorageManager.shared.realm.objects(SettingsUser.self)
+    var valueSettingsOfLunchtime = StorageManager.shared.realm.objects(SettingNotification.self)
 
     let monthName = DataManager.shared.monthArray
     let oneRangeDay = 1...15
@@ -161,9 +161,9 @@ extension СalculatedViewController: UITextFieldDelegate {
 }
 
 extension СalculatedViewController: SaveSettings {
-    var settingsUser: SettingsUser! {
+    var settingsUser: SettingNotification! {
         get {
-            StorageManager.shared.realm.objects(SettingsUser.self).first
+            StorageManager.shared.realm.objects(SettingNotification.self).first
         }
     }
     
@@ -171,10 +171,10 @@ extension СalculatedViewController: SaveSettings {
         guard settingsUser != nil else { return
             showAlert()
         }
-        if settingsUser.rateTFOutlet.isEmpty {
-            showAlert()
-        }
-        allCalculate(settingsUser.rateTFOutlet)
+//        if settingsUser.rateTFOutlet.isEmpty {
+//            showAlert()
+//        }
+//        allCalculate(settingsUser.rateTFOutlet)
         allTimeRangeDay.isHidden = false
         amountLabelOutlet.isHidden = false
     }
@@ -189,12 +189,12 @@ extension СalculatedViewController: SaveSettings {
 
         if settingsUser != nil {
             StorageManager.shared.write {
-                settingsUser.rateTFOutlet = rateTFOutlet
+//                settingsUser.rateTFOutlet = rateTFOutlet
             }
         }
         else {
-            let newValueSettingsUser = SettingsUser()
-            newValueSettingsUser.rateTFOutlet = rateTFOutlet
+            let newValueSettingsUser = SettingNotification()
+//            newValueSettingsUser.rateTFOutlet = rateTFOutlet
             StorageManager.shared.saveSettings(settings: newValueSettingsUser)
         }
         

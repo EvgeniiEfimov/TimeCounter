@@ -170,18 +170,7 @@ class TableDateCellViewController: UITableViewController {
                    
                     detailedVC.info = infoOfDay
             }
-
             }
-//        else if segue.identifier == "settingsVC" {
-//                if let settingsVC = segue.destination as? SettingsViewController {
-//                    settingsVC.saveCompletionSettings = {
-//                        self.tableView.reloadData()
-//
-//            }
-//                }
-//            else { return }
-//                
-//            }
     }
             
  

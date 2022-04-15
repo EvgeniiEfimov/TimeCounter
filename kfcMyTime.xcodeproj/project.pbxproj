@@ -10,12 +10,15 @@
 		6BDAA430F48F4E849236683E /* Pods_kfcMyTime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45F28FDEB540BDD13213FA5D /* Pods_kfcMyTime.framework */; };
 		7C01234227D9E32700FBD849 /* SaveDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C01234127D9E32700FBD849 /* SaveDataManager.swift */; };
 		7C01234627F1F1E000FBD849 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C01234527F1F1E000FBD849 /* Notifications.swift */; };
+		7C0123482802AE2600FBD849 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0123472802AE2600FBD849 /* SettingsTableViewController.swift */; };
+		7C01234A2808986300FBD849 /* SettingLunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0123492808986300FBD849 /* SettingLunchViewController.swift */; };
+		7C01234C2809F50800FBD849 /* SettingNightTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C01234B2809F50800FBD849 /* SettingNightTimeViewController.swift */; };
 		CE1ACB6727BCE62A002D9105 /* ProtocolsFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1ACB6627BCE62A002D9105 /* ProtocolsFile.swift */; };
 		CE1ACB6A27C211BC002D9105 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1ACB6927C211BC002D9105 /* DateFormatter.swift */; };
 		CE482CB4272992490034798E /* ModelJobDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE482CB3272992490034798E /* ModelJobDate.swift */; };
 		CE482CBF272AC44C0034798E /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE482CBE272AC44C0034798E /* DataManager.swift */; };
 		CE482CC2272AD9C90034798E /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE482CC1272AD9C90034798E /* StorageManager.swift */; };
-		CEC2525227B6DB6500B9F2DE /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2525127B6DB6500B9F2DE /* SettingsViewController.swift */; };
+		CEC2525227B6DB6500B9F2DE /* SettingsNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2525127B6DB6500B9F2DE /* SettingsNotificationViewController.swift */; };
 		CECA89E427280CEC00B2A03B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA89E327280CEC00B2A03B /* AppDelegate.swift */; };
 		CECA89E627280CEC00B2A03B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA89E527280CEC00B2A03B /* SceneDelegate.swift */; };
 		CECA89E827280CEC00B2A03B /* DetailedInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA89E727280CEC00B2A03B /* DetailedInformationViewController.swift */; };
@@ -32,12 +35,15 @@
 		73A72700679B2D3F9988BB17 /* Pods-kfcMyTime.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kfcMyTime.release.xcconfig"; path = "Target Support Files/Pods-kfcMyTime/Pods-kfcMyTime.release.xcconfig"; sourceTree = "<group>"; };
 		7C01234127D9E32700FBD849 /* SaveDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveDataManager.swift; sourceTree = "<group>"; };
 		7C01234527F1F1E000FBD849 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		7C0123472802AE2600FBD849 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		7C0123492808986300FBD849 /* SettingLunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingLunchViewController.swift; sourceTree = "<group>"; };
+		7C01234B2809F50800FBD849 /* SettingNightTimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingNightTimeViewController.swift; sourceTree = "<group>"; };
 		CE1ACB6627BCE62A002D9105 /* ProtocolsFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolsFile.swift; sourceTree = "<group>"; };
 		CE1ACB6927C211BC002D9105 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		CE482CB3272992490034798E /* ModelJobDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelJobDate.swift; sourceTree = "<group>"; };
 		CE482CBE272AC44C0034798E /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		CE482CC1272AD9C90034798E /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
-		CEC2525127B6DB6500B9F2DE /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		CEC2525127B6DB6500B9F2DE /* SettingsNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsNotificationViewController.swift; sourceTree = "<group>"; };
 		CECA89E027280CEC00B2A03B /* kfcMyTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kfcMyTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CECA89E327280CEC00B2A03B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CECA89E527280CEC00B2A03B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -132,10 +138,13 @@
 			isa = PBXGroup;
 			children = (
 				CECA89FA272812ED00B2A03B /* TableDateCellViewController.swift */,
+				7C0123472802AE2600FBD849 /* SettingsTableViewController.swift */,
 				CECA89E727280CEC00B2A03B /* DetailedInformationViewController.swift */,
 				CECA8A0127283C6B00B2A03B /* AddJobDateViewController.swift */,
 				CEFB466627A5A39D00327CAA /* СalculatedViewController.swift */,
-				CEC2525127B6DB6500B9F2DE /* SettingsViewController.swift */,
+				7C0123492808986300FBD849 /* SettingLunchViewController.swift */,
+				CEC2525127B6DB6500B9F2DE /* SettingsNotificationViewController.swift */,
+				7C01234B2809F50800FBD849 /* SettingNightTimeViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -263,16 +272,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE1ACB6A27C211BC002D9105 /* DateFormatter.swift in Sources */,
-				CEC2525227B6DB6500B9F2DE /* SettingsViewController.swift in Sources */,
+				CEC2525227B6DB6500B9F2DE /* SettingsNotificationViewController.swift in Sources */,
 				CECA89E827280CEC00B2A03B /* DetailedInformationViewController.swift in Sources */,
 				CE482CB4272992490034798E /* ModelJobDate.swift in Sources */,
+				7C01234A2808986300FBD849 /* SettingLunchViewController.swift in Sources */,
 				CECA89E427280CEC00B2A03B /* AppDelegate.swift in Sources */,
 				CEFB466727A5A39D00327CAA /* СalculatedViewController.swift in Sources */,
 				CE482CBF272AC44C0034798E /* DataManager.swift in Sources */,
 				CECA8A0227283C6B00B2A03B /* AddJobDateViewController.swift in Sources */,
 				7C01234627F1F1E000FBD849 /* Notifications.swift in Sources */,
+				7C01234C2809F50800FBD849 /* SettingNightTimeViewController.swift in Sources */,
 				CECA89E627280CEC00B2A03B /* SceneDelegate.swift in Sources */,
 				7C01234227D9E32700FBD849 /* SaveDataManager.swift in Sources */,
+				7C0123482802AE2600FBD849 /* SettingsTableViewController.swift in Sources */,
 				CECA89FB272812EE00B2A03B /* TableDateCellViewController.swift in Sources */,
 				CE482CC2272AD9C90034798E /* StorageManager.swift in Sources */,
 				CE1ACB6727BCE62A002D9105 /* ProtocolsFile.swift in Sources */,

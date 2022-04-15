@@ -68,14 +68,14 @@ class StorageManager {
     
     //MARK: - Settings
     
-    func saveSettings (settings: SettingsUser) {
+    func saveSettings (settings: SettingNotification) {
         write {
             realm.add(settings)
         }
     }
     
     
-    func deleteSettings (settings: SettingsUser) {
+    func deleteSettings (settings: SettingNotification) {
         write {
             realm.delete(settings)
         }
