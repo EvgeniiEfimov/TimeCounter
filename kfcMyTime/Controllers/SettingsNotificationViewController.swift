@@ -13,7 +13,6 @@ class SettingsNotificationViewController: UIViewController, UITextFieldDelegate 
     var realm = try! Realm()
     
     let notifications = Notifications()
-
     
 //    @IBOutlet weak var rateTFOutlet: UITextField!
     @IBOutlet weak var switchNotification: UISwitch!
@@ -34,6 +33,7 @@ class SettingsNotificationViewController: UIViewController, UITextFieldDelegate 
         }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
         self.view.endEditing(true)
     }
     
@@ -109,7 +109,7 @@ extension SettingsNotificationViewController: SaveSettings {
             newValueSettingsUser.switchNotification = switchNotification.isOn
             newValueSettingsUser.switchNotificationSound = switchNotificationSound.isOn
             newValueSettingsUser.datePickerNotification = datePickerNotification.date
-            StorageManager.shared.saveSettings(settings: newValueSettingsUser)
+            StorageManager.shared.saveSettingsNotification(settings: newValueSettingsUser)
         }
     }
 }

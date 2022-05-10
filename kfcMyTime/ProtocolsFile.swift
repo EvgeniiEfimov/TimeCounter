@@ -14,6 +14,7 @@ protocol SaveSettings {
     func saveSettings()
 }
 
+
 protocol SettingName {
     var settingName: String! {get set}
 }

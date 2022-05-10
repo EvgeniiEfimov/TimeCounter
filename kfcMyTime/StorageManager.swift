@@ -66,23 +66,53 @@ class StorageManager {
     }
     
     
-    //MARK: - Settings
+    //MARK: - SettingsNotification
     
-    func saveSettings (settings: SettingNotification) {
+    func saveSettingsNotification (settings: SettingNotification) {
         write {
             realm.add(settings)
         }
     }
     
     
-    func deleteSettings (settings: SettingNotification) {
+    func deleteSettingsNotification (settings: SettingNotification) {
+        write {
+            realm.delete(settings)
+        }
+    }
+    
+    //MARK: - SettingNightTime
+    
+    func saveSettingsOfNightTime (settings: SettingNightTime) {
+        write {
+            realm.add(settings)
+        }
+    }
+    
+    
+    func deleteSettingsOfNightTime (settings: SettingNightTime) {
+        write {
+            realm.delete(settings)
+        }
+    }
+    
+    //MARK: - SettingRate
+    
+    func saveSettingRate (settings: ListSettingsTableUser) {
+        write {
+            realm.add(settings)
+        }
+    }
+    
+    
+    func deleteSettingRate (settings: ListSettingsTableUser) {
         write {
             realm.delete(settings)
         }
     }
     
     
-
+    
      func write (_ completion: () -> Void) {
         do {
             try realm.write {

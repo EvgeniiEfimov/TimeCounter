@@ -13,9 +13,11 @@ class AddJobDateViewController: UIViewController {
 
     @IBOutlet weak var addButtonOutlet: UIButton!
     @IBOutlet weak var switchOfLunch: UISwitch!
+    @IBOutlet weak var switchOfNightTime: UISwitch!
     @IBOutlet weak var dataDayOutlet: UIDatePicker!
     @IBOutlet weak var startTimeJobOutlet: UIDatePicker!
     @IBOutlet weak var stopTimeJobOutlet: UIDatePicker!
+    @IBOutlet weak var infoTF: UITextField!
     
     private var listInfoOfMonch: Results<ListInfoOfMonch>!
     
@@ -59,6 +61,7 @@ class AddJobDateViewController: UIViewController {
                                                                     switchOfLunch.isOn).1
             newListDayOfMonth.timeWorkFormat = formatSave.timeWorkOfFormatString(newListDayOfMonth.timeWork)
             newListDayOfMonth.lunchBool = switchOfLunch.isOn
+            newListDayOfMonth.nightTimeBool = switchOfNightTime.isOn
             
             
             newListInfoOfDayWork.timeStart = startTimeJobOutlet.date
@@ -68,6 +71,9 @@ class AddJobDateViewController: UIViewController {
                                                                           stopTimeJobOutlet.date,
                                                                           switchOfLunch.isOn).0
             newListInfoOfDayWork.timeWorkString = formatSave.timeWorkOfFormatString(newListDayOfMonth.timeWork)
+            
+            newListInfoOfDayWork.workNightTime =  calculationNightTime()
+            newListInfoOfDayWork.inform = infoTF.text ?? ""
             
            let value =  listInfoOfMonch.filter("numberMonth = \(newListInfoOfMonch.numberMonth)")
             if value.isEmpty {
@@ -88,6 +94,13 @@ class AddJobDateViewController: UIViewController {
         }
     }
     
+    private func calculationNightTime () -> Double {
+       var value = (formatSave.lunchTimeString(startTimeJobOutlet.date, stopTimeJobOutlet.date, switchOfLunch.isOn).1) - Double(formatSave.test(startTimeJobOutlet.date, stopTimeJobOutlet.date) / 60)
+        if value < 0 {
+            value = 0
+        }
+        return value
+    }
     private func showAlert() {
         let alertError = UIAlertController.init(title: "Внимание!",
                                                 message: "Не корректная продолжительность смены! проверь время начала и конца смены! \n00:00 является следующим днём",

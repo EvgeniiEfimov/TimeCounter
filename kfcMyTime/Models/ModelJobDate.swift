@@ -13,11 +13,14 @@ class InfoOfDayWork: Object {
     @objc dynamic var timeStop =  Date()
     @objc dynamic var timeWorkString = ""
     @objc dynamic var lunchString = "-"
+    @objc dynamic var inform = String()
+    @objc dynamic var workNightTime = Double()
 }
 
 class DayOfMonth: Object {
     @objc dynamic var dateWorkShift = Date()
     @objc dynamic var lunchBool = Bool()
+    @objc dynamic var nightTimeBool = Bool()
     @objc dynamic var timeWork = Double()
     @objc dynamic var timeWorkFormat = ""
     @objc dynamic var day: InfoOfDayWork?
@@ -53,14 +56,13 @@ class SettingNotification: Object {
 
 class SettingNightTime: Object {
     
-    @objc dynamic var settingName = "Уведомления"
+    @objc dynamic var settingName = "Ночные часы"
     @objc dynamic var percent = Int()
 }
 
 
 class ListSettingsTableUser: Object {
-//    @objc dynamic var nameSetting = String()
-//    @objc dynamic var imageSetting = UIImage()
+    @objc dynamic var rateTFOutlet = String()
     @objc dynamic var settingNotification: SettingNotification?
     @objc dynamic var settingLunch: SettingLunch?
     @objc dynamic var settingNightTime: SettingNightTime?

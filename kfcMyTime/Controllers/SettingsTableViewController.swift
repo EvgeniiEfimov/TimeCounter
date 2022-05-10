@@ -9,53 +9,66 @@ import UIKit
 import RealmSwift
 
 class SettingsTableViewController: UITableViewController {
-
+        
+    @IBOutlet weak var rateButton: UIButton!
     private var listSettingTableUser: ListSettingsTableUser!
-    private let dataSetting = DataManager.shared.settingSet
+    var rateTF: String = ""
+    
+    private let storageManager = StorageManager.shared
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         listSettingTableUser = StorageManager.shared.realm.objects(ListSettingsTableUser.self).first
+        if listSettingTableUser != nil {
+            rateButton.setTitle(listSettingTableUser.rateTFOutlet, for: .normal)
+        } else {
+            rateButton.setTitle("Ставка", for: .normal)
+        }
+            rateButton.setTitleColor(.systemYellow, for: .normal)
     }
-
-    // MARK: - Table view data source
-
-//    override func numberOfSections(in tableView: UITableView) -> Int {
-//        // #warning Incomplete implementation, return the number of sections
-//        return 1
-//    }
-//
-//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return 3
-//
-//    }
-
     
-//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let callSattingNotification = tableView.dequeueReusableCell(withIdentifier: "callSattingNotification", for: indexPath)
-//        callSattingNotification.backgroundColor = UIColor.systemYellow
-//        var content = callSattingNotification.defaultContentConfiguration()
-//
-//        content.text = dataSetting[indexPath.row].0
-//        content.textProperties.color = UIColor.black
-//        content.textProperties.font = UIFont.systemFont(ofSize: 25)
-//
-//        content.image = UIImage.init(systemName: dataSetting[indexPath.row].1)
-//        content.imageProperties.tintColor = UIColor.darkGray
-//
-//
-//        callSattingNotification.contentConfiguration = content
-//
-////         Configure the cell...
-//
-//        return callSattingNotification
-//    }
+    private func alertRate() {
+        let alertRate = UIAlertController.init(title: "Часовая ставка",
+                                                message: nil,
+                                                preferredStyle: .alert)
+        alertRate.addTextField { (textField) in
+            textField.placeholder = "Руб/час"
+            self.rateTF = textField.text ?? "0"
+            print(self.rateTF)
+            textField.delegate = self
+        }
+        
+        alertRate.addAction(.init(title: "Сохранить",
+                                  style: .default,
+                                  handler: { (action) in
+            guard self.listSettingTableUser != nil else {
+                let setting = ListSettingsTableUser()
+                setting.rateTFOutlet = self.rateTF
+                print(setting.rateTFOutlet)
+                self.storageManager.saveSettingRate(settings: setting)
+                self.rateButton.setTitle(setting.rateTFOutlet, for: .normal)
+                return
+            }
+            self.storageManager.write {
+                self.listSettingTableUser.rateTFOutlet = self.rateTF
+                self.rateButton.setTitle(self.listSettingTableUser.rateTFOutlet, for: .normal)
+                print(self.listSettingTableUser.rateTFOutlet)
+            }
+        }))
+        present(alertRate,
+                animated: true,
+                completion: nil)
+    }
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        guard let settingVC = segue.destination as? SettingsNotificationViewController else { return }
-//        settingVC.tagSetting = tableView.indexPathForSelectedRow?.row
-//    }
+    @IBAction func rateButtonAction(_ sender: UIButton) {
+        alertRate()
+    }
+}
 
-
+extension SettingsTableViewController: UITextFieldDelegate {
+     func textFieldDidEndEditing(_ textField: UITextField) {
+         rateTF = textField.text ?? ""
+    }
 }

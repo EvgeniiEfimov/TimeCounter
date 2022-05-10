@@ -21,6 +21,8 @@ class DetailedInformationViewController: UIViewController {
     @IBOutlet weak var finishTimeWorkOutlet: UILabel!
     @IBOutlet weak var lanchTimeOutlet: UILabel!
     @IBOutlet weak var workTimeOutlet: UILabel!
+    @IBOutlet weak var workNightTimeOutlet: UILabel!
+    @IBOutlet weak var inform: UITextView!
     
     
     override func viewDidLoad() {
@@ -30,25 +32,14 @@ class DetailedInformationViewController: UIViewController {
         
     }
     
-//    private func calculationLunchTimeMinute(_ lunch: Double) -> String {
-//        switch lunch {
-//        case 0.8:
-//            return "45'"
-//        case 0.5:
-//            return "30'"
-//        default:
-//            return "0"
-//        }
-//    }
-    
-    
-    
     private func loadingView() {
         dateWorkOutlet.text = dateFormatter.dayDateFormatter(info.dateWorkShift)
         startTimeWorkOutlet.text = dateFormatter.timeDateFormatter(info.timeStart)
         finishTimeWorkOutlet.text = dateFormatter.timeDateFormatter(info.timeStop)
         lanchTimeOutlet.text = info.lunchString
         workTimeOutlet.text =  info.timeWorkString
+        workNightTimeOutlet.text = "\(info.workNightTime)"
+        inform.text = info.inform
     }
 }
 

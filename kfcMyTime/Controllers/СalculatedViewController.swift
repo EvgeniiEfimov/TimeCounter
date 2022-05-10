@@ -181,7 +181,7 @@ extension СalculatedViewController: SaveSettings {
     
     func deleteSettings() {
         if settingsUser != nil {
-        StorageManager.shared.deleteSettings(settings: settingsUser)
+        StorageManager.shared.deleteSettingsNotification(settings: settingsUser)
         }
     }
     
@@ -195,7 +195,7 @@ extension СalculatedViewController: SaveSettings {
         else {
             let newValueSettingsUser = SettingNotification()
 //            newValueSettingsUser.rateTFOutlet = rateTFOutlet
-            StorageManager.shared.saveSettings(settings: newValueSettingsUser)
+            StorageManager.shared.saveSettingsNotification(settings: newValueSettingsUser)
         }
         
 }
