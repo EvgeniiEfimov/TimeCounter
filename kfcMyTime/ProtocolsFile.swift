@@ -14,6 +14,12 @@ protocol SaveSettings {
     func saveSettings()
 }
 
+protocol SaveSettingsRate {
+    var settingsUser: settingRateUser! {get}
+    func readDataSettings()
+    func saveSettings()
+}
+
 
 protocol SettingName {
     var settingName: String! {get set}

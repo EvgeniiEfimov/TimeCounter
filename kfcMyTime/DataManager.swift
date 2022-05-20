@@ -12,12 +12,23 @@ class DataManager {
     static let shared = DataManager()
     init() {}
     
-    let settingSet = [("Ставка", "rublesign.circle"),
-                      ("Уведомления", "bell.fill"),
-                      ("Обед", "fork.knife"),
-                      ("Ночные часы","moon.stars.fill")]
+//    let settingSet = [("Ставка", "rublesign.circle"),
+//                      ("Уведомления", "bell.fill"),
+//                      ("Обед", "fork.knife"),
+//                      ("Ночные часы","moon.stars.fill")]
     
-    let monthArray = [1: "Январь",2: "Февраль",3: "Март",4: "Апрель",5: "Май",6: "Июнь",7: "Июль",8: "Август",9: "Сентябрь",10: "Октябрь",11: "Ноябрь",12: "Декабрь"]
+    let monthArray = [1: "Январь",
+                      2: "Февраль",
+                      3: "Март",
+                      4: "Апрель",
+                      5: "Май",
+                      6: "Июнь",
+                      7: "Июль",
+                      8: "Август",
+                      9: "Сентябрь",
+                      10: "Октябрь",
+                      11: "Ноябрь",
+                      12: "Декабрь"]
     
     func dayDateFormatterDay(_ day: Date) -> String  {
         let dateFormatterDay = DateFormatter()

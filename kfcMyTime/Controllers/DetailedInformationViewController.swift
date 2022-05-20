@@ -8,14 +8,8 @@
 import RealmSwift
 
 class DetailedInformationViewController: UIViewController {
-
-    var listInfo: Results<InfoOfDayWork>!
-    var info: InfoOfDayWork!
-    var lunchTime: String = ""
-    var boolValueOfLunch: Bool!
-    var dateFormatter = DateFormatterClass()
     
-    
+    //MARK: - Outlets
     @IBOutlet weak var dateWorkOutlet: UILabel!
     @IBOutlet weak var startTimeWorkOutlet: UILabel!
     @IBOutlet weak var finishTimeWorkOutlet: UILabel!
@@ -24,21 +18,28 @@ class DetailedInformationViewController: UIViewController {
     @IBOutlet weak var workNightTimeOutlet: UILabel!
     @IBOutlet weak var inform: UITextView!
     
+    //MARK: - Публичные свойства
+    /// Объявление свойства хнанения информации о рабочем дне из БД
+    var info: InfoOfDayWork!
+    /// Объявление и инициализация свойства экземпляром класса
+    var dateFormatter = DateFormatterClass()
     
+    //MARK: - Методы переопределения родительского класса
     override func viewDidLoad() {
         super.viewDidLoad()
+        /// Вызов метода инициализации свойств аутлетов полученными значениями
         loadingView()
-        
-        
     }
     
+    //MARK: - Приватные методы
+    /// Метод инициализации свойств аутлетов полученными значениями
     private func loadingView() {
         dateWorkOutlet.text = dateFormatter.dayDateFormatter(info.dateWorkShift)
         startTimeWorkOutlet.text = dateFormatter.timeDateFormatter(info.timeStart)
         finishTimeWorkOutlet.text = dateFormatter.timeDateFormatter(info.timeStop)
         lanchTimeOutlet.text = info.lunchString
         workTimeOutlet.text =  info.timeWorkString
-        workNightTimeOutlet.text = "\(info.workNightTime)"
+        workNightTimeOutlet.text = String(format: "%.1f", info.workNightTime)
         inform.text = info.inform
     }
 }

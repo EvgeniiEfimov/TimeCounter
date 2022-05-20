@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6BDAA430F48F4E849236683E /* Pods_kfcMyTime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45F28FDEB540BDD13213FA5D /* Pods_kfcMyTime.framework */; };
+		7C00FDA9283509B100872B2A /* DetailedInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA89E727280CEC00B2A03B /* DetailedInformationViewController.swift */; };
 		7C01234227D9E32700FBD849 /* SaveDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C01234127D9E32700FBD849 /* SaveDataManager.swift */; };
 		7C01234627F1F1E000FBD849 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C01234527F1F1E000FBD849 /* Notifications.swift */; };
 		7C0123482802AE2600FBD849 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0123472802AE2600FBD849 /* SettingsTableViewController.swift */; };
@@ -21,7 +22,6 @@
 		CEC2525227B6DB6500B9F2DE /* SettingsNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2525127B6DB6500B9F2DE /* SettingsNotificationViewController.swift */; };
 		CECA89E427280CEC00B2A03B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA89E327280CEC00B2A03B /* AppDelegate.swift */; };
 		CECA89E627280CEC00B2A03B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA89E527280CEC00B2A03B /* SceneDelegate.swift */; };
-		CECA89E827280CEC00B2A03B /* DetailedInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA89E727280CEC00B2A03B /* DetailedInformationViewController.swift */; };
 		CECA89EB27280CEC00B2A03B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CECA89E927280CEC00B2A03B /* Main.storyboard */; };
 		CECA89ED27280CF900B2A03B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CECA89EC27280CF900B2A03B /* Assets.xcassets */; };
 		CECA89F027280CF900B2A03B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CECA89EE27280CF900B2A03B /* LaunchScreen.storyboard */; };
@@ -273,12 +273,12 @@
 			files = (
 				CE1ACB6A27C211BC002D9105 /* DateFormatter.swift in Sources */,
 				CEC2525227B6DB6500B9F2DE /* SettingsNotificationViewController.swift in Sources */,
-				CECA89E827280CEC00B2A03B /* DetailedInformationViewController.swift in Sources */,
 				CE482CB4272992490034798E /* ModelJobDate.swift in Sources */,
 				7C01234A2808986300FBD849 /* SettingLunchViewController.swift in Sources */,
 				CECA89E427280CEC00B2A03B /* AppDelegate.swift in Sources */,
 				CEFB466727A5A39D00327CAA /* СalculatedViewController.swift in Sources */,
 				CE482CBF272AC44C0034798E /* DataManager.swift in Sources */,
+				7C00FDA9283509B100872B2A /* DetailedInformationViewController.swift in Sources */,
 				CECA8A0227283C6B00B2A03B /* AddJobDateViewController.swift in Sources */,
 				7C01234627F1F1E000FBD849 /* Notifications.swift in Sources */,
 				7C01234C2809F50800FBD849 /* SettingNightTimeViewController.swift in Sources */,

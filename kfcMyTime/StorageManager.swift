@@ -65,6 +65,13 @@ class StorageManager {
         }
     }
     
+    //MARK: - SettingsRate
+    
+    func saveSettingsRate (rate: settingRateUser) {
+        write {
+            realm.add(rate)
+        }
+    }
     
     //MARK: - SettingsNotification
     
@@ -98,14 +105,14 @@ class StorageManager {
     
     //MARK: - SettingRate
     
-    func saveSettingRate (settings: ListSettingsTableUser) {
+    func saveSettingRate (settings: settingRateUser) {
         write {
             realm.add(settings)
         }
     }
     
     
-    func deleteSettingRate (settings: ListSettingsTableUser) {
+    func deleteSettingRate (settings: settingRateUser) {
         write {
             realm.delete(settings)
         }

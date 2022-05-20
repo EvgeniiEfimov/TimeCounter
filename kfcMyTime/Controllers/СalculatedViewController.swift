@@ -13,13 +13,14 @@ class СalculatedViewController: UIViewController {
     private var jobDataList: Results<ListInfoOfMonch>!
     
     var value1: ListInfoOfMonch!// проба
-    var valueSettingsOfLunchtime = StorageManager.shared.realm.objects(SettingNotification.self)
+    var valueSettingNightTime: SettingNightTime!
 
     let monthName = DataManager.shared.monthArray
     let oneRangeDay = 1...15
     let twoRangeDay = 15...31
     let freeRangeDay = 1...31
     var rateTFOutlet: String = ""
+    let monthNumber = Calendar.current.dateComponents([.month], from: Date())
 
     
     @IBOutlet weak var periodSCOutlet: UISegmentedControl!
@@ -32,7 +33,7 @@ class СalculatedViewController: UIViewController {
         super.viewDidLoad()
         monthPickerView.dataSource = self
         monthPickerView.delegate = self
-        monthPickerView.selectRow(1, inComponent: 0, animated: true)
+        monthPickerView.selectRow((monthNumber.month ?? 1), inComponent: 0, animated: true)
         
         
         let titleTextAttributesNormal = [NSAttributedString.Key.foregroundColor: UIColor.systemYellow]
@@ -41,7 +42,7 @@ class СalculatedViewController: UIViewController {
         periodSCOutlet.setTitleTextAttributes(titleTextAttributesSelected, for: .selected)
         
         jobDataList = StorageManager.shared.realm.objects(ListInfoOfMonch.self).sorted(byKeyPath: "numberMonth")
-        
+        valueSettingNightTime = StorageManager.shared.realm.objects(SettingNightTime.self).first
         
         
     }
@@ -53,7 +54,6 @@ class СalculatedViewController: UIViewController {
     
     
     private func sortDataToMonth(_ monthDay: Int, _ arrayDayOfMonch: Results<ListInfoOfMonch> ) -> ListInfoOfMonch? {
-        
         for monch in arrayDayOfMonch {
             if monch.numberMonth == monthDay {
                 return monch
@@ -68,19 +68,19 @@ class СalculatedViewController: UIViewController {
     
     private func allCalculate( _ textField: String) {
         let valuePicker = monthPickerView.selectedRow(inComponent: 0)
-
+        
         value1 = sortDataToMonth(valuePicker, jobDataList)
         let allTime = filtrDay(value1)
-        allTimeRangeDay.text = "\(allTime)"
-        amountLabelOutlet.text = calculatedMoney(allTime, textField)
+        allTimeRangeDay.text = String(format: "%.1f", (allTime.0 + allTime.1))
+        amountLabelOutlet.text = calculatedMoney(allTime.0, allTime.1, textField)
     }
 
     @IBAction func calculateButton(_ sender: UIButton) {
         readDataSettings()
     }
     
-    private func filtrDay(_ sortDataDayOfMonth: ListInfoOfMonch?) -> Double {
-        guard let monch = sortDataDayOfMonth else { return 0.0 }
+    private func filtrDay(_ sortDataDayOfMonth: ListInfoOfMonch?) -> (Double, Double) {
+        guard let monch = sortDataDayOfMonth else { return (0.0,0.0) }
         var rangeDay: ClosedRange<Int>
         switch periodSCOutlet.selectedSegmentIndex {
         case 0: rangeDay = oneRangeDay
@@ -88,18 +88,25 @@ class СalculatedViewController: UIViewController {
         default:
             rangeDay = freeRangeDay
         }
-        var newList = 0.0
+        var allDayTime = 0.0
+        var allNightTime = 0.0
         for day in monch.monch {
             let components = Calendar.current.dateComponents([.day], from: day.dateWorkShift )
             if rangeDay.contains(components.day ?? 0) {
-               newList += day.timeWork
+                allDayTime += day.day?.workDayTime ?? 0.0
+                allNightTime += day.day?.workNightTime ?? 0.0
             }
         }
-        return newList
+        return (allDayTime, allNightTime)
     }
     
-    private func calculatedMoney(_ numberOfHours: Double, _ rate: String) -> String {
-        let doubleRate = (rate.doubleValue) * numberOfHours
+        private func calculatedMoney(_ numberOfDayHours: Double, _ numberOfNightHours: Double, _ rate: String) -> String {
+            var nightTimePercent = 1.0
+            if valueSettingNightTime != nil {
+                nightTimePercent += valueSettingNightTime.percent / 100
+                print(nightTimePercent)
+            }
+            let doubleRate = rate.doubleValue * numberOfDayHours + rate.doubleValue * nightTimePercent * numberOfNightHours 
         return String(format: "%.2f", doubleRate)
     }
     
@@ -160,10 +167,10 @@ extension СalculatedViewController: UITextFieldDelegate {
     }
 }
 
-extension СalculatedViewController: SaveSettings {
-    var settingsUser: SettingNotification! {
+extension СalculatedViewController: SaveSettingsRate {
+    var settingsUser: settingRateUser! {
         get {
-            StorageManager.shared.realm.objects(SettingNotification.self).first
+            StorageManager.shared.realm.objects(settingRateUser.self).first
         }
     }
     
@@ -171,34 +178,33 @@ extension СalculatedViewController: SaveSettings {
         guard settingsUser != nil else { return
             showAlert()
         }
-//        if settingsUser.rateTFOutlet.isEmpty {
-//            showAlert()
-//        }
-//        allCalculate(settingsUser.rateTFOutlet)
+        if settingsUser.rateTFOutlet.isEmpty {
+            showAlert()
+        }
+        allCalculate(settingsUser.rateTFOutlet)
         allTimeRangeDay.isHidden = false
         amountLabelOutlet.isHidden = false
     }
     
     func deleteSettings() {
-        if settingsUser != nil {
-        StorageManager.shared.deleteSettingsNotification(settings: settingsUser)
-        }
+//        if settingsUser != nil {
+//        StorageManager.shared.deleteSettingsNotification(settings: settingsUser)
+//        }
     }
     
     func saveSettings() {
 
         if settingsUser != nil {
             StorageManager.shared.write {
-//                settingsUser.rateTFOutlet = rateTFOutlet
+                settingsUser.rateTFOutlet = rateTFOutlet
             }
         }
         else {
-            let newValueSettingsUser = SettingNotification()
-//            newValueSettingsUser.rateTFOutlet = rateTFOutlet
-            StorageManager.shared.saveSettingsNotification(settings: newValueSettingsUser)
+            let newValueSettingsUser = settingRateUser()
+            newValueSettingsUser.rateTFOutlet = rateTFOutlet
+            StorageManager.shared.saveSettingsRate(rate: newValueSettingsUser)
         }
-        
-}
+        }
 }
 
 extension String {

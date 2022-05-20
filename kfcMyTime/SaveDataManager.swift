@@ -41,21 +41,39 @@ class FormatSave {
     }
     
     
-    func lunchTimeString(_ timeStart: Date, _ timeStop: Date, _ settingUserOfLunch: Bool) -> (String,Double) {
+//    func lunchTimeString(_ timeStart: Date, _ timeStop: Date, _ settingUserOfLunch: Bool) -> (String,Double) {
+//        ///Метод инициализации времени обеденного перерыва
+//        let timeInterval = timeStop.timeIntervalSince(timeStart)
+//        if settingUserOfLunch {
+//            switch timeInterval {
+//            case (14401...32399):
+//                return ("30'", (timeInterval - 1800) / 3600)
+//            case (32400...):
+//                return ("45'",(timeInterval - 2700) / 3600)
+//            default:
+//                return ("-", timeInterval / 3600.0)
+//            }
+//        }
+//        return ("-", timeInterval/3600.0)
+//    }
+    
+    func lunchTime(_ timeIntervalWork: Double, _ settingUserOfLunch: Bool) -> (String,Double) {
         ///Метод инициализации времени обеденного перерыва
-        let timeInterval = timeStop.timeIntervalSince(timeStart)
+//        let timeInterval = timeStop.timeIntervalSince(timeStart)
         if settingUserOfLunch {
-            switch timeInterval {
+            switch timeIntervalWork {
             case (14401...32399):
-                return ("30'", (timeInterval - 1800) / 3600)
+                return ("30'", 1800.0)
             case (32400...):
-                return ("45'",(timeInterval - 2700) / 3600)
+                return ("45'", 2700.0)
             default:
-                return ("-", timeInterval / 3600.0)
+                return ("-", 0.0)
             }
         }
-        return ("-", timeInterval/3600.0)
+        return ("-", 0.0)
     }
+    
+    
     //MARK: версия 1
 //    func nightTime (_ timeStart: Date, _ timeStop: Date) -> Int {
 //        func timeComponent (_ time: Date) -> Int {
@@ -91,7 +109,7 @@ class FormatSave {
 //    }
     
     //MARK: Версия 3 (работает, но не красиво)
-    func test(_ timeStart: Date, _ timeStop: Date) -> Int{
+    func workDayTime(_ timeStart: Date, _ timeStop: Date) -> Double{
         func dateComponents(_ date: Date) -> Int {
             let components = Calendar.current.dateComponents([.day, .hour, .minute], from: date)
             return (components.hour ?? 0) * 60 + (components.minute ?? 0)
@@ -104,7 +122,7 @@ class FormatSave {
             rangeWork = dateComponents(timeStart)...dateComponents(timeStop)
             let rangeClamped = rangeWork.clamped(to: dayRange)
             let dayTime = rangeClamped.upperBound - rangeClamped.lowerBound
-            return dayTime
+            return Double(dayTime)
         } else {
             rangeWork = dateComponents(timeStart)...1440
             rangeWorkTwo = 0...dateComponents(timeStop)
@@ -114,7 +132,7 @@ class FormatSave {
             let dayTime = rangeClamped.upperBound - rangeClamped.lowerBound
             let dayTimeTwo = rangeClampedTwo.upperBound - rangeClampedTwo.lowerBound
             
-            return dayTime + dayTimeTwo
+            return Double(dayTime + dayTimeTwo)
         }
 }
     

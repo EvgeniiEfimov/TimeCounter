@@ -8,7 +8,7 @@
 import UIKit
 import RealmSwift
 
-class SettingNightTimeViewController: UIViewController {
+class SettingNightTimeViewController: UIViewController, UITextFieldDelegate {
 
     var dataSettingNightTime: SettingNightTime!
     var dataSettingsIsNotEmpty: Bool!
@@ -21,6 +21,7 @@ class SettingNightTimeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSettingsIsNotEmpty = completionTextField()
+        self.percentTFOutlet.delegate = self
 //        dataSettingNightTime = StorageManager.shared.realm.objects(SettingNightTime.self).first
     }
     
@@ -34,18 +35,27 @@ class SettingNightTimeViewController: UIViewController {
     
     private func writeData() {
         storageManager.write {
-            dataSettingNightTime.percent = Int(percentTFOutlet.text ?? "0") ?? 0
+            dataSettingNightTime.percent = Double(percentTFOutlet.text ?? "0.0") ?? 0.0
         }
     }
     
     private func saveData () {
         let newValueOfSettingNightTime = SettingNightTime()
-        newValueOfSettingNightTime.percent = Int(percentTFOutlet.text ?? "0") ?? 0
+        newValueOfSettingNightTime.percent = Double(percentTFOutlet.text ?? "0.0") ?? 0.0
         storageManager.saveSettingsOfNightTime(settings: newValueOfSettingNightTime)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
 
     @IBAction func saveButtonSetting(_ sender: UIButton) {
         dataSettingsIsNotEmpty ? writeData() : saveData()
         dismiss(animated: true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }
