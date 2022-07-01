@@ -17,6 +17,17 @@ class StorageManager {
     //MARK: - work ListInfoOfMonch
     func save(allMonch: ListInfoOfMonch) {
         write {
+            var allTime = Double()
+            var nightWorkTime = Double()
+            var dayWorkTime = Double()
+            for time in allMonch.monch {
+                allTime += time.timeWork
+                nightWorkTime += time.day?.workNightTime ?? 0.0
+                dayWorkTime += time.day?.workDayTime ?? 0.0
+            }
+            allMonch.allWorkTimeOfMonch = allTime
+            allMonch.allNightWorkTime = nightWorkTime
+            allMonch.allDayWorkTime = dayWorkTime
             realm.add(allMonch)
         }
     }
@@ -39,13 +50,18 @@ class StorageManager {
     func save(monch: DayOfMonth, in listInfoOfMonch: ListInfoOfMonch) {
         write {
             listInfoOfMonch.monch.append(monch)
+            listInfoOfMonch.allWorkTimeOfMonch += monch.timeWork
+            listInfoOfMonch.allNightWorkTime += monch.day?.workNightTime ?? 0.0
+            listInfoOfMonch.allDayWorkTime += monch.day?.workDayTime ?? 0.0
         }
     }
     
-    func deleteMonch(monch: DayOfMonth) {
+    func deleteMonch(monch: DayOfMonth, in listInfoOfMonch: ListInfoOfMonch) {
         write {
+            listInfoOfMonch.allWorkTimeOfMonch -= monch.timeWork
+            listInfoOfMonch.allNightWorkTime -= monch.day?.workNightTime ?? 0.0
+            listInfoOfMonch.allDayWorkTime -= monch.day?.workDayTime ?? 0.0
             realm.delete(monch)
-//            realm.delete(monch)
         }
     }
     
@@ -55,7 +71,7 @@ class StorageManager {
         write {
             let monch = dayOfMonth
             listInfoOfMonch.monch.append(monch)
-            
+//            listInfoOfMonch.allWorkTimeOfMonch += dayOfMonth.timeWork
         }
     }
     
@@ -67,7 +83,7 @@ class StorageManager {
     
     //MARK: - SettingsRate
     
-    func saveSettingsRate (rate: settingRateUser) {
+    func saveSettingsRate (rate: SettingRateAndFormatDate) {
         write {
             realm.add(rate)
         }
@@ -105,16 +121,24 @@ class StorageManager {
     
     //MARK: - SettingRate
     
-    func saveSettingRate (settings: settingRateUser) {
+    func saveSettingRate (settings: SettingRateAndFormatDate) {
         write {
             realm.add(settings)
         }
     }
     
     
-    func deleteSettingRate (settings: settingRateUser) {
+    func deleteSettingRate (settings: SettingRateAndFormatDate) {
         write {
             realm.delete(settings)
+        }
+    }
+    
+    //MARK: - SettingTarget
+    
+    func savwSettingTarget (target: SettingTarget) {
+        write {
+            realm.add(target)
         }
     }
     
@@ -130,3 +154,4 @@ class StorageManager {
         }
     }
 }
+

@@ -15,6 +15,8 @@ class TableDateCellViewController: UITableViewController {
     //MARK: - Приватные свойства
     /// Объявление переменной хранящей данные realm по месяцам
     private var listInfoOfMonch: Results<ListInfoOfMonch>!
+    /// Объявление переменной хранящей данные настроек
+    private var settingsUser: Results<SettingRateAndFormatDate>!
     //MARK: - Методы переопределения
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +24,7 @@ class TableDateCellViewController: UITableViewController {
         startSettingOfBackgroundView()
         /// Присвоение переменной хранящей данные realm по месяцам
         listInfoOfMonch = StorageManager.shared.realm.objects(ListInfoOfMonch.self).sorted(byKeyPath: "numberMonth")
+        settingsUser = StorageManager.shared.realm.objects(SettingRateAndFormatDate.self)
         ///Проверка на наличие данных в realm
         if listInfoOfMonch.isEmpty {
             ///Вызов алерта-инструкции при первом запуске
@@ -64,7 +67,6 @@ class TableDateCellViewController: UITableViewController {
         accessory.image = image
         accessory.tintColor = UIColor.systemYellow
         cell.accessoryView = accessory
-                   ///
      
         /// Определения данных по месяцу
         let monch = listInfoOfMonch[indexPath.section]
@@ -82,7 +84,7 @@ class TableDateCellViewController: UITableViewController {
         content.textProperties.font = UIFont.init(name: "Zapf Dingbats", size: 18.0) ??
             .preferredFont(forTextStyle: .body)
         /// Определение дополнительного текста ячейки
-        content.secondaryText = day.timeWorkFormat + String(format: " → %.1f ч", day.timeWork)
+        content.secondaryText = settingsUser.first?.formatSegmentControl == 1 ? String(format: "%.1f ч", day.timeWork) : day.timeWorkStringFormat
         /// Определение цвета дополнительного текста ячейки
         content.secondaryTextProperties.color = .systemYellow
         /// Присваивание конфигурации ячейки
@@ -108,13 +110,13 @@ class TableDateCellViewController: UITableViewController {
         /// Присвоение значения текста секции
         content.text = month.nameMonth
         /// Присвоения значени дополнительного текста секции
-        content.secondaryText = timeWorkOfFormatString(allTimeMonch(month)) + String(format: " ~ %.1f ч", allTimeMonch(month))
+        content.secondaryText = settingsUser.first?.formatSegmentControl == 1 ? String(format: "%.1f ч", month.allWorkTimeOfMonch) : timeWorkOfFormatString(month.allWorkTimeOfMonch)
         /// Определения шрифта и размера дополнительного текста
         content.secondaryTextProperties.font = UIFont.init(name: "Zapf DingBats", size: 20.0)!
         /// Определение цвета дополнительного текста
         content.secondaryTextProperties.color = .darkGray
-        /// Определения цвета текста
-        content.textProperties.color = .black
+        /// Определения цвета текста секции
+        content.textProperties.color = .darkGray
         /// Определения шрифта и размера  текста
         content.textProperties.font = UIFont.init(name: "Courier", size: 22.0) ?? .preferredFont(forTextStyle: .body)
         /// Присвоения конфигурации header
@@ -132,7 +134,7 @@ class TableDateCellViewController: UITableViewController {
         ///  Определения действия при свайпе
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { _, _, _ in
             /// Удаление дня из БД
-            StorageManager.shared.deleteMonch(monch: day)
+            StorageManager.shared.deleteMonch(monch: day, in: monch)
             /// Проверка количества дней в месяце секции
             if monch.monch.count == 0 {
                 /// Удаление месяца (Если нет записанных дней)
@@ -157,7 +159,7 @@ class TableDateCellViewController: UITableViewController {
     /// Переопределения метода  перехода между vc
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         /// Проверка идентификатора контроллера перехода
-        if segue.identifier == "addVC" {
+         if segue.identifier == "addVC" {
             /// Проверка приведения seque к требуемуему VC
             if let addJobDateVC = segue.destination as? AddJobDateViewController {
                 /// Комплишн
@@ -196,9 +198,6 @@ class TableDateCellViewController: UITableViewController {
 
 //MARK: - Action
 
-    @IBAction func deleteAllAction(_ sender: UIBarButtonItem) {
-        alertOfDeleteAll()
-    }
     
 //MARK: - Приватные методы
     /// Метод настройки внешнего вида View
@@ -207,28 +206,6 @@ class TableDateCellViewController: UITableViewController {
         tableView.backgroundView?.contentMode = .scaleAspectFill
         tableView.backgroundView?.alpha = 0.6
         tableView.backgroundColor = UIColor.gray
-    }
-    ///  Метод вызова алерта отчистки БД
-    private func alertOfDeleteAll() {
-        /// Инициализация алерта
-        let alertDelete = UIAlertController.init(title: "Удалить все записанные смены?",
-                                                message: "Вы действительно хотите удалить все записанные смены без возможности восстановления?",
-                                                preferredStyle: .alert)
-        /// Добавление кнопки в алерт
-        alertDelete.addAction(.init(title: "Да",
-                                    style: .destructive,
-                                    handler: { (UIAlertAction) in
-            StorageManager.shared.deleteAllListInfo()
-            self.tableView.reloadData()
-        }))
-        /// Добавление кнопки в алерт
-        alertDelete.addAction(.init(title: "Нет",
-                                    style: .default,
-                                    handler: nil))
-        /// Представление алерта
-        present(alertDelete,
-                animated: true,
-                completion: nil)
     }
     /// Инициализация алерта первого запуска
     private func alertFirstStart() {
@@ -268,14 +245,14 @@ extension TableDateCellViewController {
         dateFormatter.locale = Locale(identifier: "Ru_Ru")
         return dateFormatter.string(from: dateDay)
     }
-        /// Метод подсчета общего количества рабочих часов за месяц
-    func allTimeMonch(_ monch: ListInfoOfMonch) -> Double {
-        var allTimeMonch = 0.0
-        for timeDay in monch.monch {
-            allTimeMonch += timeDay.timeWork
-        }
-        return allTimeMonch
-    }
+//        /// Метод подсчета общего количества рабочих часов за месяц
+//    func allTimeMonch(_ monch: ListInfoOfMonch) -> Double {
+//        var allTimeMonch = 0.0
+//        for timeDay in monch.monch {
+//            allTimeMonch += timeDay.timeWork
+//        }
+//        return allTimeMonch
+//    }
     /// Форматирование рабочего времени в формат Часы - минуты
     func timeWorkOfFormatString(_ timeInterval: Double) -> String {
     let formatter = DateComponentsFormatter()

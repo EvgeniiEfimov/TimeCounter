@@ -10,34 +10,41 @@ import RealmSwift
 
 class SettingsTableViewController: UITableViewController {
         //MARK: - Outlet
-    /// Кнопка определения часовой ставки
-    @IBOutlet weak var rateButton: UIButton!
+    /// Outlet  на TF
+    @IBOutlet weak var rateTextFieldOutlet: UITextField!
+    /// Outlet на segmentControl
+    @IBOutlet weak var formatSegmentControlOutlet: UISegmentedControl!
     
     //MARK: - Приватные свойства
     /// Объявление свойства хранения данных ставки
-    private var settingRate: settingRateUser!
+    private var settingRate: SettingRateAndFormatDate!
     /// Инициализация свойства доступа к StorageManager
     private let storageManager = StorageManager.shared
-    
-    //MARK: - Публичные свойства
-    /// Объявление свойства хранения
-    var rateTF: String = ""
     
     //MARK: - Методы переопределения родительского класса
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        rateTextFieldOutlet.delegate = self
+
         /// Инициализация свойства данными из БД
-        settingRate = StorageManager.shared.realm.objects(settingRateUser.self).first
+        settingRate = StorageManager.shared.realm.objects(SettingRateAndFormatDate.self).first
         /// Проверка свойства на наличие информации в БД
         if settingRate != nil {
-            /// Инициализация тайтла кнопки данными из БД
-            rateButton.setTitle(settingRate.rateTFOutlet, for: .normal)
+            /// Инициализация SegmentControl данными из БД
+            formatSegmentControlOutlet.selectedSegmentIndex = settingRate.formatSegmentControl
+            /// Инициализация TF данными из БД
+            rateTextFieldOutlet.text = settingRate.rateTFOutlet
+            ///
+//            rateButton.setTitle(settingRate.rateTFOutlet, for: .normal)
         } else {
-            /// Инициализация тайтла кнопки базовым значение
-            rateButton.setTitle("Ставка", for: .normal)
+            /// Инициализация TF базовым значение
+            rateTextFieldOutlet.text = "Ставка"
+            /// Инициализация SegmentControl базовым значением
+            formatSegmentControlOutlet.selectedSegmentIndex = 1
         }
         /// Настройка цвета тайтла
-        rateButton.setTitleColor(.systemYellow, for: .normal)
+//        rateButton.setTitleColor(.systemYellow, for: .normal)
     }
     /// Переопределения метода конфигурации заголовка секции
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
@@ -55,61 +62,61 @@ class SettingsTableViewController: UITableViewController {
         header.contentConfiguration = content
     }
     
-    //MARK: - Action
-    /// Кнопка настройки часовой ставки
-    @IBAction func rateButtonAction(_ sender: UIButton) {
-        alertRate()
+    override func viewWillDisappear(_ animated: Bool) {
+        /// Проверка наличия информации в БД
+        guard settingRate != nil else {
+            /// Создаем экземпляр
+            let settingFormatSelect = SettingRateAndFormatDate()
+            settingFormatSelect.formatSegmentControl = formatSegmentControlOutlet.selectedSegmentIndex
+            settingFormatSelect.rateTFOutlet = rateTextFieldOutlet.text ?? "Ставка"
+            self.storageManager.saveSettingRate(settings: settingFormatSelect)
+            return
+        }
+        storageManager.write {
+            settingRate.formatSegmentControl = formatSegmentControlOutlet.selectedSegmentIndex
+            settingRate.rateTFOutlet = rateTextFieldOutlet.text ?? "Ставка"
+        }
     }
     
-    //MARK: - Приватные методы
-    /// Метод инициализации часовой ставки и представления алерта
-    private func alertRate() {
-        /// Инициализация алерта
-        let alertRate = UIAlertController.init(title: "Часовая ставка",
-                                                message: nil,
-                                                preferredStyle: .alert)
-        /// Добавление и инициализация поля ввода текста в алерт
-        alertRate.addTextField { (textField) in
-            textField.placeholder = "Руб/час"
-            self.rateTF = textField.text ?? "0"
-            textField.delegate = self
-        }
-        /// Добавления  и инициализация кнопки "Сохранить" в алерт
-        alertRate.addAction(.init(title: "Сохранить",
-                                  style: .default,
-                                  handler: { (action) in
-            /// Проверка свойства хранения данных из БД на наличия данных
-            guard self.settingRate != nil else {
-                ///  Инициализация свойства экземпляром класса
-                let setting = settingRateUser()
-                /// Присвоение значения ставки свойству хранения в БД
-                setting.rateTFOutlet = self.rateTF
-                /// Сохранение в БД экземпляра
-                self.storageManager.saveSettingRate(settings: setting)
-                /// Установка нового тайтла кнопки установки ставки
-                self.rateButton.setTitle(setting.rateTFOutlet, for: .normal)
-                return
-            }
-            /// Чтенине данных о ставке из БД
-            self.storageManager.write {
-                /// Присвоение нового значения свойству хранения информации в БД
-                self.settingRate.rateTFOutlet = self.rateTF
-                /// Установка нового тайтла кнопки
-                self.rateButton.setTitle(self.settingRate.rateTFOutlet, for: .normal)
-            }
-        }))
-        /// Показ алерта
-        present(alertRate,
-                animated: true,
-                completion: nil)
+    //MARK: - Action
+    @IBAction func deleteButtonAction(_ sender: UIButton) {
+        alertOfDeleteAll()
     }
+    
+    
+    //MARK: - Приватные методы
+
 }
 
 /// Расширение родительского класса
 extension SettingsTableViewController: UITextFieldDelegate {
-    /// Метод завершения работы с текстовым полем
-     func textFieldDidEndEditing(_ textField: UITextField) {
-         /// Присвоения текстовому полю нового значения 
-         rateTF = textField.text ?? ""
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+       textField.resignFirstResponder()
+       return true
+   }
+}
+
+extension SettingsTableViewController {
+    ///  Метод вызова алерта отчистки БД
+    private func alertOfDeleteAll() {
+        /// Инициализация алерта
+        let alertDelete = UIAlertController.init(title: "Удалить все записанные смены?",
+                                                message: "Вы действительно хотите удалить все записанные смены без возможности восстановления?",
+                                                preferredStyle: .alert)
+        /// Добавление кнопки в алерт
+        alertDelete.addAction(.init(title: "Да",
+                                    style: .destructive,
+                                    handler: { (UIAlertAction) in
+            StorageManager.shared.deleteAllListInfo()
+                //  self.tableView.reloadData()
+        }))
+        /// Добавление кнопки в алерт
+        alertDelete.addAction(.init(title: "Нет",
+                                    style: .default,
+                                    handler: nil))
+        /// Представление алерта
+        present(alertDelete,
+                animated: true,
+                completion: nil)
     }
 }

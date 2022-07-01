@@ -10,18 +10,17 @@ import RealmSwift
 
 class SettingsNotificationViewController: UIViewController, UITextFieldDelegate {
     
-    var realm = try! Realm()
+//    var realm = try! Realm()
     
-    let notifications = Notifications()
-    
-//    @IBOutlet weak var rateTFOutlet: UITextField!
+
     @IBOutlet weak var switchNotification: UISwitch!
     @IBOutlet weak var switchNotificationSound: UISwitch!
     @IBOutlet weak var datePickerNotification: UIDatePicker!
     @IBOutlet weak var soundNotificationAction: UISwitch!
   
     
-    
+    let notifications = Notifications()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +32,6 @@ class SettingsNotificationViewController: UIViewController, UITextFieldDelegate 
         }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
         self.view.endEditing(true)
     }
     
@@ -65,7 +63,6 @@ class SettingsNotificationViewController: UIViewController, UITextFieldDelegate 
 
     
     //MARK:
-    
     @IBAction func saveButtonAction(_ sender: UIButton) {
         saveSettings()
         if settingsUser.switchNotification {
@@ -75,10 +72,8 @@ class SettingsNotificationViewController: UIViewController, UITextFieldDelegate 
     }
 }
 
-extension SettingsNotificationViewController: SaveSettings {
-    func deleteSettings() {
-    }
-    
+extension SettingsNotificationViewController {
+   
     var settingsUser: SettingNotification! {
         get {
             StorageManager.shared.realm.objects(SettingNotification.self).first
@@ -97,7 +92,6 @@ extension SettingsNotificationViewController: SaveSettings {
     func saveSettings() {
         if settingsUser != nil {
             StorageManager.shared.write {
-//                settingsUser.rateTFOutlet = rateTFOutlet.text ?? "Error"
                 settingsUser.switchNotification = switchNotification.isOn
                 settingsUser.switchNotificationSound = switchNotificationSound.isOn
                 settingsUser.datePickerNotification = datePickerNotification.date
@@ -105,7 +99,6 @@ extension SettingsNotificationViewController: SaveSettings {
         }
         else {
             let newValueSettingsUser = SettingNotification()
-//            newValueSettingsUser.rateTFOutlet = rateTFOutlet.text ?? "Error"
             newValueSettingsUser.switchNotification = switchNotification.isOn
             newValueSettingsUser.switchNotificationSound = switchNotificationSound.isOn
             newValueSettingsUser.datePickerNotification = datePickerNotification.date

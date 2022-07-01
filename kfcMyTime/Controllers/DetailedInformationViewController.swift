@@ -34,14 +34,23 @@ class DetailedInformationViewController: UIViewController {
     //MARK: - Приватные методы
     /// Метод инициализации свойств аутлетов полученными значениями
     private func loadingView() {
-        dateWorkOutlet.text = dateFormatter.dayDateFormatter(info.dateWorkShift)
-        startTimeWorkOutlet.text = dateFormatter.timeDateFormatter(info.timeStart)
-        finishTimeWorkOutlet.text = dateFormatter.timeDateFormatter(info.timeStop)
+        dateWorkOutlet.text = info.dateWorkShift
+        startTimeWorkOutlet.text = info.timeStart
+        finishTimeWorkOutlet.text = info.timeStop
         lanchTimeOutlet.text = info.lunchString
         workTimeOutlet.text =  info.timeWorkString
         workNightTimeOutlet.text = String(format: "%.1f", info.workNightTime)
         inform.text = info.inform
     }
+}
+extension DetailedInformationViewController {
+  
+    func timeDateFormatter(_ time: Date, _ dateFormat: String) -> String {
+       let dateFormatterTime = DateFormatter()
+       dateFormatterTime.dateFormat = dateFormat
+       dateFormatterTime.locale = Locale(identifier: "RU_RU")
+       return dateFormatterTime.string(from: time)
+   }
 }
 
 

@@ -8,10 +8,12 @@ import UIKit
 import RealmSwift
 // MARK: Info model
 class InfoOfDayWork: Object {
-    @objc dynamic var dateWorkShift = Date()
-    @objc dynamic var timeStart = Date()
-    @objc dynamic var timeStop =  Date()
-    @objc dynamic var timeWorkString = ""
+    @objc dynamic var dateWorkShift = String()
+    @objc dynamic var timeStart = String()
+    @objc dynamic var timeStartData = Date()
+    @objc dynamic var timeStop = String()
+    @objc dynamic var timeStopData = Date()
+    @objc dynamic var timeWorkString = String()
     @objc dynamic var lunchString = "-"
     @objc dynamic var workNightTime = Double()
     @objc dynamic var workDayTime = Double()
@@ -23,9 +25,7 @@ class DayOfMonth: Object {
     @objc dynamic var lunchBool = Bool()
     @objc dynamic var nightTimeBool = Bool()
     @objc dynamic var timeWork = Double()
-    @objc dynamic var timeWorkFormat = ""
-//    @objc dynamic var workNightTime = Double()
-//    @objc dynamic var workDayTime = Double()
+    @objc dynamic var timeWorkStringFormat = ""
     @objc dynamic var day: InfoOfDayWork?
 }
 
@@ -33,15 +33,13 @@ class ListInfoOfMonch: Object {
     @objc dynamic var nameMonth = ""
     @objc dynamic var numberMonth = Int()
     @objc dynamic var allWorkTimeOfMonch = 0.0
+    @objc dynamic var allNightWorkTime = Double()
+    @objc dynamic var allDayWorkTime = Double()
     let monch = List<DayOfMonth>()
 }
+
 // MARK: Settings model
 
-//class SettingNotification: Object {
-//    @objc dynamic var switchNotification = Bool()
-//    @objc dynamic var switchNotificationSound = Bool()
-//    @objc dynamic var datePickerNotification = Date()
-//}
 
 class SettingLunch: Object {
     
@@ -64,26 +62,34 @@ class SettingNightTime: Object {
 }
 
 
-class settingRateUser: Object {
+class SettingRateAndFormatDate: Object {
     @objc dynamic var rateTFOutlet = String()
+    @objc dynamic var formatSegmentControl = Int()
 //    @objc dynamic var settingNotification: SettingNotification?
 //    @objc dynamic var settingLunch: SettingLunch?
 //    @objc dynamic var settingNightTime: SettingNightTime?
     
 }
 
-
-
-
-
-
-
-
-class SettingsUser: Object, UIApplicationDelegate {
-    @objc dynamic var rateTFOutlet = String()
-    @objc dynamic var switchNotification = Bool()
-    @objc dynamic var switchNotificationSound = Bool()
-    @objc dynamic var datePickerNotification = Date()
-    
+class SettingTarget: Object {
+    @objc dynamic var targetMonch = Double()
 }
+
+
+
+
+
+
+
+//class SettingsUser: Object {
+//    @objc dynamic var rateTFOutlet = String()
+//    @objc dynamic var switchNotification = Bool()
+//    @objc dynamic var switchNotificationSound = Bool()
+//    @objc dynamic var datePickerNotification = Date()
+//
+//}
+
+//enum rangeTimeWork: String {
+//    case fourHours = 
+//}
 
