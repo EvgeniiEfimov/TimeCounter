@@ -35,8 +35,10 @@ class TableDateCellViewController: UITableViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        ///Обновление данных таблицы
         tableView.reloadData()
+        animationCell()
+        ///Обновление данных таблицы
+        //tableView.reloadData()
         
     }
 
@@ -237,6 +239,24 @@ class TableDateCellViewController: UITableViewController {
         alertView.cornerRadius = 12
         alertView.backgroundColor = UIColor.darkGray
         alertView.present()
+    }
+    
+    private func animationCell() {
+        let cells = tableView.visibleCells
+        let height = 0 - tableView.bounds.width
+        var delay: Double = 0
+        
+        for cell in cells {
+            cell.transform = CGAffineTransform(translationX: height, y: height)
+            
+            UIView.animate(withDuration: 0.4,
+                           delay: delay * 0.05,
+                           usingSpringWithDamping: 0.7,
+                           initialSpringVelocity: 0,
+                           options: .curveEaseInOut,
+                           animations: { cell.transform = CGAffineTransform.identity})
+            delay += 1
+        }
     }
 }
 ///  Расширение класса

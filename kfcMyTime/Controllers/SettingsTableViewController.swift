@@ -46,6 +46,11 @@ class SettingsTableViewController: UITableViewController {
         /// Настройка цвета тайтла
 //        rateButton.setTitleColor(.systemYellow, for: .normal)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        animationCell()
+    }
     /// Переопределения метода конфигурации заголовка секции
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         /// Приведение  view к UITableViewHeaderFooterView
@@ -86,6 +91,23 @@ class SettingsTableViewController: UITableViewController {
     
     //MARK: - Приватные методы
 
+    private func animationCell() {
+        let cells = tableView.visibleCells
+        let height =  -tableView.bounds.width
+        var delay: Double = 0
+        
+        for cell in cells {
+            cell.transform = CGAffineTransform(translationX: height, y: height)
+            
+            UIView.animate(withDuration: 0.4,
+                           delay: delay * 0.05,
+                           usingSpringWithDamping: 0.7,
+                           initialSpringVelocity: 0,
+                           options: .curveEaseInOut,
+                           animations: { cell.transform = CGAffineTransform.identity})
+            delay += 1
+        }
+    }
 }
 
 /// Расширение родительского класса
