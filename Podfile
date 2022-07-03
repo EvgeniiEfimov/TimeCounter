@@ -7,4 +7,5 @@ target 'kfcMyTime' do
 pod 'RealmSwift', '~> 10.25.0'
 pod 'SPAlert'
 pod 'Alamofire'
+pod 'Spring', :git => 'https://github.com/MengTo/Spring.git'
 end

@@ -7,6 +7,7 @@
 
 import RealmSwift
 import SPAlert
+import Spring
 
 class TableDateCellViewController: UITableViewController {
     //MARK: - Outlet
@@ -36,7 +37,9 @@ class TableDateCellViewController: UITableViewController {
         super.viewWillAppear(animated)
         ///Обновление данных таблицы
         tableView.reloadData()
+        
     }
+
 
     // MARK: - Table view data source
     /// Количество секции в таблице определяется количеством месяцев в БД
@@ -264,3 +267,5 @@ extension TableDateCellViewController {
     }
     
 }
+
+
