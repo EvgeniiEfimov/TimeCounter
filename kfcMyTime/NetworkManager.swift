@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 import Alamofire
-//import SwiftUI
 
 class NetworkManager {
     
@@ -116,8 +115,3 @@ extension NetworkManager {
         complition(url)
     }
 }
-
-// git add
-// git commit -m""
-// git push
-

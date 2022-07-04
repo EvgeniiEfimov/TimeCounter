@@ -18,6 +18,8 @@ class StatisticViewController: UIViewController {
     @IBOutlet weak var imageViewOutlet: SpringImageView!
     @IBOutlet weak var imageViewTwoOutlet: SpringImageView!
     @IBOutlet weak var imageViewTree: SpringImageView!
+    @IBOutlet weak var imageViewFore: SpringImageView!
+    @IBOutlet weak var monchStatisticLabel: UILabel!
     
     var arrayMonch: Results <ListInfoOfMonch>!
     var valueSettingTarget: SettingTarget?
@@ -32,6 +34,7 @@ class StatisticViewController: UIViewController {
         loadTargetImage()
         loadNightAndDayClock()
         loadStatisticToMonch()
+        loadeStatisticDayOfMonch()
     }
     
     private func loadTargetImage() {
@@ -58,9 +61,9 @@ class StatisticViewController: UIViewController {
         }
         labelInfoToMonchOutlet.text = """
 Часы:
-Всего/Цель \(valueByMonth.allWorkTimeOfMonch) / \(valueSettingTarget?.targetMonch ?? 0.0)
-Дневные: \(valueByMonth.allDayWorkTime)
-Ночные: \(valueByMonth.allNightWorkTime)
+Всего/Цель \(round(valueByMonth.allWorkTimeOfMonch * 10)/10) / \(valueSettingTarget?.targetMonch ?? 0.0)
+Дневные: \(round(valueByMonth.allDayWorkTime * 10)/10)
+Ночные: \(round(valueByMonth.allNightWorkTime * 10)/10)
 
 """
         
@@ -80,13 +83,6 @@ class StatisticViewController: UIViewController {
                             self.imageViewTwoOutlet.delay = 0.4
                             self.imageViewTwoOutlet.animate()
                             self.imageViewTwoOutlet.image = image
-//                            self.imageViewTwoOutlet.layer.
-                            
-                            
-//                            layer.animation = "squeezeLeft"
-//                            layer.curve = "easeIn"
-//                            layer.duration =  1.0
-//                            layer.animate()
                         }
                     }
         }
@@ -98,8 +94,30 @@ class StatisticViewController: UIViewController {
         for monchName in arrayMonch {
             arrayMonchString.append(monchName.nameMonth)
             arrayTimeMonch.append(monchName.allWorkTimeOfMonch)
-            
         }
+        NetworkManager.shared.statisticToMonth(arrayMonchString, arrayTimeMonch) { url in
+            NetworkManager.shared.gettingAnImage(from: url) { image in
+                self.imageViewFore.animation = "zoomIn"
+                self.imageViewFore.curve = "easwIn"
+                self.imageViewFore.duration = 1.3
+                self.imageViewFore.damping = 0.5
+                self.imageViewFore.delay = 0.6
+                self.imageViewFore.animate()
+                self.imageViewFore.image = image
+            }
+        }
+    }
+    
+    private func loadeStatisticDayOfMonch() {
+        var arrayMonchString = [String]()
+        var arrayTimeMonch = [Double]()
+        
+        guard let valueByMonth =  arrayMonch.filter("numberMonth = \(date.month ?? 0)").first else {return}
+        for monchName in valueByMonth.monch.sorted(byKeyPath: "dateWorkShift") {
+            arrayMonchString.append(monchName.day?.dateWorkShift ?? "ERROR")
+            arrayTimeMonch.append(monchName.timeWork)
+        }
+        monchStatisticLabel.text = valueByMonth.nameMonth
         
         NetworkManager.shared.statisticToMonth(arrayMonchString, arrayTimeMonch) { url in
             NetworkManager.shared.gettingAnImage(from: url) { image in

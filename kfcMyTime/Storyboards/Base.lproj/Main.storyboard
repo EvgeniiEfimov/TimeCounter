@@ -163,14 +163,14 @@
             <objects>
                 <viewController id="r1F-93-xBo" customClass="StatisticViewController" customModule="kfcMyTime" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="17S-5U-Uza">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="704"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="786"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TQm-sK-S9Z">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="704"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="786"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TrK-18-j2F">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="704"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="786"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="rmn-Ri-QyC">
                                                 <rect key="frame" x="40" y="20" width="240" height="95"/>
@@ -218,8 +218,8 @@
                                             <stackView opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="uGK-jq-dFe">
                                                 <rect key="frame" x="13.5" y="407.5" width="293.5" height="98.5"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="По месяцам" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="sLq-fs-Guh">
-                                                        <rect key="frame" x="87.5" y="0.0" width="118" height="25.5"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Месяц" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="sLq-fs-Guh">
+                                                        <rect key="frame" x="115" y="0.0" width="63" height="25.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                                         <color key="textColor" red="0.96862745289999996" green="0.8078432083" blue="0.27450981740000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <nil key="highlightedColor"/>
@@ -249,18 +249,39 @@
                                                     </imageView>
                                                 </subviews>
                                             </stackView>
+                                            <stackView opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="ZT1-1W-snk">
+                                                <rect key="frame" x="20" y="546" width="280" height="98.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Текущий месяц" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="HzS-aT-qBC">
+                                                        <rect key="frame" x="65.5" y="0.0" width="149.5" height="25.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                                        <color key="textColor" red="0.96862745289999996" green="0.8078432083" blue="0.27450981740000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sRF-Ts-DRm" customClass="SpringImageView" customModule="Spring">
+                                                        <rect key="frame" x="93" y="39.5" width="94.5" height="59"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="sRF-Ts-DRm" secondAttribute="height" multiplier="8:5" id="bY8-e6-ugr"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                </subviews>
+                                            </stackView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="uGK-jq-dFe" secondAttribute="bottom" constant="40" id="49C-wY-gdL"/>
+                                            <constraint firstItem="ZT1-1W-snk" firstAttribute="centerX" secondItem="TrK-18-j2F" secondAttribute="centerX" id="5s1-di-twn"/>
                                             <constraint firstItem="rmn-Ri-QyC" firstAttribute="top" secondItem="TrK-18-j2F" secondAttribute="top" constant="20" id="7V6-0V-X2q"/>
                                             <constraint firstItem="uGK-jq-dFe" firstAttribute="top" secondItem="oTg-fB-Y6n" secondAttribute="bottom" constant="40" id="BNf-Eo-SI6"/>
                                             <constraint firstItem="oTg-fB-Y6n" firstAttribute="top" secondItem="rmn-Ri-QyC" secondAttribute="bottom" constant="40" id="FyA-a3-TZp"/>
                                             <constraint firstItem="rmn-Ri-QyC" firstAttribute="centerX" secondItem="TrK-18-j2F" secondAttribute="centerX" id="Mt2-4z-0Os"/>
                                             <constraint firstItem="uGK-jq-dFe" firstAttribute="centerX" secondItem="TrK-18-j2F" secondAttribute="centerX" id="O4T-Ti-RaC"/>
+                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="ZT1-1W-snk" secondAttribute="bottom" constant="50" id="WSf-DB-gAY"/>
                                             <constraint firstItem="Cbf-t1-Mqk" firstAttribute="width" secondItem="TrK-18-j2F" secondAttribute="width" multiplier="0.915625" id="Zmh-as-d8H"/>
+                                            <constraint firstItem="ZT1-1W-snk" firstAttribute="top" secondItem="uGK-jq-dFe" secondAttribute="bottom" constant="40" id="aNy-00-cdt"/>
+                                            <constraint firstAttribute="trailing" secondItem="ZT1-1W-snk" secondAttribute="trailing" constant="20" id="fIf-TO-LJg"/>
                                             <constraint firstItem="rmn-Ri-QyC" firstAttribute="width" secondItem="TrK-18-j2F" secondAttribute="width" multiplier="0.75" id="sJ2-nR-ose"/>
                                             <constraint firstItem="oTg-fB-Y6n" firstAttribute="centerX" secondItem="TrK-18-j2F" secondAttribute="centerX" id="xHn-AR-bgz"/>
+                                            <constraint firstItem="ZT1-1W-snk" firstAttribute="leading" secondItem="TrK-18-j2F" secondAttribute="leading" constant="20" id="ySc-H0-i1p"/>
                                             <constraint firstItem="uGK-jq-dFe" firstAttribute="width" secondItem="TrK-18-j2F" secondAttribute="width" multiplier="0.917188" id="zv4-q6-KvE"/>
                                         </constraints>
                                     </view>
@@ -286,18 +307,20 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Статиcтика" image="chart.pie" catalog="system" id="Cow-az-rV2"/>
-                    <size key="freeformSize" width="320" height="753"/>
+                    <size key="freeformSize" width="320" height="835"/>
                     <connections>
+                        <outlet property="imageViewFore" destination="sRF-Ts-DRm" id="Hvc-R0-OJM"/>
                         <outlet property="imageViewOutlet" destination="BBT-cH-rL5" id="Qva-Pp-sD9"/>
                         <outlet property="imageViewTree" destination="vYB-Vg-r74" id="XdW-Uc-aEn"/>
                         <outlet property="imageViewTwoOutlet" destination="Cbf-t1-Mqk" id="ZIU-SR-5uY"/>
                         <outlet property="labelInfoToMonchOutlet" destination="APU-DJ-big" id="tYU-Xq-5Io"/>
                         <outlet property="labelTitleTargetOutlet" destination="JDZ-fy-FZz" id="fi7-Xz-HtD"/>
+                        <outlet property="monchStatisticLabel" destination="sLq-fs-Guh" id="dzM-rw-Acp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c3n-fX-gow" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-770.625" y="358.0985915492958"/>
+            <point key="canvasLocation" x="-770.625" y="42.25352112676056"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="K5n-dK-Qsi">

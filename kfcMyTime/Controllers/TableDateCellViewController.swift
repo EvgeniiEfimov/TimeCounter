@@ -31,12 +31,24 @@ class TableDateCellViewController: UITableViewController {
             ///Вызов алерта-инструкции при первом запуске
             alertFirstStart()
         }
+        DispatchQueue.main.async {
+            self.tableView.scrollToBottom()
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
-        animationCell()
+//        tableView.scrollToBottom()
+//            self.animationCell()
+            self.tableView.scrollToBottom()
+            self.animationCell()
+        
+        
+//        animationCell()
+//        tableView.reloadData()
+
+        
         ///Обновление данных таблицы
         //tableView.reloadData()
         
@@ -94,6 +106,8 @@ class TableDateCellViewController: UITableViewController {
         content.secondaryTextProperties.color = .systemYellow
         /// Присваивание конфигурации ячейки
         cell.contentConfiguration = content
+        /// Скролл таблицы до последней ячейки
+//        tableView.scrollToRow(at: indexPath, at: .top, animated: true)
         /// Возврат ячейки
         return cell
     }
@@ -171,6 +185,8 @@ class TableDateCellViewController: UITableViewController {
                 addJobDateVC.saveCompletion = {
                     /// Вызов метода обновления данных таблицы
                     self.tableView.reloadData()
+                    self.tableView.scrollToBottom()
+                    self.animationCell()
                 }
                 /// Проверка идентификатора seque
             }
@@ -198,7 +214,8 @@ class TableDateCellViewController: UITableViewController {
     /// Переопределения метода
     override func viewDidAppear(_ animated: Bool) {
         /// Обновление табличных данных
-        tableView.reloadData()
+//        tableView.reloadData()
+//        tableView.scrollToBottom()
     }
 
 //MARK: - Action
@@ -242,6 +259,7 @@ class TableDateCellViewController: UITableViewController {
     }
     
     private func animationCell() {
+        tableView.reloadData()
         let cells = tableView.visibleCells
         let height = 0 - tableView.bounds.width
         var delay: Double = 0
@@ -249,9 +267,9 @@ class TableDateCellViewController: UITableViewController {
         for cell in cells {
             cell.transform = CGAffineTransform(translationX: height, y: height)
             
-            UIView.animate(withDuration: 0.4,
-                           delay: delay * 0.05,
-                           usingSpringWithDamping: 0.7,
+            UIView.animate(withDuration: 0.2,
+                           delay: delay * 0.02,
+                           usingSpringWithDamping: 0.8,
                            initialSpringVelocity: 0,
                            options: .curveEaseInOut,
                            animations: { cell.transform = CGAffineTransform.identity})
@@ -285,7 +303,18 @@ extension TableDateCellViewController {
         let formattedString = formatter.string(from: TimeInterval(timeInterval * 3600.0))
         return formattedString ?? "-"
     }
-    
 }
 
+extension UITableView {
+    func scrollToBottom() {
+//            self.reloadData()
+            let section = self.numberOfSections
+            let row = self.numberOfRows(inSection: self.numberOfSections - 1) - 1;
+            guard (section > 0) && (row > 0) else{ // check bounds
+                return
+            }
+            let indexPath = IndexPath(row: row-1, section: section-1)
+        self.scrollToRow(at: indexPath, at: .middle, animated: false)
+    }
+}
 
