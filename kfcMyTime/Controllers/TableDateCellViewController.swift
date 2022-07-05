@@ -38,20 +38,18 @@ class TableDateCellViewController: UITableViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tableView.reloadData()
-//        tableView.scrollToBottom()
-//            self.animationCell()
-            self.tableView.scrollToBottom()
-            self.animationCell()
-        
-        
+//            tableView.reloadData()
+            tableView.scrollToBottom()
+            animationCell()
+
+
 //        animationCell()
 //        tableView.reloadData()
 
-        
+
         ///Обновление данных таблицы
-        //tableView.reloadData()
-        
+//        tableView.reloadData()
+
     }
 
 
@@ -184,7 +182,7 @@ class TableDateCellViewController: UITableViewController {
                 /// Комплишн
                 addJobDateVC.saveCompletion = {
                     /// Вызов метода обновления данных таблицы
-                    self.tableView.reloadData()
+//                    self.tableView.reloadData()
                     self.tableView.scrollToBottom()
                     self.animationCell()
                 }
@@ -213,10 +211,29 @@ class TableDateCellViewController: UITableViewController {
             
     /// Переопределения метода
     override func viewDidAppear(_ animated: Bool) {
-        /// Обновление табличных данных
+//        super.viewDidAppear(animated)
+        sleep(0)
 //        tableView.reloadData()
-//        tableView.scrollToBottom()
-    }
+//        animationCell()
+//        DispatchQueue.main.async {
+//            self.tableView.reloadData()
+//            tableView.scrollToBottom()
+//            self.animationCell()
+        tableView.reloadData()
+        }
+//
+//        /// Обновление табличных данных
+////        tableView.reloadData()
+////        tableView.scrollToBottom()
+////        DispatchQueue.main.async {
+////        tableView.reloadData()
+////            self.tableView.scrollToBottom()
+////            self.animationCell()
+////        }
+////        tableView.scrollToBottom()
+////        animationCell()
+////        tableView.reloadData()
+//    }
 
 //MARK: - Action
 
@@ -259,7 +276,7 @@ class TableDateCellViewController: UITableViewController {
     }
     
     private func animationCell() {
-        tableView.reloadData()
+//        tableView.reloadData()
         let cells = tableView.visibleCells
         let height = 0 - tableView.bounds.width
         var delay: Double = 0
@@ -286,14 +303,6 @@ extension TableDateCellViewController {
         dateFormatter.locale = Locale(identifier: "Ru_Ru")
         return dateFormatter.string(from: dateDay)
     }
-//        /// Метод подсчета общего количества рабочих часов за месяц
-//    func allTimeMonch(_ monch: ListInfoOfMonch) -> Double {
-//        var allTimeMonch = 0.0
-//        for timeDay in monch.monch {
-//            allTimeMonch += timeDay.timeWork
-//        }
-//        return allTimeMonch
-//    }
     /// Форматирование рабочего времени в формат Часы - минуты
     func timeWorkOfFormatString(_ timeInterval: Double) -> String {
     let formatter = DateComponentsFormatter()
@@ -307,14 +316,18 @@ extension TableDateCellViewController {
 
 extension UITableView {
     func scrollToBottom() {
-//            self.reloadData()
-            let section = self.numberOfSections
-            let row = self.numberOfRows(inSection: self.numberOfSections - 1) - 1;
-            guard (section > 0) && (row > 0) else{ // check bounds
-                return
-            }
-            let indexPath = IndexPath(row: row-1, section: section-1)
+//                    self.reloadData()
+        let section = self.numberOfSections
+        guard (section > 0) else {
+            return
+        }
+        let row = self.numberOfRows(inSection: self.numberOfSections - 1) - 1;
+        guard (section > 0) && (row > 0) else{ // check bounds
+            return
+        }
+        let indexPath = IndexPath(row: row-1, section: section-1)
         self.scrollToRow(at: indexPath, at: .middle, animated: false)
+//        self.reloadData()
     }
 }
 

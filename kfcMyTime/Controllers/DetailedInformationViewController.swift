@@ -31,9 +31,9 @@ class DetailedInformationViewController: UIViewController {
         loadingView()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//    }
     
     //MARK: - Приватные методы
     /// Метод инициализации свойств аутлетов полученными значениями

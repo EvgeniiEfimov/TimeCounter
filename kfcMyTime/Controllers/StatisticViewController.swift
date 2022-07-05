@@ -60,13 +60,13 @@ class StatisticViewController: UIViewController {
             }
         }
         labelInfoToMonchOutlet.text = """
-Часы:
-Всего/Цель \(round(valueByMonth.allWorkTimeOfMonch * 10)/10) / \(valueSettingTarget?.targetMonch ?? 0.0)
+Часы
+Всего: \(round(valueByMonth.allWorkTimeOfMonch * 10)/10)
+Цель: \(valueSettingTarget?.targetMonch ?? 0.0)
 Дневные: \(round(valueByMonth.allDayWorkTime * 10)/10)
 Ночные: \(round(valueByMonth.allNightWorkTime * 10)/10)
 
 """
-        
     }
     
     private func loadNightAndDayClock() {
@@ -114,7 +114,7 @@ class StatisticViewController: UIViewController {
         
         guard let valueByMonth =  arrayMonch.filter("numberMonth = \(date.month ?? 0)").first else {return}
         for monchName in valueByMonth.monch.sorted(byKeyPath: "dateWorkShift") {
-            arrayMonchString.append(monchName.day?.dateWorkShift ?? "ERROR")
+            arrayMonchString.append(dateFormatterDay(monchName.dateWorkShift))
             arrayTimeMonch.append(monchName.timeWork)
         }
         monchStatisticLabel.text = valueByMonth.nameMonth
@@ -181,6 +181,11 @@ extension StatisticViewController: UITextFieldDelegate {
 }
 
 extension StatisticViewController {
-    
+        /// Метод форматирования представления даты рабочей смены
+        func dateFormatterDay (_ dateDay: Date) -> String {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd, EEE"
+            dateFormatter.locale = Locale(identifier: "Ru_Ru")
+            return dateFormatter.string(from: dateDay)
 }
-
+}
