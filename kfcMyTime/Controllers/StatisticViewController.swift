@@ -12,6 +12,9 @@ import Spring
 
 class StatisticViewController: UIViewController {
 
+    @IBOutlet weak var labelNoData: UILabel!
+    
+    @IBOutlet weak var scrollViewOutlet: UIScrollView!
     @IBOutlet weak var labelTitleTargetOutlet: UILabel!
     @IBOutlet weak var labelInfoToMonchOutlet: UILabel!
     
@@ -23,13 +26,34 @@ class StatisticViewController: UIViewController {
     
     var arrayMonch: Results <ListInfoOfMonch>!
     var valueSettingTarget: SettingTarget?
+//    var valueSettingTargetTest: Results <SettingTarget>?
+
     var valueTarget = Double()
-    var textFieldAlertValue = ""
+    var textFieldAlertValue = String()
         
     let date = Calendar.current.dateComponents([.month], from: Date())
 
     override func viewWillAppear(_ animated: Bool) {
-        labelTitleTargetOutlet.text = "Цель текущего месяца: \n\(valueTarget)"
+        
+        arrayMonch = StorageManager.shared.realm.objects(ListInfoOfMonch.self).sorted(byKeyPath: "numberMonth")
+        valueSettingTarget = StorageManager.shared.realm.objects(SettingTarget.self).first
+        
+//        guard (valueSettingTargetTest?.first?.targetMonch) != nil else {print("Null")
+//            return
+//        }
+//        print("NoNull")
+        //print(arrayMonch.first)
+        guard arrayMonch.first != nil else {
+//            print(arrayMonch)
+            scrollViewOutlet.isHidden = true
+            return
+        }
+    
+        scrollViewOutlet.isHidden = false
+       // noDataLabel.isHidden = false
+
+        valueTarget = valueSettingTarget?.targetMonch ?? 0.0
+        labelTitleTargetOutlet.text = "Цель текущего месяца: \n\(valueSettingTarget?.targetMonch ?? 0.0)"
 
         loadTargetImage()
         loadNightAndDayClock()
@@ -38,23 +62,14 @@ class StatisticViewController: UIViewController {
     }
     
     private func loadTargetImage() {
-        arrayMonch = StorageManager.shared.realm.objects(ListInfoOfMonch.self).sorted(byKeyPath: "numberMonth")
-        valueSettingTarget = StorageManager.shared.realm.objects(SettingTarget.self).first
-
 
         guard let valueByMonth =  arrayMonch.filter("numberMonth = \(date.month ?? 0)").first else {return}
-      
         valueTarget = ((valueByMonth.allWorkTimeOfMonch ) / (valueSettingTarget?.targetMonch ?? 1000.0)) * 100
 
         DispatchQueue.main.async {
             NetworkManager.shared.monchTarget(self.valueTarget) { url in
                 NetworkManager.shared.gettingAnImage(from: url) { image in
-                    self.imageViewOutlet.animation = "zoomIn"
-                    self.imageViewOutlet.curve = "easwIn"
-                    self.imageViewOutlet.duration = 1.3
-                    self.imageViewOutlet.damping = 0.5
-                    self.imageViewOutlet.delay = 0.2
-                    self.imageViewOutlet.animate()
+                    self.animation(self.imageViewOutlet, 0.2)
                     self.imageViewOutlet.image = image
                 }
             }
@@ -76,12 +91,7 @@ class StatisticViewController: UIViewController {
         DispatchQueue.main.async {
             NetworkManager.shared.clockNightOfDay(dayTime ?? 0.0, nightTime ?? 0.0) { url in
                         NetworkManager.shared.gettingAnImage(from: url) { image in
-                            self.imageViewTwoOutlet.animation = "zoomIn"
-                            self.imageViewTwoOutlet.curve = "easwIn"
-                            self.imageViewTwoOutlet.duration = 1.3
-                            self.imageViewTwoOutlet.damping = 0.5
-                            self.imageViewTwoOutlet.delay = 0.4
-                            self.imageViewTwoOutlet.animate()
+                            self.animation(self.imageViewTwoOutlet, 0.4)
                             self.imageViewTwoOutlet.image = image
                         }
                     }
@@ -97,12 +107,7 @@ class StatisticViewController: UIViewController {
         }
         NetworkManager.shared.statisticToMonth(arrayMonchString, arrayTimeMonch) { url in
             NetworkManager.shared.gettingAnImage(from: url) { image in
-                self.imageViewFore.animation = "zoomIn"
-                self.imageViewFore.curve = "easwIn"
-                self.imageViewFore.duration = 1.3
-                self.imageViewFore.damping = 0.5
-                self.imageViewFore.delay = 0.6
-                self.imageViewFore.animate()
+                self.animation(self.imageViewFore, 0.6)
                 self.imageViewFore.image = image
             }
         }
@@ -121,28 +126,33 @@ class StatisticViewController: UIViewController {
         
         NetworkManager.shared.statisticToMonth(arrayMonchString, arrayTimeMonch) { url in
             NetworkManager.shared.gettingAnImage(from: url) { image in
-                self.imageViewTree.animation = "zoomIn"
-                self.imageViewTree.curve = "easwIn"
-                self.imageViewTree.duration = 1.3
-                self.imageViewTree.damping = 0.5
-                self.imageViewTree.delay = 0.6
-                self.imageViewTree.animate()
+                self.animation(self.imageViewTree, 0.6)
                 self.imageViewTree.image = image
             }
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        arrayMonch = StorageManager.shared.realm.objects(ListInfoOfMonch.self)
-        valueSettingTarget = StorageManager.shared.realm.objects(SettingTarget.self).first
-
-        
-        loadTargetImage()
-        loadNightAndDayClock()
-        loadStatisticToMonch()
+    private func animation(_ imageLabel: SpringImageView, _ delay: Double) {
+        imageLabel.animation = "zoomIn"
+        imageLabel.curve = "easwIn"
+        imageLabel.duration = 1.3
+        imageLabel.damping = 0.5
+        imageLabel.delay = delay
+        imageLabel.animate()
     }
+    
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//
+//        arrayMonch = StorageManager.shared.realm.objects(ListInfoOfMonch.self)
+//        valueSettingTarget = StorageManager.shared.realm.objects(SettingTarget.self).first
+//
+//
+//        loadTargetImage()
+//        loadNightAndDayClock()
+//        loadStatisticToMonch()
+//        loadeStatisticDayOfMonch()
+//    }
     
     @IBAction func addingOrEditingTargetButton(_ sender: UIButton) {
         alertSettingTarget()
@@ -154,22 +164,27 @@ extension StatisticViewController {
     func alertSettingTarget (){
         let alertSettingTarget = UIAlertController.init(title: "Цель текущего месяца", message: nil, preferredStyle: .alert)
         alertSettingTarget.addTextField { textField in
-            self.textFieldAlertValue = textField.text ?? ""
+           // self.textFieldAlertValue = textField.text
             textField.delegate = self
+            self.textFieldAlertValue = textField.text ?? ""
+            print(self.textFieldAlertValue)
         }
         alertSettingTarget.addAction(.init(title: "Ок", style: .default, handler: { action in
-            guard let target = self.valueSettingTarget else {
+            guard let target = self.valueSettingTarget?.targetMonch else {
                 let targetSetting = SettingTarget()
-                targetSetting.targetMonch = Double(self.textFieldAlertValue) ?? 1.0
+                print(self.textFieldAlertValue)
+                targetSetting.targetMonch = self.valueTarget
                 StorageManager.shared.savwSettingTarget(target: targetSetting)
+                self.loadTargetImage()
                 return
             }
             StorageManager.shared.write {
-                target.targetMonch = self.valueTarget
-                print(target.targetMonch)
+                self.valueSettingTarget?.targetMonch = self.valueTarget
+                print(target)
             }
             self.loadTargetImage()
             }))
+        
         present(alertSettingTarget, animated: true)
     }
 }
