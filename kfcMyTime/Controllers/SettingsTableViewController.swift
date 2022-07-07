@@ -17,7 +17,7 @@ class SettingsTableViewController: UITableViewController {
     
     //MARK: - Приватные свойства
     /// Объявление свойства хранения данных ставки
-    private var settingRate: SettingRateAndFormatDate!
+    private var settingRate: Results <SettingRateAndFormatDate>?
     /// Инициализация свойства доступа к StorageManager
     private let storageManager = StorageManager.shared
     
@@ -28,27 +28,21 @@ class SettingsTableViewController: UITableViewController {
         rateTextFieldOutlet.delegate = self
 
         /// Инициализация свойства данными из БД
-        settingRate = StorageManager.shared.realm.objects(SettingRateAndFormatDate.self).first
+        settingRate = StorageManager.shared.realm.objects(SettingRateAndFormatDate.self)
+        
         /// Проверка свойства на наличие информации в БД
-        if settingRate != nil {
-            /// Инициализация SegmentControl данными из БД
-            formatSegmentControlOutlet.selectedSegmentIndex = settingRate.formatSegmentControl
-            /// Инициализация TF данными из БД
-            rateTextFieldOutlet.text = settingRate.rateTFOutlet
-            ///
-//            rateButton.setTitle(settingRate.rateTFOutlet, for: .normal)
-        } else {
-            /// Инициализация TF базовым значение
+        guard let settingValue = settingRate?.first else {
             rateTextFieldOutlet.text = "Ставка"
-            /// Инициализация SegmentControl базовым значением
             formatSegmentControlOutlet.selectedSegmentIndex = 1
+            return
         }
-        /// Настройка цвета тайтла
-//        rateButton.setTitleColor(.systemYellow, for: .normal)
+        formatSegmentControlOutlet.selectedSegmentIndex = settingValue.formatSegmentControl
+        rateTextFieldOutlet.text = settingValue.rateTFOutlet
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
         animationCell()
     }
     /// Переопределения метода конфигурации заголовка секции
@@ -69,7 +63,7 @@ class SettingsTableViewController: UITableViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         /// Проверка наличия информации в БД
-        guard settingRate != nil else {
+        guard let saveValue = settingRate?.first else {
             /// Создаем экземпляр
             let settingFormatSelect = SettingRateAndFormatDate()
             settingFormatSelect.formatSegmentControl = formatSegmentControlOutlet.selectedSegmentIndex
@@ -78,8 +72,8 @@ class SettingsTableViewController: UITableViewController {
             return
         }
         storageManager.write {
-            settingRate.formatSegmentControl = formatSegmentControlOutlet.selectedSegmentIndex
-            settingRate.rateTFOutlet = rateTextFieldOutlet.text ?? "Ставка"
+            saveValue.formatSegmentControl = formatSegmentControlOutlet.selectedSegmentIndex
+            saveValue.rateTFOutlet = rateTextFieldOutlet.text ?? "Ставка"
         }
     }
     
