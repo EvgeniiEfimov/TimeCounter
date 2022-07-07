@@ -166,6 +166,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Untitled-2" translatesAutoresizingMaskIntoConstraints="NO" id="tew-qV-kqi">
+                                <rect key="frame" x="-3" y="-51" width="327" height="570"/>
+                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Нет данных" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="CX3-hd-WPp">
                                 <rect key="frame" x="20" y="249" width="280" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -176,7 +179,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TrK-18-j2F">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="694.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="695.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="rmn-Ri-QyC">
                                                 <rect key="frame" x="40" y="20" width="240" height="95"/>
@@ -222,7 +225,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="uGK-jq-dFe">
-                                                <rect key="frame" x="13.5" y="407.5" width="293.5" height="98.5"/>
+                                                <rect key="frame" x="13.5" y="407.5" width="293.5" height="99"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Месяц" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="sLq-fs-Guh">
                                                         <rect key="frame" x="115" y="0.0" width="63" height="25.5"/>
@@ -231,7 +234,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vYB-Vg-r74" customClass="SpringImageView" customModule="Spring">
-                                                        <rect key="frame" x="99.5" y="39.5" width="94" height="59"/>
+                                                        <rect key="frame" x="99" y="39.5" width="95" height="59.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="vYB-Vg-r74" secondAttribute="height" multiplier="8:5" id="c8q-pT-ua3"/>
                                                         </constraints>
@@ -256,7 +259,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="ZT1-1W-snk">
-                                                <rect key="frame" x="20" y="546" width="280" height="98.5"/>
+                                                <rect key="frame" x="20" y="546.5" width="280" height="99"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Текущий месяц" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="HzS-aT-qBC">
                                                         <rect key="frame" x="65.5" y="0.0" width="149.5" height="25.5"/>
@@ -265,7 +268,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sRF-Ts-DRm" customClass="SpringImageView" customModule="Spring">
-                                                        <rect key="frame" x="93" y="39.5" width="94.5" height="59"/>
+                                                        <rect key="frame" x="92.5" y="39.5" width="95" height="59.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="sRF-Ts-DRm" secondAttribute="height" multiplier="8:5" id="bY8-e6-ugr"/>
                                                         </constraints>
@@ -273,7 +276,6 @@
                                                 </subviews>
                                             </stackView>
                                         </subviews>
-                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="ZT1-1W-snk" firstAttribute="centerX" secondItem="TrK-18-j2F" secondAttribute="centerX" id="5s1-di-twn"/>
                                             <constraint firstItem="rmn-Ri-QyC" firstAttribute="top" secondItem="TrK-18-j2F" secondAttribute="top" constant="20" id="7V6-0V-X2q"/>
@@ -292,7 +294,6 @@
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="TrK-18-j2F" firstAttribute="top" secondItem="TQm-sK-S9Z" secondAttribute="top" id="Qaf-hK-5xn"/>
                                     <constraint firstAttribute="trailing" secondItem="TrK-18-j2F" secondAttribute="trailing" id="egB-fp-43j"/>
@@ -304,15 +305,19 @@
                         <viewLayoutGuide key="safeArea" id="gcD-gr-0wf"/>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="tew-qV-kqi" firstAttribute="top" secondItem="gcD-gr-0wf" secondAttribute="top" constant="-51" id="2CJ-FJ-aiY"/>
                             <constraint firstItem="gcD-gr-0wf" firstAttribute="trailing" secondItem="CX3-hd-WPp" secondAttribute="trailing" constant="20" id="3o3-pn-DIU"/>
+                            <constraint firstItem="tew-qV-kqi" firstAttribute="leading" secondItem="gcD-gr-0wf" secondAttribute="leading" constant="-3" id="DS1-ad-F4b"/>
                             <constraint firstItem="TrK-18-j2F" firstAttribute="height" secondItem="17S-5U-Uza" secondAttribute="height" priority="250" id="LKi-mp-igj"/>
                             <constraint firstItem="gcD-gr-0wf" firstAttribute="bottom" secondItem="TQm-sK-S9Z" secondAttribute="bottom" id="M3A-Z6-MzD"/>
                             <constraint firstItem="TQm-sK-S9Z" firstAttribute="leading" secondItem="gcD-gr-0wf" secondAttribute="leading" id="M7C-Hz-0Mu"/>
                             <constraint firstItem="gcD-gr-0wf" firstAttribute="bottom" secondItem="CX3-hd-WPp" secondAttribute="bottom" constant="249" id="MnR-EU-3fH"/>
                             <constraint firstItem="TQm-sK-S9Z" firstAttribute="top" secondItem="17S-5U-Uza" secondAttribute="top" id="XT1-we-5FL"/>
                             <constraint firstItem="TrK-18-j2F" firstAttribute="width" secondItem="17S-5U-Uza" secondAttribute="width" id="cfy-1T-8fY"/>
+                            <constraint firstItem="gcD-gr-0wf" firstAttribute="trailing" secondItem="tew-qV-kqi" secondAttribute="trailing" constant="-4" id="kVY-lW-E5w"/>
                             <constraint firstItem="CX3-hd-WPp" firstAttribute="leading" secondItem="gcD-gr-0wf" secondAttribute="leading" constant="20" id="mhp-KW-Tdq"/>
                             <constraint firstItem="CX3-hd-WPp" firstAttribute="top" secondItem="gcD-gr-0wf" secondAttribute="top" constant="249" id="sju-PI-4uU"/>
+                            <constraint firstItem="gcD-gr-0wf" firstAttribute="bottom" secondItem="tew-qV-kqi" secondAttribute="bottom" id="wk7-Uq-MJV"/>
                             <constraint firstItem="gcD-gr-0wf" firstAttribute="trailing" secondItem="TQm-sK-S9Z" secondAttribute="trailing" id="zTV-6F-cNu"/>
                         </constraints>
                     </view>
@@ -331,7 +336,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c3n-fX-gow" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-770.625" y="42.25352112676056"/>
+            <point key="canvasLocation" x="-770.76923076923072" y="41.943127962085306"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="K5n-dK-Qsi">

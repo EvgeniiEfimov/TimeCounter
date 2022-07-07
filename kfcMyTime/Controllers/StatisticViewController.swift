@@ -39,10 +39,13 @@ class StatisticViewController: UIViewController {
         
         guard arrayMonch.first != nil else {
             scrollViewOutlet.isHidden = true
+            labelNoData.isHidden = false
             return
         }
     
         scrollViewOutlet.isHidden = false
+        labelNoData.isHidden = true
+
 
         valueTarget = valueSettingTarget.first?.targetMonch ?? 0.0
 //        labelTitleTargetOutlet.text = "Цель текущего месяца: \n\(valueSettingTarget?.targetMonch ?? 0.0)"
