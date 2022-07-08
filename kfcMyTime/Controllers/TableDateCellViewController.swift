@@ -141,11 +141,15 @@ class TableDateCellViewController: UITableViewController {
         /// Сортировка массива дней месяца
         let daySorted = monch.monch.sorted(byKeyPath: "dateWorkShift")
         /// Присвоения свойству дня, соответствующего номеру строки таблицы
-        let day = daySorted[indexPath.row]
+        let days = daySorted[indexPath.row]
         ///  Определения действия при свайпе
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { _, _, _ in
             /// Удаление дня из БД
-            StorageManager.shared.deleteMonch(monch: day, in: monch)
+            guard let day = days.day else {
+                return
+            }
+            StorageManager.shared.deleteDayInfo(day: day)
+            StorageManager.shared.deleteMonch(monch: days, in: monch)
             /// Проверка количества дней в месяце секции
             if monch.monch.count == 0 {
                 /// Удаление месяца (Если нет записанных дней)

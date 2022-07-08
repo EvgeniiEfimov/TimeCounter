@@ -150,6 +150,7 @@
                     <connections>
                         <outlet property="allTimeRangeDayOutlet" destination="aiI-zi-hpX" id="J98-RH-TMy"/>
                         <outlet property="amountLabelOutlet" destination="ytn-7G-2xo" id="nnm-5g-HZA"/>
+                        <outlet property="buttonCalculatedOutlet" destination="d3C-7u-Jzw" id="LDW-st-Nsc"/>
                         <outlet property="monthPickerView" destination="VF0-4S-lbW" id="a8m-dr-Zox"/>
                         <outlet property="periodSCOutlet" destination="MQg-UG-cFJ" id="IFU-cw-j84"/>
                     </connections>

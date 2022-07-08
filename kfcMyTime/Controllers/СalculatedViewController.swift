@@ -15,8 +15,11 @@ class СalculatedViewController: UIViewController {
     @IBOutlet weak var allTimeRangeDayOutlet: UILabel!
     @IBOutlet weak var amountLabelOutlet: UILabel!
     
+    @IBOutlet weak var buttonCalculatedOutlet: UIButton!
+    
     //MARK: - Приватные свойства
-    private var jobDataList: Results<ListInfoOfMonch>!
+    private var jobDataList: Results<ListInfoOfMonch>?
+    private var listInfoOfMonth = ListInfoOfMonch()
     private var valueSettingNightTime: Results<SettingNightTime>!
     private var rateSetting: Results<SettingRateAndFormatDate>!
     
@@ -49,6 +52,17 @@ class СalculatedViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        guard let valueJobDataList = jobDataList?.first else {
+            buttonCalculatedOutlet.isUserInteractionEnabled = false
+            buttonCalculatedOutlet.alpha = 0.5
+            allTimeRangeDayOutlet.isHidden = true
+            amountLabelOutlet.isHidden = true
+            monthPickerView.reloadAllComponents()
+                        return
+        }
+        listInfoOfMonth = valueJobDataList
+        buttonCalculatedOutlet.alpha = 1
+        buttonCalculatedOutlet.isUserInteractionEnabled = true
         allTimeRangeDayOutlet.isHidden = true
         amountLabelOutlet.isHidden = true
         monthPickerView.reloadAllComponents()
@@ -67,7 +81,10 @@ class СalculatedViewController: UIViewController {
         }
         allTimeRangeDayOutlet.isHidden = false
         amountLabelOutlet.isHidden = false
-        let arrayDay = filtrDayOfMonth(jobDataList[monthPickerView.selectedRow(inComponent: 0)], range)
+        guard let valueJobDataList = jobDataList else {
+            return
+        }
+        let arrayDay = filtrDayOfMonth(valueJobDataList[monthPickerView.selectedRow(inComponent: 0)], range)
         let allTimeDayAndNight = countAllDayAndNightClock(arrayDay)
         allTimeRangeDayOutlet.text = String(format: "%.1f", (allTimeDayAndNight.allDayTime + allTimeDayAndNight.allNightTime))
         amountLabelOutlet.text = calculatedMoney(allTimeDayAndNight.allDayTime,
@@ -127,14 +144,17 @@ extension СalculatedViewController: UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        jobDataList = StorageManager.shared.realm.objects(ListInfoOfMonch.self).sorted(byKeyPath: "numberMonth")
-        return jobDataList.count
+         jobDataList = StorageManager.shared.realm.objects(ListInfoOfMonch.self).sorted(byKeyPath: "numberMonth")
+        return (jobDataList?.first != nil ? (jobDataList?.count ?? 1) : 1)
     }
 }
 
 extension СalculatedViewController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        jobDataList[row].nameMonth
+        guard jobDataList?.first != nil else {
+            return "Нет данных"
+        }
+        return jobDataList?[row].nameMonth
     }
     private func showAlert() {
         let alertError = UIAlertController.init(title: "Часовая ставка",

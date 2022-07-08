@@ -29,8 +29,10 @@ class SettingsTableViewController: UITableViewController {
 
         /// Инициализация свойства данными из БД
         settingRate = StorageManager.shared.realm.objects(SettingRateAndFormatDate.self)
-        
-        /// Проверка свойства на наличие информации в БД
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         guard let settingValue = settingRate?.first else {
             rateTextFieldOutlet.text = "Ставка"
             formatSegmentControlOutlet.selectedSegmentIndex = 1
@@ -38,10 +40,6 @@ class SettingsTableViewController: UITableViewController {
         }
         formatSegmentControlOutlet.selectedSegmentIndex = settingValue.formatSegmentControl
         rateTextFieldOutlet.text = settingValue.rateTFOutlet
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
 
         animationCell()
     }
@@ -124,7 +122,7 @@ extension SettingsTableViewController {
                                     style: .destructive,
                                     handler: { (UIAlertAction) in
             StorageManager.shared.deleteAllListInfo()
-                //  self.tableView.reloadData()
+            self.rateTextFieldOutlet.text = "Ставка"
         }))
         /// Добавление кнопки в алерт
         alertDelete.addAction(.init(title: "Нет",
