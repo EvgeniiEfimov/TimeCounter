@@ -71,7 +71,6 @@ class StorageManager {
         write {
             let monch = dayOfMonth
             listInfoOfMonch.monch.append(monch)
-//            listInfoOfMonch.allWorkTimeOfMonch += dayOfMonth.timeWork
         }
     }
     

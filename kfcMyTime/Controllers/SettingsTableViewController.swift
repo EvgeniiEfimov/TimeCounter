@@ -24,6 +24,10 @@ class SettingsTableViewController: UITableViewController {
     //MARK: - Методы переопределения родительского класса
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.backgroundView = UIImageView(image: UIImage(named: "269"))
+        tableView.backgroundView?.contentMode = .scaleAspectFill
+        tableView.backgroundView?.alpha = 0.6
+        tableView.backgroundColor = UIColor.gray
         
         rateTextFieldOutlet.delegate = self
 
