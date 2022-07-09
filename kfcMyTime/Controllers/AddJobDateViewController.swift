@@ -91,11 +91,23 @@ class AddJobDateViewController: UIViewController, UITextFieldDelegate {
             newListInfoOfDayWork.timeStopData = stopTimeJobOutlet.date
             newListInfoOfDayWork.lunchString = lunchTime.stringValue
             newListInfoOfDayWork.timeWorkString = formattingTimeWorkOfString(newListDayOfMonth.timeWork)
-            newListInfoOfDayWork.workDayTime = ((formatSave.workDayTime(startTimeJobOutlet.date, stopTimeJobOutlet.date)) - lunchTime.doubleValue) / secondsPerHour
-            
-            newListInfoOfDayWork.workNightTime = switchOfNightTime.isOn ?
-            newListDayOfMonth.timeWork  - newListInfoOfDayWork.workDayTime : 0.0
-            
+            if formatSave.workDayTime(startTimeJobOutlet.date, stopTimeJobOutlet.date) > lunchTime.doubleValue {
+                newListInfoOfDayWork.workDayTime = ((formatSave.workDayTime(startTimeJobOutlet.date, stopTimeJobOutlet.date)) - lunchTime.doubleValue) / secondsPerHour
+                newListInfoOfDayWork.workNightTime = switchOfNightTime.isOn ?
+                newListDayOfMonth.timeWork  - newListInfoOfDayWork.workDayTime : 0.0
+            } else {
+                newListInfoOfDayWork.workDayTime = (formatSave.workDayTime(startTimeJobOutlet.date, stopTimeJobOutlet.date)) / secondsPerHour
+                newListInfoOfDayWork.workNightTime = switchOfNightTime.isOn ?
+                (newListDayOfMonth.timeWork  - newListInfoOfDayWork.workDayTime) : 0.0
+//                print(newListDayOfMonth.timeWork)
+//                print(lunchTime.doubleValue / secondsPerHour)
+//                print(newListInfoOfDayWork.workNightTime)
+            }
+//            newListInfoOfDayWork.workDayTime = ((formatSave.workDayTime(startTimeJobOutlet.date, stopTimeJobOutlet.date)) - lunchTime.doubleValue) / secondsPerHour
+//            
+//            newListInfoOfDayWork.workNightTime = switchOfNightTime.isOn ?
+//            newListDayOfMonth.timeWork  - newListInfoOfDayWork.workDayTime : 0.0
+//            
             newListInfoOfDayWork.inform = infoTF.text ?? ""
             
             let valueByMonth =  listInfoOfMonch.filter("numberMonth = \(newListInfoOfMonch.numberMonth)")

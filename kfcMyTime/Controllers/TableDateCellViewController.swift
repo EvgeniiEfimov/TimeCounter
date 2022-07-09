@@ -148,8 +148,9 @@ class TableDateCellViewController: UITableViewController {
             guard let day = days.day else {
                 return
             }
-            StorageManager.shared.deleteDayInfo(day: day)
             StorageManager.shared.deleteMonch(monch: days, in: monch)
+            StorageManager.shared.deleteDayInfo(day: day)
+
             /// Проверка количества дней в месяце секции
             if monch.monch.count == 0 {
                 /// Удаление месяца (Если нет записанных дней)

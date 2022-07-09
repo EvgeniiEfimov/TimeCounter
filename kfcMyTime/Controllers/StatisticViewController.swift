@@ -24,8 +24,8 @@ class StatisticViewController: UIViewController {
     @IBOutlet weak var imageViewFore: SpringImageView!
     @IBOutlet weak var monchStatisticLabel: UILabel!
     
-    var arrayMonch: Results <ListInfoOfMonch>!
-    var valueSettingTarget: Results <SettingTarget>!
+    var arrayMonch: Results <ListInfoOfMonch>?
+    var valueSettingTarget: Results <SettingTarget>?
 
     var valueTarget = Double()
     var textFieldAlertValue = String()
@@ -37,18 +37,16 @@ class StatisticViewController: UIViewController {
         arrayMonch = StorageManager.shared.realm.objects(ListInfoOfMonch.self).sorted(byKeyPath: "numberMonth")
         valueSettingTarget = StorageManager.shared.realm.objects(SettingTarget.self)
         
-        guard arrayMonch.first != nil else {
+        guard arrayMonch?.first != nil else {
             scrollViewOutlet.isHidden = true
             labelNoData.isHidden = false
             return
         }
-    
         scrollViewOutlet.isHidden = false
         labelNoData.isHidden = true
 
 
-        valueTarget = valueSettingTarget.first?.targetMonch ?? 0.0
-//        labelTitleTargetOutlet.text = "Цель текущего месяца: \n\(valueSettingTarget?.targetMonch ?? 0.0)"
+        valueTarget = valueSettingTarget?.first?.targetMonch ?? 0.0
 
         loadTargetImage()
         loadNightAndDayClock()
@@ -58,11 +56,12 @@ class StatisticViewController: UIViewController {
     
     private func loadTargetImage() {
 
-        guard let valueByMonth =  arrayMonch.filter("numberMonth = \(date.month ?? 0)").first else {
-            labelInfoToMonchOutlet.text = "Увы, ничего нет в текущем месяце =("
+        guard let valueByMonth =  arrayMonch?.filter("numberMonth = \(date.month ?? 0)").first else {
+            labelInfoToMonchOutlet.text = "Увы, нет данных по текущему месяцу =("
+            imageViewOutlet.image = UIImage.init(named: "noData")
             return
         }
-        valueTarget = ((valueByMonth.allWorkTimeOfMonch ) / (valueSettingTarget.first?.targetMonch ?? 1000.0)) * 100
+        valueTarget = ((valueByMonth.allWorkTimeOfMonch ) / (valueSettingTarget?.first?.targetMonch ?? 1000.0)) * 100
 
         DispatchQueue.main.async {
             NetworkManager.shared.monchTarget(self.valueTarget) { url in
@@ -74,20 +73,22 @@ class StatisticViewController: UIViewController {
         }
         labelInfoToMonchOutlet.text = """
 Часы
-Всего: \(round(valueByMonth.allWorkTimeOfMonch * 10)/10)
-Цель: \(valueSettingTarget.first?.targetMonch ?? 0.0)
-Дневные: \(round(valueByMonth.allDayWorkTime * 10)/10)
-Ночные: \(round(valueByMonth.allNightWorkTime * 10)/10)
-
+Всего: \(round(valueByMonth.allWorkTimeOfMonch * 100)/100)
+Цель: \(valueSettingTarget?.first?.targetMonch ?? 0.0)
+Дневные: \(round(valueByMonth.allDayWorkTime * 100)/100)
+Ночные: \(round(valueByMonth.allNightWorkTime * 100)/100)
 """
     }
     
     private func loadNightAndDayClock() {
-        let valueByMonth =  arrayMonch.filter("numberMonth = \(date.month ?? 0)")
-        let nightTime = valueByMonth.first?.allNightWorkTime
-        let dayTime = valueByMonth.first?.allDayWorkTime
+        guard let valueMonth = arrayMonch?.filter("numberMonth = \(date.month ?? 0)").first else {
+            imageViewTwoOutlet.image = UIImage.init(named: "noData")
+            return
+        }
+        let nightTime = valueMonth.allNightWorkTime
+        let dayTime = valueMonth.allDayWorkTime
         DispatchQueue.main.async {
-            NetworkManager.shared.clockNightOfDay(dayTime ?? 0.0, nightTime ?? 0.0) { url in
+            NetworkManager.shared.clockNightOfDay(dayTime , nightTime) { url in
                         NetworkManager.shared.gettingAnImage(from: url) { image in
                             self.animation(self.imageViewTwoOutlet, 0.4)
                             self.imageViewTwoOutlet.image = image
@@ -99,7 +100,11 @@ class StatisticViewController: UIViewController {
     private func loadStatisticToMonch() {
         var arrayMonchString = [String]()
         var arrayTimeMonch = [Double]()
-        for monchName in arrayMonch {
+        
+        guard let valueArrayMonth = arrayMonch else {
+            return
+        }
+        for monchName in valueArrayMonth {
             arrayMonchString.append(monchName.nameMonth)
             arrayTimeMonch.append(monchName.allWorkTimeOfMonch)
         }
@@ -115,7 +120,10 @@ class StatisticViewController: UIViewController {
         var arrayMonchString = [String]()
         var arrayTimeMonch = [Double]()
         
-        guard let valueByMonth =  arrayMonch.filter("numberMonth = \(date.month ?? 0)").first else {return}
+        guard let valueByMonth =  arrayMonch?.filter("numberMonth = \(date.month ?? 0)").first else {
+            imageViewTree.image = UIImage.init(named: "noData")
+            return
+        }
         for monchName in valueByMonth.monch.sorted(byKeyPath: "dateWorkShift") {
             arrayMonchString.append(dateFormatterDay(monchName.dateWorkShift))
             arrayTimeMonch.append(monchName.timeWork)
@@ -167,7 +175,7 @@ extension StatisticViewController {
             //print(self.textFieldAlertValue)
         }
         alertSettingTarget.addAction(.init(title: "Ок", style: .default, handler: { action in
-            guard (self.valueSettingTarget.first?.targetMonch) != nil else {
+            guard (self.valueSettingTarget?.first?.targetMonch) != nil else {
                 let targetSetting = SettingTarget()
               //  print(self.textFieldAlertValue)
                 targetSetting.targetMonch = self.valueTarget
@@ -176,7 +184,7 @@ extension StatisticViewController {
                 return
             }
             StorageManager.shared.write {
-                self.valueSettingTarget.first?.targetMonch = self.valueTarget
+                self.valueSettingTarget?.first?.targetMonch = self.valueTarget
                 //print(target)
             }
             self.loadTargetImage()
