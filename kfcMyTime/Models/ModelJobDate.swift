@@ -32,7 +32,7 @@ class DayOfMonth: Object {
 class ListInfoOfMonch: Object {
     @objc dynamic var nameMonth = ""
     @objc dynamic var numberMonth = Int()
-    @objc dynamic var targetMonth = Double()
+    @objc dynamic var targetMonth = 0.0
     @objc dynamic var allWorkTimeOfMonch = 0.0
     @objc dynamic var allNightWorkTime = Double()
     @objc dynamic var allDayWorkTime = Double()
@@ -53,11 +53,9 @@ class SettingNotification: Object {
     @objc dynamic var switchNotification = Bool()
     @objc dynamic var switchNotificationSound = Bool()
     @objc dynamic var datePickerNotification = Date()
-    //    @objc dynamic var settingLunch: SettingLunch?
 }
 
 class SettingNightTime: Object {
-    
     @objc dynamic var settingName = "Ночные часы"
     @objc dynamic var percent = 0.0
 }
@@ -66,31 +64,7 @@ class SettingNightTime: Object {
 class SettingRateAndFormatDate: Object {
     @objc dynamic var rateTFOutlet = String()
     @objc dynamic var formatSegmentControl = Int()
-//    @objc dynamic var settingNotification: SettingNotification?
-//    @objc dynamic var settingLunch: SettingLunch?
-//    @objc dynamic var settingNightTime: SettingNightTime?
-    
-}
-
-class SettingTarget: Object {
-    @objc dynamic var targetMonch = Double()
 }
 
 
-
-
-
-
-
-//class SettingsUser: Object {
-//    @objc dynamic var rateTFOutlet = String()
-//    @objc dynamic var switchNotification = Bool()
-//    @objc dynamic var switchNotificationSound = Bool()
-//    @objc dynamic var datePickerNotification = Date()
-//
-//}
-
-//enum rangeTimeWork: String {
-//    case fourHours = 
-//}
 

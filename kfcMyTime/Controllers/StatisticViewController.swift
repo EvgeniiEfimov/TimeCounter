@@ -26,14 +26,12 @@ class StatisticViewController: UIViewController {
     @IBOutlet weak var monchStatisticLabel: UILabel!
     
     var arrayMonch: Results <ListInfoOfMonch>?
-    var valueSettingTarget: Results <SettingTarget>?
-    
     var monthData: ListInfoOfMonch?
+    
     var valueTarget = Double()
     var textFieldAlertValue = String()
     var picker = UIPickerView()
     var tapBar = UIToolbar()
-    let testArray = ["Apr","may"]
     let monthNameArray = ["январь", "февраль", "март", "апрель", "май", "июнь", "июль", "август",
                           "сентябрь", "октябрь", "ноябрь", "декабрь"]
     let date = Calendar.current.dateComponents([.month], from: Date())
@@ -50,7 +48,6 @@ class StatisticViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         
         arrayMonch = StorageManager.shared.realm.objects(ListInfoOfMonch.self).sorted(byKeyPath: "numberMonth")
-        valueSettingTarget = StorageManager.shared.realm.objects(SettingTarget.self)
         
         guard arrayMonch?.first != nil else {
             scrollViewOutlet.isHidden = true
@@ -59,9 +56,6 @@ class StatisticViewController: UIViewController {
         }
         scrollViewOutlet.isHidden = false
         labelNoData.isHidden = true
-
-
-        valueTarget = valueSettingTarget?.first?.targetMonch ?? 0.0
 
         loadTargetImage(valueMonth)
         loadNightAndDayClock(valueMonth)
@@ -80,7 +74,7 @@ class StatisticViewController: UIViewController {
         }
         monthData = valueByMonth
         textFieldSelectMonthOutlet.text = valueByMonth.nameMonth
-        valueTarget = ((valueByMonth.allWorkTimeOfMonch ) / (valueSettingTarget?.first?.targetMonch ?? 1000.0)) * 100
+        valueTarget = ((valueByMonth.allWorkTimeOfMonch ) / (valueByMonth.targetMonth <= 0.0 ? 1000 : valueByMonth.targetMonth)) * 100
 
         DispatchQueue.main.async {
             NetworkManager.shared.monchTarget(self.valueTarget) { url in
@@ -93,7 +87,7 @@ class StatisticViewController: UIViewController {
         labelInfoToMonchOutlet.text = """
 Часы
 Всего: \(round(valueByMonth.allWorkTimeOfMonch * 100)/100)
-Цель: \(valueSettingTarget?.first?.targetMonch ?? 0.0)
+Цель: \(valueByMonth.targetMonth)
 Дневные: \(round(valueByMonth.allDayWorkTime * 100)/100)
 Ночные: \(round(valueByMonth.allNightWorkTime * 100)/100)
 """
@@ -196,21 +190,14 @@ extension StatisticViewController {
         alertSettingTarget.addTextField { textField in
             textField.delegate = self
             self.textFieldAlertValue = textField.text ?? ""
-            //print(self.textFieldAlertValue)
         }
-        alertSettingTarget.addAction(.init(title: "Ок", style: .default, handler: { action in
-            guard (self.valueSettingTarget?.first?.targetMonch) != nil else {
-                let targetSetting = SettingTarget()
-                targetSetting.targetMonch = self.valueTarget
-                StorageManager.shared.savwSettingTarget(target: targetSetting)
-                self.loadTargetImage(self.valueMonth)
-                return
-            }
+        alertSettingTarget.addAction(.init(title: "Сохранить", style: .default, handler: { action in
             StorageManager.shared.write {
-                self.valueSettingTarget?.first?.targetMonch = self.valueTarget
+                self.monthData?.targetMonth = self.valueTarget
             }
             self.loadTargetImage(self.valueMonth)
             }))
+        alertSettingTarget.addAction(.init(title: "Выйти", style: .cancel, handler: nil))
         
         present(alertSettingTarget, animated: true)
     }
@@ -218,7 +205,7 @@ extension StatisticViewController {
 
 extension StatisticViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
-        valueTarget = Double(textField.text ?? "") ?? 5.0
+        valueTarget = Double(textField.text?.doubleValue ?? 0.0)
     }
 }
 

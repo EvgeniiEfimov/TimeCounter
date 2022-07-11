@@ -133,15 +133,6 @@ class StorageManager {
         }
     }
     
-    //MARK: - SettingTarget
-    
-    func savwSettingTarget (target: SettingTarget) {
-        write {
-            realm.add(target)
-        }
-    }
-    
-    
     
      func write (_ completion: () -> Void) {
         do {
