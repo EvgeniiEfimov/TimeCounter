@@ -17,6 +17,7 @@ class StatisticViewController: UIViewController {
     @IBOutlet weak var scrollViewOutlet: UIScrollView!
     @IBOutlet weak var labelTitleTargetOutlet: UILabel!
     @IBOutlet weak var labelInfoToMonchOutlet: UILabel!
+    @IBOutlet weak var textFieldSelectMonthOutlet: UITextField!
     
     @IBOutlet weak var imageViewOutlet: SpringImageView!
     @IBOutlet weak var imageViewTwoOutlet: SpringImageView!
@@ -26,12 +27,26 @@ class StatisticViewController: UIViewController {
     
     var arrayMonch: Results <ListInfoOfMonch>?
     var valueSettingTarget: Results <SettingTarget>?
-
+    
+    var monthData: ListInfoOfMonch?
     var valueTarget = Double()
     var textFieldAlertValue = String()
-        
+    var picker = UIPickerView()
+    var tapBar = UIToolbar()
+    let testArray = ["Apr","may"]
+    let monthNameArray = ["январь", "февраль", "март", "апрель", "май", "июнь", "июль", "август",
+                          "сентябрь", "октябрь", "ноябрь", "декабрь"]
     let date = Calendar.current.dateComponents([.month], from: Date())
-
+    lazy var valueMonth = date.month ?? 0
+    
+    override func viewDidLoad() {
+        
+        picker.delegate = self
+        picker.dataSource = self
+        
+        getPickerView()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         
         arrayMonch = StorageManager.shared.realm.objects(ListInfoOfMonch.self).sorted(byKeyPath: "numberMonth")
@@ -48,19 +63,23 @@ class StatisticViewController: UIViewController {
 
         valueTarget = valueSettingTarget?.first?.targetMonch ?? 0.0
 
-        loadTargetImage()
-        loadNightAndDayClock()
+        loadTargetImage(valueMonth)
+        loadNightAndDayClock(valueMonth)
+        loadeStatisticDayOfMonch(valueMonth)
         loadStatisticToMonch()
-        loadeStatisticDayOfMonch()
     }
     
-    private func loadTargetImage() {
+    private func loadTargetImage(_ month: Int) {
 
-        guard let valueByMonth =  arrayMonch?.filter("numberMonth = \(date.month ?? 0)").first else {
+        guard let valueByMonth =  arrayMonch?.filter("numberMonth = \(month)").first else {
+           
             labelInfoToMonchOutlet.text = "Увы, нет данных по текущему месяцу =("
             imageViewOutlet.image = UIImage.init(named: "noData")
+            textFieldSelectMonthOutlet.text = monthNameArray[month - 1]
             return
         }
+        monthData = valueByMonth
+        textFieldSelectMonthOutlet.text = valueByMonth.nameMonth
         valueTarget = ((valueByMonth.allWorkTimeOfMonch ) / (valueSettingTarget?.first?.targetMonch ?? 1000.0)) * 100
 
         DispatchQueue.main.async {
@@ -79,9 +98,9 @@ class StatisticViewController: UIViewController {
 Ночные: \(round(valueByMonth.allNightWorkTime * 100)/100)
 """
     }
-    
-    private func loadNightAndDayClock() {
-        guard let valueMonth = arrayMonch?.filter("numberMonth = \(date.month ?? 0)").first else {
+    //\(round(valueByMonth.targetMonth * 100)/100)
+    private func loadNightAndDayClock(_ month: Int) {
+        guard let valueMonth = arrayMonch?.filter("numberMonth = \(month)").first else {
             imageViewTwoOutlet.image = UIImage.init(named: "noData")
             return
         }
@@ -116,11 +135,11 @@ class StatisticViewController: UIViewController {
         }
     }
     
-    private func loadeStatisticDayOfMonch() {
+    private func loadeStatisticDayOfMonch(_ month: Int) {
         var arrayMonchString = [String]()
         var arrayTimeMonch = [Double]()
         
-        guard let valueByMonth =  arrayMonch?.filter("numberMonth = \(date.month ?? 0)").first else {
+        guard let valueByMonth =  arrayMonch?.filter("numberMonth = \(month)").first else {
             imageViewTree.image = UIImage.init(named: "noData")
             return
         }
@@ -147,18 +166,23 @@ class StatisticViewController: UIViewController {
         imageLabel.animate()
     }
     
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//
-//        arrayMonch = StorageManager.shared.realm.objects(ListInfoOfMonch.self)
-//        valueSettingTarget = StorageManager.shared.realm.objects(SettingTarget.self).first
-//
-//
-//        loadTargetImage()
-//        loadNightAndDayClock()
-//        loadStatisticToMonch()
-//        loadeStatisticDayOfMonch()
-//    }
+    private func getPickerView() {
+        textFieldSelectMonthOutlet.inputAccessoryView = tapBar
+        textFieldSelectMonthOutlet.inputView = picker
+        let barItem = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(donePressed))
+        tapBar.sizeToFit()
+        tapBar.setItems([barItem], animated: true)
+        
+    }
+    
+    @objc func donePressed() {
+        let selectValue = picker.selectedRow(inComponent: 0)
+        valueMonth =  arrayMonch?[selectValue].numberMonth ?? 0
+        loadTargetImage(valueMonth)
+        loadNightAndDayClock(valueMonth)
+        loadeStatisticDayOfMonch(valueMonth)
+        self.view.endEditing(true)
+    }
     
     @IBAction func addingOrEditingTargetButton(_ sender: UIButton) {
         alertSettingTarget()
@@ -177,17 +201,15 @@ extension StatisticViewController {
         alertSettingTarget.addAction(.init(title: "Ок", style: .default, handler: { action in
             guard (self.valueSettingTarget?.first?.targetMonch) != nil else {
                 let targetSetting = SettingTarget()
-              //  print(self.textFieldAlertValue)
                 targetSetting.targetMonch = self.valueTarget
                 StorageManager.shared.savwSettingTarget(target: targetSetting)
-                self.loadTargetImage()
+                self.loadTargetImage(self.valueMonth)
                 return
             }
             StorageManager.shared.write {
                 self.valueSettingTarget?.first?.targetMonch = self.valueTarget
-                //print(target)
             }
-            self.loadTargetImage()
+            self.loadTargetImage(self.valueMonth)
             }))
         
         present(alertSettingTarget, animated: true)
@@ -208,4 +230,18 @@ extension StatisticViewController {
             dateFormatter.locale = Locale(identifier: "Ru_Ru")
             return dateFormatter.string(from: dateDay)
 }
+}
+
+extension StatisticViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        arrayMonch?.count ?? 0
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        arrayMonch?[row].nameMonth
+    }
 }

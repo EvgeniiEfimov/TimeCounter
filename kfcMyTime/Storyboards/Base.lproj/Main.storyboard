@@ -180,22 +180,29 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TrK-18-j2F">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="695.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="698.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="rmn-Ri-QyC">
-                                                <rect key="frame" x="40" y="20" width="240" height="95"/>
+                                                <rect key="frame" x="40" y="20" width="240" height="98"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="jt7-W3-PV8">
-                                                        <rect key="frame" x="34.5" y="0.0" width="171.5" height="31"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="jt7-W3-PV8">
+                                                        <rect key="frame" x="15" y="0.0" width="210.5" height="34"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Цель месяца" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="JDZ-fy-FZz">
-                                                                <rect key="frame" x="0.0" y="3" width="124.5" height="25.5"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Месяц:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="JDZ-fy-FZz">
+                                                                <rect key="frame" x="0.0" y="4.5" width="68.5" height="25.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                                                 <color key="textColor" red="0.96862745289999996" green="0.8078432083" blue="0.27450981740000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="month" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q0W-Wv-he2">
+                                                                <rect key="frame" x="74.5" y="0.0" width="83" height="34"/>
+                                                                <color key="backgroundColor" systemColor="systemYellowColor"/>
+                                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                                                <textInputTraits key="textInputTraits"/>
+                                                            </textField>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lcb-Ke-Fby">
-                                                                <rect key="frame" x="124.5" y="0.0" width="47" height="31"/>
+                                                                <rect key="frame" x="163.5" y="1.5" width="47" height="31"/>
                                                                 <color key="tintColor" red="0.97544378040000002" green="0.73611879229999999" blue="0.26801820279999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <buttonConfiguration key="configuration" style="plain">
                                                                     <imageReference key="image" image="gear" catalog="system" symbolScale="large"/>
@@ -207,7 +214,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="a4l-bf-dss">
-                                                        <rect key="frame" x="37" y="45" width="166" height="50"/>
+                                                        <rect key="frame" x="37" y="48" width="166" height="50"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BBT-cH-rL5" customClass="SpringImageView" customModule="Spring">
                                                                 <rect key="frame" x="0.0" y="0.0" width="80" height="50"/>
@@ -226,7 +233,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="uGK-jq-dFe">
-                                                <rect key="frame" x="13.5" y="407.5" width="293.5" height="99"/>
+                                                <rect key="frame" x="13.5" y="410.5" width="293.5" height="99"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Месяц" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="sLq-fs-Guh">
                                                         <rect key="frame" x="115" y="0.0" width="63" height="25.5"/>
@@ -243,7 +250,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="oTg-fB-Y6n">
-                                                <rect key="frame" x="-3" y="155" width="326" height="212.5"/>
+                                                <rect key="frame" x="-3" y="158" width="326" height="212.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Соотношение часов (День / Ночь)" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="rhw-Px-2YZ">
                                                         <rect key="frame" x="0.0" y="0.0" width="326" height="25.5"/>
@@ -260,7 +267,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="ZT1-1W-snk">
-                                                <rect key="frame" x="20" y="546.5" width="280" height="99"/>
+                                                <rect key="frame" x="20" y="549.5" width="280" height="99"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Текущий месяц" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="HzS-aT-qBC">
                                                         <rect key="frame" x="65.5" y="0.0" width="149.5" height="25.5"/>
@@ -333,11 +340,12 @@
                         <outlet property="labelTitleTargetOutlet" destination="JDZ-fy-FZz" id="fi7-Xz-HtD"/>
                         <outlet property="monchStatisticLabel" destination="sLq-fs-Guh" id="dzM-rw-Acp"/>
                         <outlet property="scrollViewOutlet" destination="TQm-sK-S9Z" id="qyW-wk-gLy"/>
+                        <outlet property="textFieldSelectMonthOutlet" destination="Q0W-Wv-he2" id="yKx-ft-eWR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c3n-fX-gow" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-770.76923076923072" y="41.943127962085306"/>
+            <point key="canvasLocation" x="-699" y="-87"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="K5n-dK-Qsi">

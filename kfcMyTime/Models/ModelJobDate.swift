@@ -32,6 +32,7 @@ class DayOfMonth: Object {
 class ListInfoOfMonch: Object {
     @objc dynamic var nameMonth = ""
     @objc dynamic var numberMonth = Int()
+    @objc dynamic var targetMonth = Double()
     @objc dynamic var allWorkTimeOfMonch = 0.0
     @objc dynamic var allNightWorkTime = Double()
     @objc dynamic var allDayWorkTime = Double()
