@@ -70,7 +70,7 @@ class StatisticViewController: UIViewController {
     }
     
     private func loadTargetImage(_ month: Int) {
-
+        animation(imageViewOutlet, 0.2)
         guard let valueByMonth =  arrayMonch?.filter("numberMonth = \(month)").first else {
             labelNotInfoToMonchOutlet.isHidden = false
             stackInfo.isHidden = true
@@ -88,7 +88,6 @@ class StatisticViewController: UIViewController {
         DispatchQueue.main.async {
             NetworkManager.shared.monchTarget(self.valueTarget) { url in
                 NetworkManager.shared.gettingAnImage(from: url) { image in
-                    self.animation(self.imageViewOutlet, 0.2)
                     self.imageViewOutlet.image = image
                     self.stackInfo.isHidden = false
                 }
@@ -100,6 +99,7 @@ class StatisticViewController: UIViewController {
         nightTimeLabelOutlet.text = "Ночные: \(round(valueByMonth.allNightWorkTime * 100)/100)"
     }
     private func loadNightAndDayClock(_ month: Int) {
+        animation(imageViewTwoOutlet, 0.4)
         guard let valueMonth = arrayMonch?.filter("numberMonth = \(month)").first else {
             imageViewTwoOutlet.image = UIImage.init(named: "noData")
             return
@@ -109,7 +109,6 @@ class StatisticViewController: UIViewController {
         DispatchQueue.main.async {
             NetworkManager.shared.clockNightOfDay(dayTime , nightTime) { url in
                         NetworkManager.shared.gettingAnImage(from: url) { image in
-                            self.animation(self.imageViewTwoOutlet, 0.4)
                             self.imageViewTwoOutlet.image = image
                         }
                     }
@@ -117,6 +116,8 @@ class StatisticViewController: UIViewController {
     }
     
     private func loadStatisticToMonch() {
+        animation(imageViewFore, 0.6)
+
         var arrayMonchString = [String]()
         var arrayTimeMonch = [Double]()
         
@@ -129,13 +130,14 @@ class StatisticViewController: UIViewController {
         }
         NetworkManager.shared.statisticToMonth(arrayMonchString, arrayTimeMonch) { url in
             NetworkManager.shared.gettingAnImage(from: url) { image in
-                self.animation(self.imageViewFore, 0.6)
                 self.imageViewFore.image = image
             }
         }
     }
     
     private func loadeStatisticDayOfMonch(_ month: Int) {
+        self.animation(self.imageViewTree, 0.8)
+
         var arrayMonchString = [String]()
         var arrayTimeMonch = [Double]()
         
@@ -151,7 +153,6 @@ class StatisticViewController: UIViewController {
         
         NetworkManager.shared.statisticToMonth(arrayMonchString, arrayTimeMonch) { url in
             NetworkManager.shared.gettingAnImage(from: url) { image in
-                self.animation(self.imageViewTree, 0.6)
                 self.imageViewTree.image = image
             }
         }
