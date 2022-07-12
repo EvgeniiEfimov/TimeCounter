@@ -16,7 +16,7 @@ class StatisticViewController: UIViewController {
     
     @IBOutlet weak var scrollViewOutlet: UIScrollView!
     @IBOutlet weak var labelTitleTargetOutlet: UILabel!
-    @IBOutlet weak var labelInfoToMonchOutlet: UILabel!
+    @IBOutlet weak var labelNotInfoToMonchOutlet: UILabel!
     @IBOutlet weak var textFieldSelectMonthOutlet: UITextField!
     
     @IBOutlet weak var imageViewOutlet: SpringImageView!
@@ -24,6 +24,12 @@ class StatisticViewController: UIViewController {
     @IBOutlet weak var imageViewTree: SpringImageView!
     @IBOutlet weak var imageViewFore: SpringImageView!
     @IBOutlet weak var monchStatisticLabel: UILabel!
+    
+    @IBOutlet weak var targetLabelOutlet: UILabel!
+    @IBOutlet weak var allTimeLabelOutlet: UILabel!
+    @IBOutlet weak var dayTimeLabelOutlet: UILabel!
+    @IBOutlet weak var nightTimeLabelOutlet: UILabel!
+    @IBOutlet weak var stackInfo: UIStackView!
     
     var arrayMonch: Results <ListInfoOfMonch>?
     var monthData: ListInfoOfMonch?
@@ -66,12 +72,15 @@ class StatisticViewController: UIViewController {
     private func loadTargetImage(_ month: Int) {
 
         guard let valueByMonth =  arrayMonch?.filter("numberMonth = \(month)").first else {
-           
-            labelInfoToMonchOutlet.text = "Увы, нет данных по текущему месяцу =("
+            labelNotInfoToMonchOutlet.isHidden = false
+            stackInfo.isHidden = true
+            labelNotInfoToMonchOutlet.text = "Нет смен в текущем месяце. Вы можете посмотреть статистику по месяцу в котором есть хотя бы одна закрытая смена"
             imageViewOutlet.image = UIImage.init(named: "noData")
             textFieldSelectMonthOutlet.text = monthNameArray[month - 1]
             return
         }
+        
+        labelNotInfoToMonchOutlet.isHidden = true
         monthData = valueByMonth
         textFieldSelectMonthOutlet.text = valueByMonth.nameMonth
         valueTarget = ((valueByMonth.allWorkTimeOfMonch ) / (valueByMonth.targetMonth <= 0.0 ? 1000 : valueByMonth.targetMonth)) * 100
@@ -81,18 +90,15 @@ class StatisticViewController: UIViewController {
                 NetworkManager.shared.gettingAnImage(from: url) { image in
                     self.animation(self.imageViewOutlet, 0.2)
                     self.imageViewOutlet.image = image
+                    self.stackInfo.isHidden = false
                 }
             }
         }
-        labelInfoToMonchOutlet.text = """
-Часы
-Всего: \(round(valueByMonth.allWorkTimeOfMonch * 100)/100)
-Цель: \(valueByMonth.targetMonth)
-Дневные: \(round(valueByMonth.allDayWorkTime * 100)/100)
-Ночные: \(round(valueByMonth.allNightWorkTime * 100)/100)
-"""
+        targetLabelOutlet.text = "Цель: \(valueByMonth.targetMonth)"
+        allTimeLabelOutlet.text = "Часы всего: \(round(valueByMonth.allWorkTimeOfMonch * 100)/100)"
+        dayTimeLabelOutlet.text = "Дневны: \(round(valueByMonth.allDayWorkTime * 100)/100)"
+        nightTimeLabelOutlet.text = "Ночные: \(round(valueByMonth.allNightWorkTime * 100)/100)"
     }
-    //\(round(valueByMonth.targetMonth * 100)/100)
     private func loadNightAndDayClock(_ month: Int) {
         guard let valueMonth = arrayMonch?.filter("numberMonth = \(month)").first else {
             imageViewTwoOutlet.image = UIImage.init(named: "noData")
