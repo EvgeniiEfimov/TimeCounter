@@ -16,6 +16,7 @@
 		7C01234C2809F50800FBD849 /* SettingNightTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C01234B2809F50800FBD849 /* SettingNightTimeViewController.swift */; };
 		7C07F5A3283D71EA00AA4E30 /* StatisticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C07F5A2283D71EA00AA4E30 /* StatisticViewController.swift */; };
 		7C07F5A5283FED4A00AA4E30 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C07F5A4283FED4A00AA4E30 /* NetworkManager.swift */; };
+		7CC9910F287F19B600A1E0C2 /* AppInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9910E287F19B600A1E0C2 /* AppInfoViewController.swift */; };
 		CE1ACB6727BCE62A002D9105 /* ProtocolsFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1ACB6627BCE62A002D9105 /* ProtocolsFile.swift */; };
 		CE1ACB6A27C211BC002D9105 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1ACB6927C211BC002D9105 /* DateFormatter.swift */; };
 		CE482CB4272992490034798E /* ModelJobDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE482CB3272992490034798E /* ModelJobDate.swift */; };
@@ -42,6 +43,7 @@
 		7C01234B2809F50800FBD849 /* SettingNightTimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingNightTimeViewController.swift; sourceTree = "<group>"; };
 		7C07F5A2283D71EA00AA4E30 /* StatisticViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticViewController.swift; sourceTree = "<group>"; };
 		7C07F5A4283FED4A00AA4E30 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		7CC9910E287F19B600A1E0C2 /* AppInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfoViewController.swift; sourceTree = "<group>"; };
 		CE1ACB6627BCE62A002D9105 /* ProtocolsFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolsFile.swift; sourceTree = "<group>"; };
 		CE1ACB6927C211BC002D9105 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		CE482CB3272992490034798E /* ModelJobDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelJobDate.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 				7C0123492808986300FBD849 /* SettingLunchViewController.swift */,
 				CEC2525127B6DB6500B9F2DE /* SettingsNotificationViewController.swift */,
 				7C01234B2809F50800FBD849 /* SettingNightTimeViewController.swift */,
+				7CC9910E287F19B600A1E0C2 /* AppInfoViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -287,6 +290,7 @@
 				CE482CBF272AC44C0034798E /* DataManager.swift in Sources */,
 				7C00FDA9283509B100872B2A /* DetailedInformationViewController.swift in Sources */,
 				CECA8A0227283C6B00B2A03B /* AddJobDateViewController.swift in Sources */,
+				7CC9910F287F19B600A1E0C2 /* AppInfoViewController.swift in Sources */,
 				7C01234627F1F1E000FBD849 /* Notifications.swift in Sources */,
 				7C01234C2809F50800FBD849 /* SettingNightTimeViewController.swift in Sources */,
 				CECA89E627280CEC00B2A03B /* SceneDelegate.swift in Sources */,

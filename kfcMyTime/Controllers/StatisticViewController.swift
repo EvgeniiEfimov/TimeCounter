@@ -204,8 +204,7 @@ extension StatisticViewController {
             }
             self.loadTargetImage(self.valueMonth)
             }))
-        alertSettingTarget.addAction(.init(title: "Выйти", style: .cancel, handler: nil))
-        
+        alertSettingTarget.addAction(.init(title: "Выйти", style: .destructive, handler: nil))
         present(alertSettingTarget, animated: true)
     }
 }

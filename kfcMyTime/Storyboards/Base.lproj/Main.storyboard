@@ -407,7 +407,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c3n-fX-gow" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-699" y="-87"/>
+            <point key="canvasLocation" x="-1125" y="-511"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="K5n-dK-Qsi">
@@ -430,7 +430,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Bn-Qt-PHy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2058" y="-942"/>
+            <point key="canvasLocation" x="-2278" y="-908"/>
         </scene>
         <!--Time C⎋unter-->
         <scene sceneID="ARD-N9-bYG">
@@ -491,7 +491,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G1m-cY-1ez" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-233.33333333333334" y="-1321.2053571428571"/>
+            <point key="canvasLocation" x="191" y="-1845"/>
         </scene>
         <!--Detailed Information View Controller-->
         <scene sceneID="3Hl-ve-3A5">
@@ -782,7 +782,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FVH-8R-Ozj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="648.75" y="-528.16901408450701"/>
+            <point key="canvasLocation" x="1243" y="-1050"/>
         </scene>
         <!--Settings Notification View Controller-->
         <scene sceneID="FeQ-U3-6Uo">
@@ -957,7 +957,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qog-Zk-q5l" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="920.625" y="315.84507042253523"/>
+            <point key="canvasLocation" x="-844" y="1151"/>
         </scene>
         <!--Настройки-->
         <scene sceneID="YkK-zX-enP">
@@ -1175,6 +1175,9 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" systemColor="systemYellowColor"/>
+                                        <connections>
+                                            <segue destination="uiw-y0-nGJ" kind="show" identifier="" id="fcD-Pg-6Bu"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -1225,7 +1228,34 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OfJ-En-rRF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1657.5" y="295.77464788732397"/>
+            <point key="canvasLocation" x="-1659" y="299"/>
+        </scene>
+        <!--App Info View Controller-->
+        <scene sceneID="z11-L0-Q0m">
+            <objects>
+                <viewController id="uiw-y0-nGJ" customClass="AppInfoViewController" customModule="kfcMyTime" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleAspectFill" id="tcD-UF-92T">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="7" translatesAutoresizingMaskIntoConstraints="NO" id="Iy5-AK-jha">
+                                <rect key="frame" x="67.5" y="522" width="185.5" height="26"/>
+                                <color key="pageIndicatorTintColor" red="0.96862745289999996" green="0.8078432083" blue="0.27450981740000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="currentPageIndicatorTintColor" red="0.33333334329999997" green="0.33333334329999997" blue="0.33333334329999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </pageControl>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="QrQ-Pq-VKs"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Iy5-AK-jha" firstAttribute="centerX" secondItem="tcD-UF-92T" secondAttribute="centerX" id="D6W-jD-MeH"/>
+                            <constraint firstItem="Iy5-AK-jha" firstAttribute="bottom" secondItem="QrQ-Pq-VKs" secondAttribute="bottom" id="eVp-PQ-CVL"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Cew-KC-KNQ"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7sx-dE-yPx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-753.75" y="298.94366197183098"/>
         </scene>
         <!--Setting Lunch View Controller-->
         <scene sceneID="nCG-mv-jrY">
@@ -1266,7 +1296,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zDp-T1-yPc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="217" y="762"/>
+            <point key="canvasLocation" x="-2278" y="1152"/>
         </scene>
         <!--Add Job Date View Controller-->
         <scene sceneID="bYl-NO-rtf">
@@ -1477,7 +1507,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Yn-gz-Ihp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="652.5" y="-1294.0140845070423"/>
+            <point key="canvasLocation" x="1243" y="-1845"/>
         </scene>
         <!--Setting Night Time View Controller-->
         <scene sceneID="rmO-bp-ymK">
@@ -1558,7 +1588,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kre-AV-Lrt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-532.5" y="1168.3098591549297"/>
+            <point key="canvasLocation" x="-1551" y="1151"/>
         </scene>
         <!--Часы-->
         <scene sceneID="8vN-U0-ocj">
@@ -1604,6 +1634,9 @@
         <image name="rublesign.circle" catalog="system" width="128" height="121"/>
         <image name="stopwatch" catalog="system" width="121" height="128"/>
         <image name="wrench.and.screwdriver" catalog="system" width="128" height="120"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
