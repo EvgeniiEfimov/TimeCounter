@@ -31,5 +31,11 @@ class AppInfoViewController: UIViewController {
         if pageControlOutlet.currentPage == 1 {
             imageViewOutlet.image = UIImage(named: "addIDataInfo")
         }
+        if pageControlOutlet.currentPage == 2 {
+            imageViewOutlet.image = UIImage(named: "tableViewImage")
+        }
+        if pageControlOutlet.currentPage == 3 {
+            imageViewOutlet.image = UIImage(named: "tabBarImage")
+        }
     }
 }
