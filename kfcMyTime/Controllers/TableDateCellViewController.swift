@@ -193,16 +193,8 @@ class TableDateCellViewController: UITableViewController {
                 guard let indexPath = tableView.indexPathForSelectedRow else {
                     return
                 }
-                /// Определение свойства месяца, соответствующего номеру секции
-                let month = listInfoOfMonch[indexPath.section]
-                /// Сортировка массива дней месяца
-                let sortDay = month.monch.sorted(byKeyPath: "dateWorkShift")
-                /// Определение свойства дня, соответствующего номеру строки
-                let day = sortDay[indexPath.row]
-                /// Определение свойства информации  дня
-                let infoOfDay = day.day
-                /// Присвоение свойству Info (detailedVC) информаци рабочего дня
-                detailedVC.info = infoOfDay
+                detailedVC.indexPathSection = indexPath.section
+                detailedVC.indexPathRow = indexPath.row
             }
         }
     }
@@ -301,4 +293,6 @@ extension UITableView {
         self.scrollToRow(at: indexPath, at: .middle, animated: false)
     }
 }
+
+
 

@@ -17,6 +17,14 @@
 		7C07F5A3283D71EA00AA4E30 /* StatisticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C07F5A2283D71EA00AA4E30 /* StatisticViewController.swift */; };
 		7C07F5A5283FED4A00AA4E30 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C07F5A4283FED4A00AA4E30 /* NetworkManager.swift */; };
 		7CC9910F287F19B600A1E0C2 /* AppInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9910E287F19B600A1E0C2 /* AppInfoViewController.swift */; };
+		7CC9919C2896703D00A1E0C2 /* AppInfoPresentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9919B2896703D00A1E0C2 /* AppInfoPresentor.swift */; };
+		7CC9919E289670A400A1E0C2 /* AppInfoInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9919D289670A400A1E0C2 /* AppInfoInteractor.swift */; };
+		7CC991A0289670F400A1E0C2 /* AppInfoRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9919F289670F400A1E0C2 /* AppInfoRouter.swift */; };
+		7CC991A32896725000A1E0C2 /* DetailedInformationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC991A22896725000A1E0C2 /* DetailedInformationPresenter.swift */; };
+		7CC991A5289672CA00A1E0C2 /* DetailedInformationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC991A4289672CA00A1E0C2 /* DetailedInformationInteractor.swift */; };
+		7CC991A7289672E800A1E0C2 /* DetailedInformationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC991A6289672E800A1E0C2 /* DetailedInformationRouter.swift */; };
+		7CC991A92896736300A1E0C2 /* DetailedInformationConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC991A82896736300A1E0C2 /* DetailedInformationConfigurator.swift */; };
+		7CC991AE2896999900A1E0C2 /* dataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC991AD2896999900A1E0C2 /* dataService.swift */; };
 		CE1ACB6727BCE62A002D9105 /* ProtocolsFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1ACB6627BCE62A002D9105 /* ProtocolsFile.swift */; };
 		CE1ACB6A27C211BC002D9105 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1ACB6927C211BC002D9105 /* DateFormatter.swift */; };
 		CE482CB4272992490034798E /* ModelJobDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE482CB3272992490034798E /* ModelJobDate.swift */; };
@@ -44,6 +52,14 @@
 		7C07F5A2283D71EA00AA4E30 /* StatisticViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticViewController.swift; sourceTree = "<group>"; };
 		7C07F5A4283FED4A00AA4E30 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		7CC9910E287F19B600A1E0C2 /* AppInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfoViewController.swift; sourceTree = "<group>"; };
+		7CC9919B2896703D00A1E0C2 /* AppInfoPresentor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfoPresentor.swift; sourceTree = "<group>"; };
+		7CC9919D289670A400A1E0C2 /* AppInfoInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfoInteractor.swift; sourceTree = "<group>"; };
+		7CC9919F289670F400A1E0C2 /* AppInfoRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfoRouter.swift; sourceTree = "<group>"; };
+		7CC991A22896725000A1E0C2 /* DetailedInformationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedInformationPresenter.swift; sourceTree = "<group>"; };
+		7CC991A4289672CA00A1E0C2 /* DetailedInformationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedInformationInteractor.swift; sourceTree = "<group>"; };
+		7CC991A6289672E800A1E0C2 /* DetailedInformationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedInformationRouter.swift; sourceTree = "<group>"; };
+		7CC991A82896736300A1E0C2 /* DetailedInformationConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedInformationConfigurator.swift; sourceTree = "<group>"; };
+		7CC991AD2896999900A1E0C2 /* dataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dataService.swift; sourceTree = "<group>"; };
 		CE1ACB6627BCE62A002D9105 /* ProtocolsFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolsFile.swift; sourceTree = "<group>"; };
 		CE1ACB6927C211BC002D9105 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		CE482CB3272992490034798E /* ModelJobDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelJobDate.swift; sourceTree = "<group>"; };
@@ -85,6 +101,37 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		7CC9919A28966F8A00A1E0C2 /* AppInfoModule */ = {
+			isa = PBXGroup;
+			children = (
+				7CC9910E287F19B600A1E0C2 /* AppInfoViewController.swift */,
+				7CC9919B2896703D00A1E0C2 /* AppInfoPresentor.swift */,
+				7CC9919D289670A400A1E0C2 /* AppInfoInteractor.swift */,
+				7CC9919F289670F400A1E0C2 /* AppInfoRouter.swift */,
+			);
+			path = AppInfoModule;
+			sourceTree = "<group>";
+		};
+		7CC991A1289671FA00A1E0C2 /* DetailedInformationModule */ = {
+			isa = PBXGroup;
+			children = (
+				CECA89E727280CEC00B2A03B /* DetailedInformationViewController.swift */,
+				7CC991A82896736300A1E0C2 /* DetailedInformationConfigurator.swift */,
+				7CC991A22896725000A1E0C2 /* DetailedInformationPresenter.swift */,
+				7CC991A4289672CA00A1E0C2 /* DetailedInformationInteractor.swift */,
+				7CC991A6289672E800A1E0C2 /* DetailedInformationRouter.swift */,
+			);
+			path = DetailedInformationModule;
+			sourceTree = "<group>";
+		};
+		7CC991AC2896997800A1E0C2 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				7CC991AD2896999900A1E0C2 /* dataService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		CE482CB927299C510034798E /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -123,6 +170,7 @@
 				CE482CC1272AD9C90034798E /* StorageManager.swift */,
 				CE1ACB6627BCE62A002D9105 /* ProtocolsFile.swift */,
 				CE1ACB6927C211BC002D9105 /* DateFormatter.swift */,
+				7CC991AC2896997800A1E0C2 /* Service */,
 				CE482CB927299C510034798E /* Models */,
 				CECA89FF2728134700B2A03B /* Controllers */,
 				CECA89F92728127700B2A03B /* Storyboards */,
@@ -146,14 +194,14 @@
 			children = (
 				CECA89FA272812ED00B2A03B /* TableDateCellViewController.swift */,
 				7C0123472802AE2600FBD849 /* SettingsTableViewController.swift */,
-				CECA89E727280CEC00B2A03B /* DetailedInformationViewController.swift */,
+				7CC991A1289671FA00A1E0C2 /* DetailedInformationModule */,
 				CECA8A0127283C6B00B2A03B /* AddJobDateViewController.swift */,
 				CEFB466627A5A39D00327CAA /* СalculatedViewController.swift */,
 				7C07F5A2283D71EA00AA4E30 /* StatisticViewController.swift */,
 				7C0123492808986300FBD849 /* SettingLunchViewController.swift */,
 				CEC2525127B6DB6500B9F2DE /* SettingsNotificationViewController.swift */,
 				7C01234B2809F50800FBD849 /* SettingNightTimeViewController.swift */,
-				7CC9910E287F19B600A1E0C2 /* AppInfoViewController.swift */,
+				7CC9919A28966F8A00A1E0C2 /* AppInfoModule */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -280,24 +328,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7CC9919C2896703D00A1E0C2 /* AppInfoPresentor.swift in Sources */,
 				7C07F5A5283FED4A00AA4E30 /* NetworkManager.swift in Sources */,
+				7CC991A5289672CA00A1E0C2 /* DetailedInformationInteractor.swift in Sources */,
 				CE1ACB6A27C211BC002D9105 /* DateFormatter.swift in Sources */,
 				CEC2525227B6DB6500B9F2DE /* SettingsNotificationViewController.swift in Sources */,
 				CE482CB4272992490034798E /* ModelJobDate.swift in Sources */,
 				7C01234A2808986300FBD849 /* SettingLunchViewController.swift in Sources */,
+				7CC991A92896736300A1E0C2 /* DetailedInformationConfigurator.swift in Sources */,
 				CECA89E427280CEC00B2A03B /* AppDelegate.swift in Sources */,
 				CEFB466727A5A39D00327CAA /* СalculatedViewController.swift in Sources */,
 				CE482CBF272AC44C0034798E /* DataManager.swift in Sources */,
 				7C00FDA9283509B100872B2A /* DetailedInformationViewController.swift in Sources */,
 				CECA8A0227283C6B00B2A03B /* AddJobDateViewController.swift in Sources */,
+				7CC991AE2896999900A1E0C2 /* dataService.swift in Sources */,
 				7CC9910F287F19B600A1E0C2 /* AppInfoViewController.swift in Sources */,
 				7C01234627F1F1E000FBD849 /* Notifications.swift in Sources */,
+				7CC991A32896725000A1E0C2 /* DetailedInformationPresenter.swift in Sources */,
 				7C01234C2809F50800FBD849 /* SettingNightTimeViewController.swift in Sources */,
 				CECA89E627280CEC00B2A03B /* SceneDelegate.swift in Sources */,
 				7C01234227D9E32700FBD849 /* SaveDataManager.swift in Sources */,
 				7C0123482802AE2600FBD849 /* SettingsTableViewController.swift in Sources */,
 				CECA89FB272812EE00B2A03B /* TableDateCellViewController.swift in Sources */,
+				7CC9919E289670A400A1E0C2 /* AppInfoInteractor.swift in Sources */,
+				7CC991A0289670F400A1E0C2 /* AppInfoRouter.swift in Sources */,
 				7C07F5A3283D71EA00AA4E30 /* StatisticViewController.swift in Sources */,
+				7CC991A7289672E800A1E0C2 /* DetailedInformationRouter.swift in Sources */,
 				CE482CC2272AD9C90034798E /* StorageManager.swift in Sources */,
 				CE1ACB6727BCE62A002D9105 /* ProtocolsFile.swift in Sources */,
 			);

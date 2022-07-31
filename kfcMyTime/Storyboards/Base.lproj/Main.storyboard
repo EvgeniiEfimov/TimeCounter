@@ -773,7 +773,7 @@
                     <connections>
                         <outlet property="dateWorkOutlet" destination="KDj-r7-Cmu" id="XAe-Wf-ipl"/>
                         <outlet property="finishTimeWorkOutlet" destination="pUK-Ir-OHC" id="kb6-VB-fQb"/>
-                        <outlet property="inform" destination="ZZH-4o-rkc" id="2PN-xh-cDP"/>
+                        <outlet property="informOutlet" destination="ZZH-4o-rkc" id="2PN-xh-cDP"/>
                         <outlet property="lanchTimeOutlet" destination="aDy-xj-JD7" id="8lJ-BG-WVu"/>
                         <outlet property="startTimeWorkOutlet" destination="reV-Yj-gby" id="CKS-5R-sWA"/>
                         <outlet property="workNightTimeOutlet" destination="pR0-FO-g8e" id="1bP-O1-JSC"/>
