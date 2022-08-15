@@ -69,6 +69,7 @@ class StatisticViewController: UIViewController {
         loadStatisticToMonch()
     }
     
+
     private func loadTargetImage(_ month: Int) {
         animation(imageViewOutlet, 0.2)
         guard let valueByMonth =  arrayMonch?.filter("numberMonth = \(month)").first else {

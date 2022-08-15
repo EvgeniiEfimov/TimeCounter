@@ -15,7 +15,7 @@ class DetailedInformationInteractor: DetailedInformationInteractorProtocol {
  
     weak var presenter: DetailedInformationPresenterProtocol!
     let dataService: DataServiceProtocol = DataService()
-    required init(presenter: DetailedInformationPresenter) {
+    required init(presenter: DetailedInformationPresenterProtocol) {
         self.presenter = presenter
 }
     func getInfoDay(_ indexPathSection: Int, _ indexPathRow: Int) -> InfoOfDayWork? {

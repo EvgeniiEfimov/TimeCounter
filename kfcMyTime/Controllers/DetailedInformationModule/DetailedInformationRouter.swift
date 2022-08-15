@@ -10,3 +10,4 @@ import Foundation
 protocol DetailedInformationRouterProtocol: AnyObject {
     func closeCurrentViewController()
 }
+

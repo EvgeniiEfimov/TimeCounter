@@ -435,7 +435,7 @@
         <!--Time C⎋unter-->
         <scene sceneID="ARD-N9-bYG">
             <objects>
-                <tableViewController id="HfX-hm-bsm" customClass="TableDateCellViewController" customModule="kfcMyTime" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="HfX-hm-bsm" customClass="TableDateViewController" customModule="kfcMyTime" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="36" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="BKA-59-WK6">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="761"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -481,6 +481,7 @@
                             <imageReference key="image" image="cross.circle" catalog="system" symbolScale="large"/>
                             <color key="tintColor" systemColor="systemYellowColor"/>
                             <connections>
+                                <action selector="addButtonAction:" destination="HfX-hm-bsm" id="M2f-BQ-Er4"/>
                                 <segue destination="U2n-7v-o0l" kind="presentation" identifier="addVC" id="UQ7-Gm-B53"/>
                             </connections>
                         </barButtonItem>
@@ -1242,7 +1243,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
                                 <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
-                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="4" translatesAutoresizingMaskIntoConstraints="NO" id="Iy5-AK-jha">
+                            <pageControl opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="4" translatesAutoresizingMaskIntoConstraints="NO" id="Iy5-AK-jha">
                                 <rect key="frame" x="130.33333333333337" y="742" width="129.66666666666663" height="25"/>
                                 <color key="pageIndicatorTintColor" red="0.96862745289999996" green="0.8078432083" blue="0.27450981740000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <color key="currentPageIndicatorTintColor" red="0.33333334329999997" green="0.33333334329999997" blue="0.33333334329999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>

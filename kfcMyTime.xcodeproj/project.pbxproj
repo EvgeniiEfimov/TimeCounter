@@ -25,6 +25,17 @@
 		7CC991A7289672E800A1E0C2 /* DetailedInformationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC991A6289672E800A1E0C2 /* DetailedInformationRouter.swift */; };
 		7CC991A92896736300A1E0C2 /* DetailedInformationConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC991A82896736300A1E0C2 /* DetailedInformationConfigurator.swift */; };
 		7CC991AE2896999900A1E0C2 /* dataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC991AD2896999900A1E0C2 /* dataService.swift */; };
+		7CC991B128A15A9100A1E0C2 /* TableDataConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC991B028A15A9100A1E0C2 /* TableDataConfigurator.swift */; };
+		7CC991B328A15AB300A1E0C2 /* TableDataPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC991B228A15AB300A1E0C2 /* TableDataPresenter.swift */; };
+		7CC991B528A15ACD00A1E0C2 /* TableDataInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC991B428A15ACC00A1E0C2 /* TableDataInteractor.swift */; };
+		7CC991B728A15ADD00A1E0C2 /* TableDataRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC991B628A15ADD00A1E0C2 /* TableDataRouter.swift */; };
+		7CC991B928A306DF00A1E0C2 /* SettingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC991B828A306DF00A1E0C2 /* SettingService.swift */; };
+		7CC991BB28A42D7D00A1E0C2 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC991BA28A42D7D00A1E0C2 /* AlertService.swift */; };
+		7CC991BD28A4434E00A1E0C2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC991BC28A4434E00A1E0C2 /* Extensions.swift */; };
+		7CC991C028A507EF00A1E0C2 /* AddDataPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC991BF28A507EF00A1E0C2 /* AddDataPresenter.swift */; };
+		7CC991C428A5081900A1E0C2 /* AddDataRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC991C328A5081900A1E0C2 /* AddDataRouter.swift */; };
+		7CC991C628A5084500A1E0C2 /* AddDataConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC991C528A5084500A1E0C2 /* AddDataConfigurator.swift */; };
+		7CC991C728A6D83A00A1E0C2 /* AddDataInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC991C128A5080600A1E0C2 /* AddDataInteractor.swift */; };
 		CE1ACB6727BCE62A002D9105 /* ProtocolsFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1ACB6627BCE62A002D9105 /* ProtocolsFile.swift */; };
 		CE1ACB6A27C211BC002D9105 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1ACB6927C211BC002D9105 /* DateFormatter.swift */; };
 		CE482CB4272992490034798E /* ModelJobDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE482CB3272992490034798E /* ModelJobDate.swift */; };
@@ -36,7 +47,7 @@
 		CECA89EB27280CEC00B2A03B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CECA89E927280CEC00B2A03B /* Main.storyboard */; };
 		CECA89ED27280CF900B2A03B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CECA89EC27280CF900B2A03B /* Assets.xcassets */; };
 		CECA89F027280CF900B2A03B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CECA89EE27280CF900B2A03B /* LaunchScreen.storyboard */; };
-		CECA89FB272812EE00B2A03B /* TableDateCellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA89FA272812ED00B2A03B /* TableDateCellViewController.swift */; };
+		CECA89FB272812EE00B2A03B /* TableDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA89FA272812ED00B2A03B /* TableDateViewController.swift */; };
 		CECA8A0227283C6B00B2A03B /* AddJobDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA8A0127283C6B00B2A03B /* AddJobDateViewController.swift */; };
 		CEFB466727A5A39D00327CAA /* СalculatedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFB466627A5A39D00327CAA /* СalculatedViewController.swift */; };
 /* End PBXBuildFile section */
@@ -60,6 +71,17 @@
 		7CC991A6289672E800A1E0C2 /* DetailedInformationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedInformationRouter.swift; sourceTree = "<group>"; };
 		7CC991A82896736300A1E0C2 /* DetailedInformationConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedInformationConfigurator.swift; sourceTree = "<group>"; };
 		7CC991AD2896999900A1E0C2 /* dataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dataService.swift; sourceTree = "<group>"; };
+		7CC991B028A15A9100A1E0C2 /* TableDataConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableDataConfigurator.swift; sourceTree = "<group>"; };
+		7CC991B228A15AB300A1E0C2 /* TableDataPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableDataPresenter.swift; sourceTree = "<group>"; };
+		7CC991B428A15ACC00A1E0C2 /* TableDataInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableDataInteractor.swift; sourceTree = "<group>"; };
+		7CC991B628A15ADD00A1E0C2 /* TableDataRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableDataRouter.swift; sourceTree = "<group>"; };
+		7CC991B828A306DF00A1E0C2 /* SettingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingService.swift; sourceTree = "<group>"; };
+		7CC991BA28A42D7D00A1E0C2 /* AlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
+		7CC991BC28A4434E00A1E0C2 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		7CC991BF28A507EF00A1E0C2 /* AddDataPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDataPresenter.swift; sourceTree = "<group>"; };
+		7CC991C128A5080600A1E0C2 /* AddDataInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDataInteractor.swift; sourceTree = "<group>"; };
+		7CC991C328A5081900A1E0C2 /* AddDataRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDataRouter.swift; sourceTree = "<group>"; };
+		7CC991C528A5084500A1E0C2 /* AddDataConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDataConfigurator.swift; sourceTree = "<group>"; };
 		CE1ACB6627BCE62A002D9105 /* ProtocolsFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolsFile.swift; sourceTree = "<group>"; };
 		CE1ACB6927C211BC002D9105 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		CE482CB3272992490034798E /* ModelJobDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelJobDate.swift; sourceTree = "<group>"; };
@@ -74,7 +96,7 @@
 		CECA89EC27280CF900B2A03B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CECA89EF27280CF900B2A03B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CECA89F127280CF900B2A03B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CECA89FA272812ED00B2A03B /* TableDateCellViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableDateCellViewController.swift; sourceTree = "<group>"; };
+		CECA89FA272812ED00B2A03B /* TableDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableDateViewController.swift; sourceTree = "<group>"; };
 		CECA8A0127283C6B00B2A03B /* AddJobDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddJobDateViewController.swift; sourceTree = "<group>"; };
 		CEFB466627A5A39D00327CAA /* СalculatedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "СalculatedViewController.swift"; sourceTree = "<group>"; };
 		E27667F708EF91AB32750857 /* Pods-kfcMyTime.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kfcMyTime.debug.xcconfig"; path = "Target Support Files/Pods-kfcMyTime/Pods-kfcMyTime.debug.xcconfig"; sourceTree = "<group>"; };
@@ -128,8 +150,35 @@
 			isa = PBXGroup;
 			children = (
 				7CC991AD2896999900A1E0C2 /* dataService.swift */,
+				7CC991B828A306DF00A1E0C2 /* SettingService.swift */,
+				7CC991BA28A42D7D00A1E0C2 /* AlertService.swift */,
+				7CC991BC28A4434E00A1E0C2 /* Extensions.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		7CC991AF28A15A3300A1E0C2 /* TableDataModule */ = {
+			isa = PBXGroup;
+			children = (
+				CECA89FA272812ED00B2A03B /* TableDateViewController.swift */,
+				7CC991B028A15A9100A1E0C2 /* TableDataConfigurator.swift */,
+				7CC991B228A15AB300A1E0C2 /* TableDataPresenter.swift */,
+				7CC991B428A15ACC00A1E0C2 /* TableDataInteractor.swift */,
+				7CC991B628A15ADD00A1E0C2 /* TableDataRouter.swift */,
+			);
+			path = TableDataModule;
+			sourceTree = "<group>";
+		};
+		7CC991BE28A507B700A1E0C2 /* AddDataModule */ = {
+			isa = PBXGroup;
+			children = (
+				CECA8A0127283C6B00B2A03B /* AddJobDateViewController.swift */,
+				7CC991C528A5084500A1E0C2 /* AddDataConfigurator.swift */,
+				7CC991BF28A507EF00A1E0C2 /* AddDataPresenter.swift */,
+				7CC991C128A5080600A1E0C2 /* AddDataInteractor.swift */,
+				7CC991C328A5081900A1E0C2 /* AddDataRouter.swift */,
+			);
+			path = AddDataModule;
 			sourceTree = "<group>";
 		};
 		CE482CB927299C510034798E /* Models */ = {
@@ -192,10 +241,10 @@
 		CECA89FF2728134700B2A03B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				CECA89FA272812ED00B2A03B /* TableDateCellViewController.swift */,
 				7C0123472802AE2600FBD849 /* SettingsTableViewController.swift */,
+				7CC991AF28A15A3300A1E0C2 /* TableDataModule */,
 				7CC991A1289671FA00A1E0C2 /* DetailedInformationModule */,
-				CECA8A0127283C6B00B2A03B /* AddJobDateViewController.swift */,
+				7CC991BE28A507B700A1E0C2 /* AddDataModule */,
 				CEFB466627A5A39D00327CAA /* СalculatedViewController.swift */,
 				7C07F5A2283D71EA00AA4E30 /* StatisticViewController.swift */,
 				7C0123492808986300FBD849 /* SettingLunchViewController.swift */,
@@ -332,29 +381,40 @@
 				7C07F5A5283FED4A00AA4E30 /* NetworkManager.swift in Sources */,
 				7CC991A5289672CA00A1E0C2 /* DetailedInformationInteractor.swift in Sources */,
 				CE1ACB6A27C211BC002D9105 /* DateFormatter.swift in Sources */,
+				7CC991C028A507EF00A1E0C2 /* AddDataPresenter.swift in Sources */,
 				CEC2525227B6DB6500B9F2DE /* SettingsNotificationViewController.swift in Sources */,
 				CE482CB4272992490034798E /* ModelJobDate.swift in Sources */,
 				7C01234A2808986300FBD849 /* SettingLunchViewController.swift in Sources */,
 				7CC991A92896736300A1E0C2 /* DetailedInformationConfigurator.swift in Sources */,
+				7CC991C728A6D83A00A1E0C2 /* AddDataInteractor.swift in Sources */,
 				CECA89E427280CEC00B2A03B /* AppDelegate.swift in Sources */,
 				CEFB466727A5A39D00327CAA /* СalculatedViewController.swift in Sources */,
 				CE482CBF272AC44C0034798E /* DataManager.swift in Sources */,
 				7C00FDA9283509B100872B2A /* DetailedInformationViewController.swift in Sources */,
 				CECA8A0227283C6B00B2A03B /* AddJobDateViewController.swift in Sources */,
+				7CC991B328A15AB300A1E0C2 /* TableDataPresenter.swift in Sources */,
 				7CC991AE2896999900A1E0C2 /* dataService.swift in Sources */,
 				7CC9910F287F19B600A1E0C2 /* AppInfoViewController.swift in Sources */,
+				7CC991C428A5081900A1E0C2 /* AddDataRouter.swift in Sources */,
 				7C01234627F1F1E000FBD849 /* Notifications.swift in Sources */,
 				7CC991A32896725000A1E0C2 /* DetailedInformationPresenter.swift in Sources */,
 				7C01234C2809F50800FBD849 /* SettingNightTimeViewController.swift in Sources */,
+				7CC991B728A15ADD00A1E0C2 /* TableDataRouter.swift in Sources */,
 				CECA89E627280CEC00B2A03B /* SceneDelegate.swift in Sources */,
 				7C01234227D9E32700FBD849 /* SaveDataManager.swift in Sources */,
 				7C0123482802AE2600FBD849 /* SettingsTableViewController.swift in Sources */,
-				CECA89FB272812EE00B2A03B /* TableDateCellViewController.swift in Sources */,
+				CECA89FB272812EE00B2A03B /* TableDateViewController.swift in Sources */,
 				7CC9919E289670A400A1E0C2 /* AppInfoInteractor.swift in Sources */,
 				7CC991A0289670F400A1E0C2 /* AppInfoRouter.swift in Sources */,
 				7C07F5A3283D71EA00AA4E30 /* StatisticViewController.swift in Sources */,
+				7CC991B928A306DF00A1E0C2 /* SettingService.swift in Sources */,
 				7CC991A7289672E800A1E0C2 /* DetailedInformationRouter.swift in Sources */,
+				7CC991B528A15ACD00A1E0C2 /* TableDataInteractor.swift in Sources */,
+				7CC991BD28A4434E00A1E0C2 /* Extensions.swift in Sources */,
+				7CC991BB28A42D7D00A1E0C2 /* AlertService.swift in Sources */,
 				CE482CC2272AD9C90034798E /* StorageManager.swift in Sources */,
+				7CC991C628A5084500A1E0C2 /* AddDataConfigurator.swift in Sources */,
+				7CC991B128A15A9100A1E0C2 /* TableDataConfigurator.swift in Sources */,
 				CE1ACB6727BCE62A002D9105 /* ProtocolsFile.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -13,12 +13,12 @@ protocol DetailedInformationConfiguratorProtocol: AnyObject {
 }
 
 class DetaileedInformationConfigurator: DetailedInformationConfiguratorProtocol {
-func configure(with viewController: DetailedInformationViewController) {
-    let presenter = DetailedInformationPresenter(view: viewController)
-    let interactor = DetailedInformationInteractor(presenter: presenter)
-    
-    viewController.presenter = presenter
-    presenter.interactor = interactor
-}
+    func configure(with viewController: DetailedInformationViewController) {
+        let presenter = DetailedInformationPresenter(view: viewController)
+        let interactor = DetailedInformationInteractor(presenter: presenter)
+        
+        viewController.presenter = presenter
+        presenter.interactor = interactor
+    }
 }
 

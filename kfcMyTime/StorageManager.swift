@@ -34,7 +34,6 @@ class StorageManager {
     
     func deleteMonch(allMonch: ListInfoOfMonch) {
         write {
-
             realm.delete(allMonch)
         }
     }

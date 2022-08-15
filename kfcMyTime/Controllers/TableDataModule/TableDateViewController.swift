@@ -9,7 +9,21 @@ import RealmSwift
 import SPAlert
 import Spring
 
-class TableDateCellViewController: UITableViewController {
+protocol TableDataViewControllerProtocol: AnyObject {
+    func setView(with data: Results<ListInfoOfMonch>?)
+    func setSetting(with setting: Results<SettingRateAndFormatDate>?)
+    func tableViewDeleteSection(_ indexPath: IndexPath)
+    func tableViewDeleteRow(_ indexPath: IndexPath)
+    func showSpAlert(_ text: String)
+}
+
+class TableDateViewController: UITableViewController {
+    
+    var presenter: TableDataPresenterProtocol!
+    let configurator: TableDataConfiguratorProtocol = TableDataConfigurator()
+    
+    let selfToAddSegueName = "addVC"
+    
     //MARK: - Outlet
     /// outlet кнопки добавления
     @IBOutlet weak var addButton: UIBarButtonItem!
@@ -21,29 +35,18 @@ class TableDateCellViewController: UITableViewController {
     //MARK: - Методы переопределения
     override func viewDidLoad() {
         super.viewDidLoad()
+        configurator.configure(with: self)
+        presenter.configureView()
         ///Вызов метода настройки внешнего вида View
         startSettingOfBackgroundView()
-        /// Присвоение переменной хранящей данные realm по месяцам
-        listInfoOfMonch = StorageManager.shared.realm.objects(ListInfoOfMonch.self).sorted(byKeyPath: "numberMonth")
-        settingsUser = StorageManager.shared.realm.objects(SettingRateAndFormatDate.self)
-        ///Проверка на наличие данных в realm
-        if listInfoOfMonch.isEmpty {
-            ///Вызов алерта-инструкции при первом запуске
-            alertFirstStart()
-        }
-        DispatchQueue.main.async {
-            self.tableView.scrollToBottom()
-        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         DispatchQueue.main.async {
             self.tableView.scrollToBottom()
-            self.tableView.scrollToBottom()
             self.animationCell()
         }
-
     }
 
 
@@ -98,8 +101,6 @@ class TableDateCellViewController: UITableViewController {
         content.secondaryTextProperties.color = .systemYellow
         /// Присваивание конфигурации ячейки
         cell.contentConfiguration = content
-        /// Скролл таблицы до последней ячейки
-//        tableView.scrollToRow(at: indexPath, at: .top, animated: true)
         /// Возврат ячейки
         return cell
     }
@@ -136,37 +137,9 @@ class TableDateCellViewController: UITableViewController {
     
     /// Переопределения метода свайпа
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        /// Определение свойства месяца, соответствующего номеру секции
-        let monch = listInfoOfMonch[indexPath.section]
-        /// Сортировка массива дней месяца
-        let daySorted = monch.monch.sorted(byKeyPath: "dateWorkShift")
-        /// Присвоения свойству дня, соответствующего номеру строки таблицы
-        let days = daySorted[indexPath.row]
-        ///  Определения действия при свайпе
+        
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { _, _, _ in
-            /// Удаление дня из БД
-            guard let day = days.day else {
-                return
-            }
-            StorageManager.shared.deleteMonch(monch: days, in: monch)
-            StorageManager.shared.deleteDayInfo(day: day)
-
-            /// Проверка количества дней в месяце секции
-            if monch.monch.count == 0 {
-                /// Удаление месяца (Если нет записанных дней)
-                StorageManager.shared.deleteMonch(allMonch: monch)
-                /// Удаление секции "пустого" (удаленного) месяца
-                tableView.deleteSections(IndexSet(integer: indexPath.section), with: .automatic)
-                /// Вызов визуального эффекта (подтверждения) удаления
-                self.spAlert()
-            } else {
-                /// Удаление ячейки удаленного дня
-                tableView.deleteRows(at: [indexPath], with: .automatic)
-                /// Обновление секции
-                tableView.reloadSections(IndexSet(integer: indexPath.section), with: .automatic)
-                /// Вызов визуального эффекта (подтверждения) удаления
-                self.spAlert()
-            }
+            self.presenter.swipeCellLeft(indexPath)
         }
         /// Присвоение конфигурации свайпа
         return UISwipeActionsConfiguration(actions: [deleteAction])
@@ -201,6 +174,9 @@ class TableDateCellViewController: UITableViewController {
             
 //MARK: - Action
 
+    @IBAction func addButtonAction(_ sender: UIBarButtonItem) {
+        presenter.addButtonAction()
+    }
     
 //MARK: - Приватные методы
     /// Метод настройки внешнего вида View
@@ -210,35 +186,7 @@ class TableDateCellViewController: UITableViewController {
         tableView.backgroundView?.alpha = 0.6
         tableView.backgroundColor = UIColor.gray
     }
-    /// Инициализация алерта первого запуска
-    private func alertFirstStart() {
-        let alertStart = UIAlertController(title: "Привет!",
-                                           message: """
-Краткая инструкция:
-* Для добавления смены воспользуйтесь иконкой ➕ в правом верхнем углу
-* Для удаления определенной смены воспользуйтесь свайпом  👈🏻 влево на необходимой ячейки
-* Иконка корзины 🗑 в левом верхнем углу служит для удаления всех смен (без возможности возврата!)
-* ⚙️ позволит настроить учет обеденного перерыва, часовую ставку а так же уведомления
-* ВНИМАНИЕ! Данное приложение носит исключительно информативный характер и предназначено для
-более удобного отслеживания рабочих часов. Все расчеты являются приблизительными
-""",
-                                           preferredStyle: .alert)
-        /// Добавление кнопки в алерт
-        alertStart.addAction(.init(title: "Понятно!",
-                                   style: .default,
-                                   handler: nil))
-        /// Представление алерта
-        present(alertStart, animated: true, completion: nil)
-    }
-    /// Метод вызова алерта визуального подтверждения удаления
-    private func spAlert() {
-        let alertView = SPAlertView(title: "Удалено", preset: .error)
-        alertView.duration = 1.3
-        alertView.cornerRadius = 12
-        alertView.backgroundColor = UIColor.darkGray
-        alertView.present()
-    }
-    
+
     private func animationCell() {
         tableView.reloadData()
         let cells = tableView.visibleCells
@@ -258,41 +206,41 @@ class TableDateCellViewController: UITableViewController {
         }
     }
 }
-///  Расширение класса
-extension TableDateCellViewController {
-    /// Метод форматирования представления даты рабочей смены
-    func dateFormatterDay (_ dateDay: Date) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd / MM, EEE"
-        dateFormatter.locale = Locale(identifier: "Ru_Ru")
-        return dateFormatter.string(from: dateDay)
-    }
-    /// Форматирование рабочего времени в формат Часы - минуты
-    func timeWorkOfFormatString(_ timeInterval: Double) -> String {
-    let formatter = DateComponentsFormatter()
-        formatter.calendar?.locale = Locale(identifier: "Ru-ru")
-    formatter.allowedUnits = [.hour, .minute]
-        formatter.unitsStyle = .abbreviated
-        let formattedString = formatter.string(from: TimeInterval(timeInterval * 3600.0))
-        return formattedString ?? "-"
-    }
-}
 
-extension UITableView {
-    func scrollToBottom() {
-        self.reloadData()
-        let section = self.numberOfSections
-        guard (section > 0) else {
+extension TableDateViewController: TableDataViewControllerProtocol {
+   
+    func setSetting(with setting: Results<SettingRateAndFormatDate>?) {
+        guard let setting = setting else {
+            dismiss(animated: true)
             return
         }
-        let row = self.numberOfRows(inSection: self.numberOfSections - 1) - 1;
-        guard (section > 0) && (row > 0) else{ // check bounds
+        settingsUser = setting
+    }
+    
+    func setView(with data: Results<ListInfoOfMonch>?) {
+        guard let info = data else {
+            dismiss(animated: true)
             return
         }
-        let indexPath = IndexPath(row: row-1, section: section-1)
-        self.scrollToRow(at: indexPath, at: .middle, animated: false)
+        listInfoOfMonch = info
+    }
+    
+    func tableViewDeleteSection(_ indexPath: IndexPath) {
+        tableView.deleteSections(IndexSet(integer: indexPath.section), with: .automatic)
+    }
+    
+    func tableViewDeleteRow(_ indexPath: IndexPath) {
+        tableView.deleteRows(at: [indexPath], with: .automatic)
+        tableView.reloadSections(IndexSet(integer: indexPath.section), with: .automatic)
+    }
+    
+    func showSpAlert(_ text: String) {
+        let alertView = SPAlertView(title: text, preset: .error)
+        alertView.duration = 1.3
+        alertView.cornerRadius = 12
+        alertView.backgroundColor = UIColor.darkGray
+        alertView.present()
     }
 }
-
 
 
