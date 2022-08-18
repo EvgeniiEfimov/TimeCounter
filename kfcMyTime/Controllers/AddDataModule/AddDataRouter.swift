@@ -8,7 +8,7 @@
 import Foundation
 
 protocol AddDataRouterProtocol: AnyObject {
-    
+    func dismissVC()
 }
 
 class AddDataRouter: AddDataRouterProtocol {
@@ -16,5 +16,9 @@ class AddDataRouter: AddDataRouterProtocol {
     
     required init(view: AddDataViewProtocol) {
         self.view = view
+    }
+    
+    func dismissVC() {
+        view.dismissView()
     }
 }

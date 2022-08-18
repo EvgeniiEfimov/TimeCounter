@@ -5,13 +5,10 @@
 //  Created by User on 26.10.2021.
 //
 
-import RealmSwift
 import SPAlert
 import Spring
 
 protocol TableDataViewControllerProtocol: AnyObject {
-    func setView(with data: Results<ListInfoOfMonch>?)
-    func setSetting(with setting: Results<SettingRateAndFormatDate>?)
     func tableViewDeleteSection(_ indexPath: IndexPath)
     func tableViewDeleteRow(_ indexPath: IndexPath)
     func showSpAlert(_ text: String)
@@ -22,27 +19,27 @@ class TableDateViewController: UITableViewController {
     var presenter: TableDataPresenterProtocol!
     let configurator: TableDataConfiguratorProtocol = TableDataConfigurator()
     
-    let selfToAddSegueName = "addVC"
-    
-    //MARK: - Outlet
-    /// outlet кнопки добавления
-    @IBOutlet weak var addButton: UIBarButtonItem!
     //MARK: - Приватные свойства
     /// Объявление переменной хранящей данные realm по месяцам
-    private var listInfoOfMonch: Results<ListInfoOfMonch>!
+    private var listInfoOfMonch: [ListInfoOfMonch] {
+        presenter.configureViewData
+    }
     /// Объявление переменной хранящей данные настроек
-    private var settingsUser: Results<SettingRateAndFormatDate>!
+    private var settingsUser: SettingRateAndFormatDate {
+        presenter.configureViewSettings
+    }
+    
     //MARK: - Методы переопределения
     override func viewDidLoad() {
         super.viewDidLoad()
         configurator.configure(with: self)
-        presenter.configureView()
         ///Вызов метода настройки внешнего вида View
         startSettingOfBackgroundView()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         DispatchQueue.main.async {
             self.tableView.scrollToBottom()
             self.animationCell()
@@ -96,7 +93,7 @@ class TableDateViewController: UITableViewController {
         content.textProperties.font = UIFont.init(name: "Zapf Dingbats", size: 18.0) ??
             .preferredFont(forTextStyle: .body)
         /// Определение дополнительного текста ячейки
-        content.secondaryText = settingsUser.first?.formatSegmentControl == 1 ? String(format: "%.1f ч", day.timeWork) : day.timeWorkStringFormat
+        content.secondaryText = settingsUser.formatSegmentControl == 1 ? String(format: "%.1f ч", day.timeWork) : day.timeWorkStringFormat
         /// Определение цвета дополнительного текста ячейки
         content.secondaryTextProperties.color = .systemYellow
         /// Присваивание конфигурации ячейки
@@ -122,7 +119,7 @@ class TableDateViewController: UITableViewController {
         /// Присвоение значения текста секции
         content.text = month.nameMonth
         /// Присвоения значени дополнительного текста секции
-        content.secondaryText = settingsUser.first?.formatSegmentControl == 1 ? String(format: "%.1f ч", month.allWorkTimeOfMonch) : timeWorkOfFormatString(month.allWorkTimeOfMonch)
+        content.secondaryText = settingsUser.formatSegmentControl == 1 ? String(format: "%.1f ч", month.allWorkTimeOfMonch) : timeWorkOfFormatString(month.allWorkTimeOfMonch)
         /// Определения шрифта и размера дополнительного текста
         content.secondaryTextProperties.font = UIFont.init(name: "Zapf DingBats", size: 20.0)!
         /// Определение цвета дополнительного текста
@@ -145,39 +142,10 @@ class TableDateViewController: UITableViewController {
         return UISwipeActionsConfiguration(actions: [deleteAction])
     }
     
-    /// Переопределения метода  перехода между vc
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        /// Проверка идентификатора контроллера перехода
-         if segue.identifier == "addVC" {
-            /// Проверка приведения seque к требуемуему VC
-            if let addJobDateVC = segue.destination as? AddJobDateViewController {
-                /// Комплишн
-                addJobDateVC.saveCompletion = {
-                    /// Вызов метода обновления данных таблицы
-                        self.tableView.scrollToBottom()
-                        self.animationCell()
-                }
-                /// Проверка идентификатора seque
-            }
-        } else if segue.identifier == "detailVC" {
-            /// Проверка приведения seque к требуемуему VC
-            if let detailedVC = segue.destination as? DetailedInformationViewController {
-                /// Определение свойства indexPath как номер строки таблицы
-                guard let indexPath = tableView.indexPathForSelectedRow else {
-                    return
-                }
-                detailedVC.indexPathSection = indexPath.section
-                detailedVC.indexPathRow = indexPath.row
-            }
-        }
+        presenter.seque(.init(segue: segue, sender: sender))
     }
             
-//MARK: - Action
-
-    @IBAction func addButtonAction(_ sender: UIBarButtonItem) {
-        presenter.addButtonAction()
-    }
-    
 //MARK: - Приватные методы
     /// Метод настройки внешнего вида View
     private func startSettingOfBackgroundView() {
@@ -187,7 +155,7 @@ class TableDateViewController: UITableViewController {
         tableView.backgroundColor = UIColor.gray
     }
 
-    private func animationCell() {
+     func animationCell() {
         tableView.reloadData()
         let cells = tableView.visibleCells
         let height = 0 - tableView.bounds.width
@@ -208,23 +176,6 @@ class TableDateViewController: UITableViewController {
 }
 
 extension TableDateViewController: TableDataViewControllerProtocol {
-   
-    func setSetting(with setting: Results<SettingRateAndFormatDate>?) {
-        guard let setting = setting else {
-            dismiss(animated: true)
-            return
-        }
-        settingsUser = setting
-    }
-    
-    func setView(with data: Results<ListInfoOfMonch>?) {
-        guard let info = data else {
-            dismiss(animated: true)
-            return
-        }
-        listInfoOfMonch = info
-    }
-    
     func tableViewDeleteSection(_ indexPath: IndexPath) {
         tableView.deleteSections(IndexSet(integer: indexPath.section), with: .automatic)
     }

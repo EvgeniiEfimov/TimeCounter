@@ -8,12 +8,14 @@
 import Foundation
 
 protocol TableDataPresenterProtocol: AnyObject {
-    func configureView()
     func swipeCellLeft(_ indexPath: IndexPath)
     func deleteSection(_ indexPath: IndexPath)
     func deleteRow(_ indexPath: IndexPath)
     func showSpAlert(_ text: String)
-    func addButtonAction()
+    func seque(_ seque: Transition)
+    
+    var configureViewData: [ListInfoOfMonch] { get }
+    var configureViewSettings: SettingRateAndFormatDate { get }
 }
 
 class TableDataPresenter: TableDataPresenterProtocol {
@@ -24,11 +26,6 @@ class TableDataPresenter: TableDataPresenterProtocol {
     
     required init(view: TableDataViewControllerProtocol) {
         self.view = view
-    }
-    
-    func configureView() {
-        view.setView(with: interactor.startInfo)
-        view.setSetting(with: interactor.settingsView)
     }
     
     func swipeCellLeft(_ indexPath: IndexPath) {
@@ -47,7 +44,16 @@ class TableDataPresenter: TableDataPresenterProtocol {
         view.showSpAlert(text)
     }
     
-    func addButtonAction() {
-        router.showAddScene()
+    func seque(_ seque: Transition) {
+        router.prepare(for: seque.segue, sender: seque.sender)
+    }
+    
+    
+    var configureViewData: [ListInfoOfMonch] {
+        interactor.startInfo
+    }
+    
+    var configureViewSettings: SettingRateAndFormatDate {
+        interactor.settingsView
     }
 }

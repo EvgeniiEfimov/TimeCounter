@@ -79,3 +79,17 @@ extension Double {
             return formatter.string(from: TimeInterval(self * 3600)) ?? "-"
     }
 }
+// MARK: - Struct
+
+struct AddDataStruct {
+    let note: String?
+    let timeStart: Date
+    let timeStop: Date
+    let lunch: Bool
+    let nightTime: Bool
+}
+
+struct Transition {
+    let segue: UIStoryboardSegue
+    let sender:  Any?
+}

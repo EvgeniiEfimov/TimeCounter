@@ -9,14 +9,17 @@ import Foundation
 import RealmSwift
 
 protocol SettingServiceProtocol: AnyObject {
-    var settingData: Results<SettingRateAndFormatDate>? {get}
+    var settingData: SettingRateAndFormatDate {get}
 }
 
 class SettingService: SettingServiceProtocol {
     let realm = try! Realm()
-    var settingData: Results<SettingRateAndFormatDate>? {
+    var settingData: SettingRateAndFormatDate {
         get {
-            return realm.objects(SettingRateAndFormatDate.self)
+            guard let settings = realm.objects(SettingRateAndFormatDate.self).first else {
+                return SettingRateAndFormatDate.init()
+            }
+            return settings
         }
     }
 }

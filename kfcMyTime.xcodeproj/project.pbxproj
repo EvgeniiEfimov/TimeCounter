@@ -36,6 +36,10 @@
 		7CC991C428A5081900A1E0C2 /* AddDataRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC991C328A5081900A1E0C2 /* AddDataRouter.swift */; };
 		7CC991C628A5084500A1E0C2 /* AddDataConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC991C528A5084500A1E0C2 /* AddDataConfigurator.swift */; };
 		7CC991C728A6D83A00A1E0C2 /* AddDataInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC991C128A5080600A1E0C2 /* AddDataInteractor.swift */; };
+		7CC991CA28AE830C00A1E0C2 /* СalculatedPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC991C928AE830C00A1E0C2 /* СalculatedPresenter.swift */; };
+		7CC991CC28AE831F00A1E0C2 /* СalculatedInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC991CB28AE831F00A1E0C2 /* СalculatedInteractor.swift */; };
+		7CC991CE28AE833600A1E0C2 /* СalculatedRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC991CD28AE833600A1E0C2 /* СalculatedRouter.swift */; };
+		7CC991D028AE834C00A1E0C2 /* СalculatedConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC991CF28AE834C00A1E0C2 /* СalculatedConfigurator.swift */; };
 		CE1ACB6727BCE62A002D9105 /* ProtocolsFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1ACB6627BCE62A002D9105 /* ProtocolsFile.swift */; };
 		CE1ACB6A27C211BC002D9105 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1ACB6927C211BC002D9105 /* DateFormatter.swift */; };
 		CE482CB4272992490034798E /* ModelJobDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE482CB3272992490034798E /* ModelJobDate.swift */; };
@@ -82,6 +86,10 @@
 		7CC991C128A5080600A1E0C2 /* AddDataInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDataInteractor.swift; sourceTree = "<group>"; };
 		7CC991C328A5081900A1E0C2 /* AddDataRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDataRouter.swift; sourceTree = "<group>"; };
 		7CC991C528A5084500A1E0C2 /* AddDataConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDataConfigurator.swift; sourceTree = "<group>"; };
+		7CC991C928AE830C00A1E0C2 /* СalculatedPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "СalculatedPresenter.swift"; sourceTree = "<group>"; };
+		7CC991CB28AE831F00A1E0C2 /* СalculatedInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "СalculatedInteractor.swift"; sourceTree = "<group>"; };
+		7CC991CD28AE833600A1E0C2 /* СalculatedRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "СalculatedRouter.swift"; sourceTree = "<group>"; };
+		7CC991CF28AE834C00A1E0C2 /* СalculatedConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "СalculatedConfigurator.swift"; sourceTree = "<group>"; };
 		CE1ACB6627BCE62A002D9105 /* ProtocolsFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolsFile.swift; sourceTree = "<group>"; };
 		CE1ACB6927C211BC002D9105 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		CE482CB3272992490034798E /* ModelJobDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelJobDate.swift; sourceTree = "<group>"; };
@@ -181,6 +189,18 @@
 			path = AddDataModule;
 			sourceTree = "<group>";
 		};
+		7CC991C828AE82C600A1E0C2 /* СalculatedModules */ = {
+			isa = PBXGroup;
+			children = (
+				7CC991CF28AE834C00A1E0C2 /* СalculatedConfigurator.swift */,
+				CEFB466627A5A39D00327CAA /* СalculatedViewController.swift */,
+				7CC991C928AE830C00A1E0C2 /* СalculatedPresenter.swift */,
+				7CC991CB28AE831F00A1E0C2 /* СalculatedInteractor.swift */,
+				7CC991CD28AE833600A1E0C2 /* СalculatedRouter.swift */,
+			);
+			path = "СalculatedModules";
+			sourceTree = "<group>";
+		};
 		CE482CB927299C510034798E /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -245,7 +265,7 @@
 				7CC991AF28A15A3300A1E0C2 /* TableDataModule */,
 				7CC991A1289671FA00A1E0C2 /* DetailedInformationModule */,
 				7CC991BE28A507B700A1E0C2 /* AddDataModule */,
-				CEFB466627A5A39D00327CAA /* СalculatedViewController.swift */,
+				7CC991C828AE82C600A1E0C2 /* СalculatedModules */,
 				7C07F5A2283D71EA00AA4E30 /* StatisticViewController.swift */,
 				7C0123492808986300FBD849 /* SettingLunchViewController.swift */,
 				CEC2525127B6DB6500B9F2DE /* SettingsNotificationViewController.swift */,
@@ -381,6 +401,7 @@
 				7C07F5A5283FED4A00AA4E30 /* NetworkManager.swift in Sources */,
 				7CC991A5289672CA00A1E0C2 /* DetailedInformationInteractor.swift in Sources */,
 				CE1ACB6A27C211BC002D9105 /* DateFormatter.swift in Sources */,
+				7CC991CA28AE830C00A1E0C2 /* СalculatedPresenter.swift in Sources */,
 				7CC991C028A507EF00A1E0C2 /* AddDataPresenter.swift in Sources */,
 				CEC2525227B6DB6500B9F2DE /* SettingsNotificationViewController.swift in Sources */,
 				CE482CB4272992490034798E /* ModelJobDate.swift in Sources */,
@@ -396,7 +417,9 @@
 				7CC991AE2896999900A1E0C2 /* dataService.swift in Sources */,
 				7CC9910F287F19B600A1E0C2 /* AppInfoViewController.swift in Sources */,
 				7CC991C428A5081900A1E0C2 /* AddDataRouter.swift in Sources */,
+				7CC991CE28AE833600A1E0C2 /* СalculatedRouter.swift in Sources */,
 				7C01234627F1F1E000FBD849 /* Notifications.swift in Sources */,
+				7CC991CC28AE831F00A1E0C2 /* СalculatedInteractor.swift in Sources */,
 				7CC991A32896725000A1E0C2 /* DetailedInformationPresenter.swift in Sources */,
 				7C01234C2809F50800FBD849 /* SettingNightTimeViewController.swift in Sources */,
 				7CC991B728A15ADD00A1E0C2 /* TableDataRouter.swift in Sources */,
@@ -415,6 +438,7 @@
 				CE482CC2272AD9C90034798E /* StorageManager.swift in Sources */,
 				7CC991C628A5084500A1E0C2 /* AddDataConfigurator.swift in Sources */,
 				7CC991B128A15A9100A1E0C2 /* TableDataConfigurator.swift in Sources */,
+				7CC991D028AE834C00A1E0C2 /* СalculatedConfigurator.swift in Sources */,
 				CE1ACB6727BCE62A002D9105 /* ProtocolsFile.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

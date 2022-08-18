@@ -8,6 +8,10 @@
 import UIKit
 import RealmSwift
 
+protocol CalculatedViewControllerProtocol: AnyObject {
+    func setListInfoOfMonch(_ listInfoOfMonth: [ListInfoOfMonch])
+}
+
 class СalculatedViewController: UIViewController {
     //MARK: - Outlets
     @IBOutlet weak var periodSCOutlet: UISegmentedControl!
@@ -17,9 +21,11 @@ class СalculatedViewController: UIViewController {
     
     @IBOutlet weak var buttonCalculatedOutlet: UIButton!
     
+    
+    private var listInfoOfMonth: [ListInfoOfMonch]!
+    
     //MARK: - Приватные свойства
     private var jobDataList: Results<ListInfoOfMonch>?
-    private var listInfoOfMonth = ListInfoOfMonch()
     private var valueSettingNightTime: Results<SettingNightTime>!
     private var rateSetting: Results<SettingRateAndFormatDate>!
     
@@ -40,9 +46,16 @@ class СalculatedViewController: UIViewController {
     
     private let monthNumber = Calendar.current.dateComponents([.month], from: Date())
     
+    
+    var presenter: CalculatedPresenterProtocol!
+    var configurator: CalculatedConfiguratorProtocol = CalculatedConfigurator()
+    
     //MARK: - Методы переопределения родительского класса
     override func viewDidLoad() {
         super.viewDidLoad()
+        configurator.configure(viewController: self)
+        
+        
         monthPickerView.dataSource = self
         monthPickerView.delegate = self
         /// Вызов метода стартовых настроек view
@@ -221,6 +234,15 @@ extension String {
             }
         }
         return 0
+    }
+}
+
+
+
+extension СalculatedViewController: CalculatedViewControllerProtocol {
+
+    func setListInfoOfMonch(_ listMonth: [ListInfoOfMonch]) {
+        listInfoOfMonth = listMonth
     }
 }
 

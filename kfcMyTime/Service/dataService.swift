@@ -10,7 +10,7 @@ import RealmSwift
 
 protocol DataServiceProtocol: AnyObject {
     func info(_ indexPathSection: Int, _ indexPathRow: Int) -> InfoOfDayWork?
-    var listInfoOfMonch: Results<ListInfoOfMonch>! {get}
+    var listInfoOfMonch: Results<ListInfoOfMonch> {get}
     func deleteDayOfMonth(monch: DayOfMonth, in listInfoOfMonch: ListInfoOfMonch)
     func deleteDayInfo(day: InfoOfDayWork)
     func deleteMonch(allMonch: ListInfoOfMonch)
@@ -21,7 +21,7 @@ protocol DataServiceProtocol: AnyObject {
 class DataService: DataServiceProtocol {
     let realm = try! Realm()
     
-    var listInfoOfMonch: Results<ListInfoOfMonch>! {
+    var listInfoOfMonch: Results<ListInfoOfMonch> {
         get {
             realm.objects(ListInfoOfMonch.self).sorted(byKeyPath: "numberMonth")
         }

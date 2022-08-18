@@ -5,7 +5,7 @@
 //  Created by User on 26.10.2021.
 //
 
-import RealmSwift
+import UIKit
 
 protocol DetailedInformationViewProtocol: AnyObject {
     func setInfo(with data: InfoOfDayWork?)

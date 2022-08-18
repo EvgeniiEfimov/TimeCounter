@@ -9,12 +9,13 @@ import Foundation
 
 protocol AddDataInteractorProtocol: AnyObject {
     func saveData(_ data: AddDataStruct)
+//    var showAlertAttention: Alert { get }
 }
 
 class AddDataInteractor: AddDataInteractorProtocol {
     weak var presenter: AddDataPresenterProtocol!
     let dataService: DataServiceProtocol = DataService()
-    
+    let alertService: AlertServiceProtocol = AlertService()
     
     required init(presenter: AddDataPresenterProtocol) {
         self.presenter = presenter
@@ -28,15 +29,12 @@ class AddDataInteractor: AddDataInteractorProtocol {
         let newListDayOfMonth = DayOfMonth()
         let newListInfoOfDayWork = InfoOfDayWork()
             
-            
             newListInfoOfMonch.nameMonth = data.timeStart.getNameMonth
             newListInfoOfMonch.numberMonth = data.timeStart.getNumberMonth
-            
             
             newListDayOfMonth.dateWorkShift = data.timeStart
             
             let allWorkTime = data.timeStop.timeIntervalSince(data.timeStart)
-            
             let lunchTime = data.lunch ? determininglunchTime(allWorkTime) : (stringValue: "Не учтен", doubleValue: 0.0)
             
             newListDayOfMonth.timeWork = data.lunch ?
@@ -72,15 +70,17 @@ class AddDataInteractor: AddDataInteractorProtocol {
                     newListDayOfMonth.day = newListInfoOfDayWork
                     newListInfoOfMonch.monch.append(newListDayOfMonth)
                     self.dataService.saveListInfoOfMonch(allMonch: newListInfoOfMonch)
-//                    StorageManager.shared.save(allMonch: newListInfoOfMonch)
                 }
             } else {
                 newListDayOfMonth.day = newListInfoOfDayWork
                 guard let valueMonth = valueByMonth.first else { return }
-                /////////////////
                 self.dataService.saveDayOfMonch(monch: newListDayOfMonth, in: valueMonth)
-//                StorageManager.shared.save(monch: newListDayOfMonth, in: valueMonth)
             }
+            if presenter.dismissView {
+            presenter.showSpAlert()
+            }
+        } else {
+            presenter.showAlert(alertService.alertAttention)
         }
     }
 

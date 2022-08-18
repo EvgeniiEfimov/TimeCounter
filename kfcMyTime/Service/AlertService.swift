@@ -9,6 +9,14 @@ import Foundation
 
 protocol AlertServiceProtocol {
     var spAlertDelete: String { get }
+    var alertAttention: Alert { get }
+}
+
+struct Alert {
+    let title: String?
+    let message: String?
+    let buttonTitleFirst: String?
+    let buttonTitleLast: String?
 }
 
 class AlertService: AlertServiceProtocol {
@@ -16,6 +24,13 @@ class AlertService: AlertServiceProtocol {
         get {
             "Удалено"
         }
+    }
+    
+    var alertAttention: Alert {
+            Alert.init(title: "Внимание!",
+                       message: "Не корректная продолжительность смены! \n✷проверь время начала и конца смены! \n✷00:00 является следующим днём \n✷Продолжительность смены не может превышать 24 часа",
+                       buttonTitleFirst: "Ок",
+                       buttonTitleLast: nil)
     }
     
     

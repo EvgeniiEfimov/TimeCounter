@@ -6,11 +6,11 @@
 //
 
 import Foundation
-import RealmSwift
+//import RealmSwift
 
 protocol TableDataInteractorProtocol: AnyObject {
-    var startInfo: Results<ListInfoOfMonch>? { get }
-    var settingsView: Results<SettingRateAndFormatDate>? { get }
+    var startInfo: [ListInfoOfMonch] { get }
+    var settingsView: SettingRateAndFormatDate { get }
     
     func deleteDay(_ indexPath: IndexPath)
 }
@@ -22,23 +22,30 @@ class TableDataInteractor: TableDataInteractorProtocol {
     let settingService: SettingServiceProtocol = SettingService()
     let alertService: AlertServiceProtocol = AlertService()
 
+
     required init(presenter: TableDataPresenterProtocol) {
         self.presenter = presenter
     }
-    var startInfo: Results<ListInfoOfMonch>? {
+    
+    var startInfo: [ListInfoOfMonch] {
     get {
-        return dataService.listInfoOfMonch
+        var array: [ListInfoOfMonch] = []
+        for valueData in dataService.listInfoOfMonch {
+            array.append(valueData)
+        }
+        return array
     }
     }
     
-    var settingsView: Results<SettingRateAndFormatDate>? {
+    var settingsView: SettingRateAndFormatDate {
         get {
             return settingService.settingData
         }
     }
     
     func deleteDay(_ indexPath: IndexPath) {
-        guard let listInfoOfMonch = startInfo else { return }
+//        guard let listInfoOfMonch = startInfo else { return }
+        let listInfoOfMonch = startInfo
         /// Определение свойства месяца, соответствующего номеру секции
         let monch = listInfoOfMonch[indexPath.section]
         /// Сортировка массива дней месяца
