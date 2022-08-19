@@ -25,7 +25,7 @@ class TableDateViewController: UITableViewController {
         presenter.configureViewData
     }
     /// Объявление переменной хранящей данные настроек
-    private var settingsUser: SettingRateAndFormatDate {
+    private var settingsUser: Int {
         presenter.configureViewSettings
     }
     
@@ -93,7 +93,7 @@ class TableDateViewController: UITableViewController {
         content.textProperties.font = UIFont.init(name: "Zapf Dingbats", size: 18.0) ??
             .preferredFont(forTextStyle: .body)
         /// Определение дополнительного текста ячейки
-        content.secondaryText = settingsUser.formatSegmentControl == 1 ? String(format: "%.1f ч", day.timeWork) : day.timeWorkStringFormat
+        content.secondaryText = settingsUser == 1 ? String(format: "%.1f ч", day.timeWork) : day.timeWorkStringFormat
         /// Определение цвета дополнительного текста ячейки
         content.secondaryTextProperties.color = .systemYellow
         /// Присваивание конфигурации ячейки
@@ -119,7 +119,7 @@ class TableDateViewController: UITableViewController {
         /// Присвоение значения текста секции
         content.text = month.nameMonth
         /// Присвоения значени дополнительного текста секции
-        content.secondaryText = settingsUser.formatSegmentControl == 1 ? String(format: "%.1f ч", month.allWorkTimeOfMonch) : timeWorkOfFormatString(month.allWorkTimeOfMonch)
+        content.secondaryText = settingsUser == 1 ? String(format: "%.1f ч", month.allWorkTimeOfMonch) : timeWorkOfFormatString(month.allWorkTimeOfMonch)
         /// Определения шрифта и размера дополнительного текста
         content.secondaryTextProperties.font = UIFont.init(name: "Zapf DingBats", size: 20.0)!
         /// Определение цвета дополнительного текста

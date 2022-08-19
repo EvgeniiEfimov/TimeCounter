@@ -10,8 +10,7 @@ import Foundation
 
 protocol TableDataInteractorProtocol: AnyObject {
     var startInfo: [ListInfoOfMonch] { get }
-    var settingsView: SettingRateAndFormatDate { get }
-    
+    var settingsTableView: Int { get }    
     func deleteDay(_ indexPath: IndexPath)
 }
 
@@ -37,11 +36,13 @@ class TableDataInteractor: TableDataInteractorProtocol {
     }
     }
     
-    var settingsView: SettingRateAndFormatDate {
+    var settingsTableView: Int {
         get {
-            return settingService.settingData
+            guard let settings = settingService.settingData?.formatSegmentControl else { return 1}
+            return settings
         }
     }
+    
     
     func deleteDay(_ indexPath: IndexPath) {
 //        guard let listInfoOfMonch = startInfo else { return }

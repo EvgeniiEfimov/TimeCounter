@@ -15,7 +15,7 @@ protocol TableDataPresenterProtocol: AnyObject {
     func seque(_ seque: Transition)
     
     var configureViewData: [ListInfoOfMonch] { get }
-    var configureViewSettings: SettingRateAndFormatDate { get }
+    var configureViewSettings: Int { get }
 }
 
 class TableDataPresenter: TableDataPresenterProtocol {
@@ -53,7 +53,7 @@ class TableDataPresenter: TableDataPresenterProtocol {
         interactor.startInfo
     }
     
-    var configureViewSettings: SettingRateAndFormatDate {
-        interactor.settingsView
+    var configureViewSettings: Int {
+        interactor.settingsTableView
     }
 }

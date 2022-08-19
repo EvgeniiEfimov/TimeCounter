@@ -9,6 +9,10 @@ import Foundation
 
 protocol CalculatedPresenterProtocol: AnyObject {
     func configureView()
+    func clickButtonCalculate(_ valuePickerView: Int, _ indexSegmentedControl: Int)
+    func showAlert(_ alert: Alert)
+    func saveRate(_ rate: String)
+    func calculateValue(_ allTime: String,_ money: String)
 }
 
 final class CalculatedPresenter: CalculatedPresenterProtocol {
@@ -21,7 +25,22 @@ final class CalculatedPresenter: CalculatedPresenterProtocol {
     }
     
     func configureView() {
-        view.setListInfoOfMonch(interactor.getListInfoOfMonth)
+        view.setListInfoOfMonch(interactor.getArrayNameOfMonth)
     }
-   
+    
+    func clickButtonCalculate(_ valuePickerView: Int, _ indexSegmentedControl: Int) {
+        interactor.calculated(valuePickerView, indexSegmentedControl)
+    }
+    
+    func showAlert(_ alert: Alert) {
+        view.showAlert(alert)
+    }
+    
+    func saveRate(_ rate: String) {
+        interactor.saveRate(rate)
+    }
+    
+    func calculateValue(_ allTime: String,_ money: String) {
+        view.setOutle(allTime, money)
+    }
 }
